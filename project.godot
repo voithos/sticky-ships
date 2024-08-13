@@ -11,5 +11,17 @@ config_version=5
 [application]
 
 config/name="GMTK Game Jam 2024"
+run/main_scene="res://scenes/sandbox.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+CheckpointStore="*res://scripts/checkpoint_store.gd"
+GameTimer="*res://scripts/game_timer.gd"
+GlobalCamera="*res://scripts/global_camera.gd"
+Music="*res://scripts/music.gd"
+ProgressionStore="*res://scripts/progression_store.gd"
+Saving="*res://scripts/saving.gd"
+Screen="*res://scripts/screen.gd"
+Sfx="*res://scripts/sfx.gd"
