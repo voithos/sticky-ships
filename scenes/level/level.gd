@@ -3,14 +3,16 @@ extends Node2D
 
 
 var PLAYER_SCENE = preload("res://scenes/player/player.tscn")
+var ENERGY_DROP_SCENE = preload("res://scenes/drops/energy_drop.tscn")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var player = PLAYER_SCENE.instantiate()
-	self.add_child(player)
+	add_child(player)
+	
+	var drop = ENERGY_DROP_SCENE.instantiate()
+	add_child(drop)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

@@ -1,11 +1,86 @@
-[gd_scene load_steps=3 format=3 uid="uid://brj10kdt5qdh8"]
+[gd_scene load_steps=13 format=3 uid="uid://brj10kdt5qdh8"]
 
 [ext_resource type="Script" path="res://scenes/drops/drop.gd" id="1_q5eng"]
+[ext_resource type="Texture2D" uid="uid://bhu5cqi3hyjey" path="res://assets/sprites/drops/energy_drop.png" id="2_qkg1i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoefs"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egafa"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ucq2"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnvtm"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmuc6"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61ide"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuu6p"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fxv5"]
+atlas = ExtResource("2_qkg1i")
+region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cyijo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoefs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egafa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ucq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnvtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmuc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61ide")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuu6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fxv5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_15yln"]
+radius = 8.0
 
 [node name="EnergyDrop" type="Node2D"]
 script = ExtResource("1_q5eng")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cyijo")
+autoplay = "default"
+frame_progress = 0.337434
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_15yln")
