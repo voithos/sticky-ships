@@ -1,5 +1,5 @@
 class_name Player
-extends Node2D
+extends CharacterBody2D
 
 
 # Called when the node enters the scene tree for the first time.
