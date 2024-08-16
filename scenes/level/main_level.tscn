@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnxf638rjtql8"]
+
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_trb5r"]
+[ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_u3510"]
+
+[node name="LeviTestLevel" type="Node2D"]
+script = ExtResource("1_trb5r")
+
+[node name="Background" parent="." instance=ExtResource("2_u3510")]
