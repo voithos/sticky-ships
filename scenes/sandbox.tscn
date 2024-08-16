@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://ccq67lxkq7d6j"]
+[gd_scene load_steps=3 format=3 uid="uid://ccq67lxkq7d6j"]
+
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_ahhpc"]
+[ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_xfnuo"]
 
 [node name="Sandbox" type="Node2D"]
+script = ExtResource("1_ahhpc")
+
+[node name="Background" parent="." instance=ExtResource("2_xfnuo")]

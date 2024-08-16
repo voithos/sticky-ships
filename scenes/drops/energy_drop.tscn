@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brj10kdt5qdh8"]
+
+[ext_resource type="Script" path="res://scenes/drops/drop.gd" id="1_q5eng"]
+
+[node name="EnergyDrop" type="Node2D"]
+script = ExtResource("1_q5eng")
