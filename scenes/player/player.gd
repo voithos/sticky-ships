@@ -43,6 +43,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attach"):
 		attach_overlapping_parts()
 
+	# Try to fire every frame when it's held down
+	if Input.is_action_pressed("fire"):
+		try_fire()
+
 
 func handle_movement(delta: float) -> void:
 	var movement := get_movement()
@@ -79,6 +83,9 @@ func attach_overlapping_parts() -> void:
 	for overlap in overlaps:
 		attach_part(overlap)
 
+
+func try_fire() -> void:
+	print('pew')
 
 
 func get_movement() -> Vector2:

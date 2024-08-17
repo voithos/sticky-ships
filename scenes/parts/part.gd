@@ -16,8 +16,8 @@ var child_connections: Array[Connection] = []
 
 
 func _ready() -> void:
-	self.connect("area_entered", _on_area_entered)
-	self.connect("area_exited", _on_area_exited)
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
 
 
 func _process(delta: float) -> void:
