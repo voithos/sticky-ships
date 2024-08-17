@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+
+const CORE_PART_SCENE := preload("res://scenes/parts/core_part.tscn")
+
+@export var drag_linear_coeff := 0.05
 ## The % of max speed when going backwards.
 @export var reverse_multiplier := 0.25
 
@@ -20,8 +24,11 @@ var can_fire := true
 # Components.
 @onready var health: HealthComponent = $HealthComponent
 
+var parts: Array[Part] = []
+
 func _ready() -> void:
 	Global.player = self
+	add_new_part(Enums.PartType.Core, null, Vector2.ZERO)
 
 
 func _process(delta: float) -> void:
@@ -75,26 +82,93 @@ func get_orientation() -> Vector2:
 	return Vector2.from_angle(rotation - PI/2)
 
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area is Drop:
-		pass
-		area.on_player_entered(self)
-	elif area is Enemy:
-		pass
-		area.on_player_entered(self)
-
-
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area is Drop:
-		pass
-		area.on_player_entered(self)
-	elif area is Enemy:
-		pass
-		area.on_player_entered(self)
-
-
 func _on_health_component_health_depleted() -> void:
 	die()
 
+
 func die() -> void:
 	print('we died!')
+
+
+func on_area_entered(area: Area2D, part: Part) -> void:
+	if area is Drop:
+		area.on_player_part_entered(self)
+	elif area is Enemy:
+		area.on_player_part_entered(self)
+	elif area is EnemyProjectile:
+		area.on_player_part_entered(self)
+
+
+func on_area_exited(area: Area2D, part: Part) -> void:
+	if area is Drop:
+		area.on_player_part_exited(self)
+	elif area is Enemy:
+		area.on_player_part_exited(self)
+	elif area is EnemyProjectile:
+		area.on_player_part_exited(self)
+
+
+func add_fallen_parts(sub_part: Part, parent_part: Part) -> void:
+	# TODO: Re-orient the part tree such that the given sub_part is the root.
+
+	parent_part.add_child_part(sub_part)
+
+	_add_fallen_sub_part(sub_part)
+
+
+func _add_fallen_sub_part(sub_part: Part) -> void:
+	sub_part.reparent(self)
+	parts.push_back(sub_part)
+	sub_part.attached_to_player = true
+
+	for child in sub_part.children:
+		_add_fallen_sub_part(child)
+
+
+func add_new_part(type: Enums.PartType, parent_part: Part, player_relative_position: Vector2) -> void:
+	assert(is_instance_valid(parent_part) or type == Enums.PartType.Core)
+
+	var part: Part = part_type_to_packed_scene(type).instantiate()
+
+	parts.push_back(part)
+	if is_instance_valid(parent_part):
+		parent_part.add_child_part(part)
+	add_child(part)
+
+	part.attached_to_player = true
+
+	part.position = player_relative_position
+
+
+func destroy_part(part: Part) -> void:
+	assert(is_instance_valid(part))
+	assert(parts.has(part), "destroy_part: Player does not have part.")
+
+	_remove_sub_part(part)
+
+	for child in part.children:
+		part.remove_child_part(child)
+	if is_instance_valid(part.parent):
+		part.parent.remove_child_part(part)
+
+	part.queue_free()
+
+
+func _remove_sub_part(part: Part) -> void:
+	assert(is_instance_valid(part))
+	assert(parts.has(part), "_remove_sub_part: Player does not have part.")
+
+	part.attached_to_player = false
+	parts.erase(part)
+
+	for child in part.children:
+		_remove_sub_part(child)
+
+
+func part_type_to_packed_scene(type: Enums.PartType) -> PackedScene:
+	match type:
+		Enums.PartType.Core:
+			return CORE_PART_SCENE
+		_:
+			assert(false)
+			return null

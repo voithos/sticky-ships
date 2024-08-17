@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4sg3kxsmixsn"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_projectile.gd" id="1_3xvt7"]
+[ext_resource type="Texture2D" uid="uid://sabje8rtaqdg" path="res://assets/sprites/enemies/basic_enemy_projectile.png" id="2_s5i5h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_581ul"]
+radius = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62mqx"]
+atlas = ExtResource("2_s5i5h")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dao2y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62mqx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicEnemyProjectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_3xvt7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_581ul")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dao2y")

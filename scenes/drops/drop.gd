@@ -10,5 +10,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func on_player_entered(player: Player) -> void:
+func on_player_part_entered(part: Part) -> void:
+	pass
+
+
+func on_player_part_exited(part: Part) -> void:
 	pass

@@ -1,4 +1,4 @@
-class_name Enemy
+class_name EnemyProjectile
 extends Area2D
 
 
