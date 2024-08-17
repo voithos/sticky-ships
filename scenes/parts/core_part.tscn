@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/parts/core_part.gd" id="1_cyajj"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_58uv2"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="3_5khfa"]
-[ext_resource type="PackedScene" path="res://scenes/parts/attach_point.tscn" id="3_cmso1"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/parts/attach_point.tscn" id="3_cmso1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bmit"]
 radius = 8.0

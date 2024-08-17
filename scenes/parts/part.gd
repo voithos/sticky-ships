@@ -14,10 +14,21 @@ var attach_points: Array[AttachPoint] = []
 var parent_connection: Connection
 var child_connections: Array[Connection] = []
 
+# Component constituents of this part. These are auto-registered.
+var light_guns: Array[Gun] = []
+# TODO: Add thrusters, shields, heavy guns, etc
+
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
+	_init_components(self)
+
+func _init_components(node: Node) -> void:
+	if node is Gun:
+		light_guns.push_back(node)
+	for child in node.get_children():
+		_init_components(child)
 
 
 func _process(delta: float) -> void:

@@ -85,7 +85,9 @@ func attach_overlapping_parts() -> void:
 
 
 func try_fire() -> void:
-	print('pew')
+	for part in parts:
+		for gun in part.light_guns:
+			gun.try_fire()
 
 
 func get_movement() -> Vector2:
