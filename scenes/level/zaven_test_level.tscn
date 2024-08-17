@@ -31,4 +31,11 @@ collision_mask = 1
 motion_mode = 1
 
 [node name="BasicGunPart" parent="." instance=ExtResource("5_yy4jp")]
-position = Vector2(69, 56)
+position = Vector2(30, -47)
+rotation = -1.6525
+
+[node name="Hurtbox" parent="BasicGunPart" index="1"]
+collision_layer = 4
+
+[editable path="BasicGunPart"]
+[editable path="BasicGunPart/Hurtbox"]

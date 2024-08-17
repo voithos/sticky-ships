@@ -14,9 +14,13 @@ var attach_points: Array[AttachPoint] = []
 var parent_connection: Connection
 var child_connections: Array[Connection] = []
 
+
 # Component constituents of this part. These are auto-registered.
 var light_guns: Array[LightGun] = []
 var heavy_guns: Array[HeavyGun] = []
+
+# Health is special, as there's only ever one
+var health: HealthComponent = null
 # TODO: Add thrusters, shields, heavy guns, etc
 
 
@@ -26,13 +30,26 @@ func _ready() -> void:
 	_init_components(self)
 
 func _init_components(node: Node) -> void:
-	if node is LightGun:
+	if node is HealthComponent:
+		_init_health_component(node)
+	elif node is LightGun:
 		light_guns.push_back(node)
 	elif node is HeavyGun:
 		heavy_guns.push_back(node)
 
 	for child in node.get_children():
 		_init_components(child)
+
+
+func _init_health_component(h: HealthComponent) -> void:
+	assert(health == null)
+	health = h
+	health.health_depleted.connect(destroy_part)
+
+
+func destroy_part() -> void:
+	print('part destroyed!')
+	queue_free()
 
 
 func _process(delta: float) -> void:

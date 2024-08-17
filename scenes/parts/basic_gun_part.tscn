@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://buedulm0clu5e"]
+[gd_scene load_steps=8 format=3 uid="uid://buedulm0clu5e"]
 
 [ext_resource type="Script" path="res://scenes/parts/basic_gun_part.gd" id="1_48u7a"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_blxg6"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_vnmqv"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="3_4ewls"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_giefb"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/parts/attach_point.tscn" id="4_bogoi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bmit"]
@@ -11,6 +13,13 @@ radius = 8.0
 [node name="BasicGunPart" type="Area2D"]
 collision_mask = 22
 script = ExtResource("1_48u7a")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_vnmqv")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_giefb")]
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4bmit")
@@ -33,3 +42,5 @@ position = Vector2(8, 0)
 [node name="RearAttachPoint" parent="." instance=ExtResource("4_bogoi")]
 unique_name_in_owner = true
 position = Vector2(0, 8)
+
+[editable path="Hurtbox"]

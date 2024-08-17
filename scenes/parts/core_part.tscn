@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2ddtvmfs2v5i"]
+[gd_scene load_steps=8 format=3 uid="uid://b2ddtvmfs2v5i"]
 
 [ext_resource type="Script" path="res://scenes/parts/core_part.gd" id="1_cyajj"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_3imgx"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_58uv2"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="3_5khfa"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_7wok1"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/parts/attach_point.tscn" id="3_cmso1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bmit"]
@@ -12,6 +14,12 @@ radius = 8.0
 collision_mask = 22
 script = ExtResource("1_cyajj")
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_3imgx")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_7wok1")]
+health_component = NodePath("../HealthComponent")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4bmit")
 
@@ -20,7 +28,7 @@ texture = ExtResource("2_58uv2")
 
 [node name="BasicGun" parent="." instance=ExtResource("3_5khfa")]
 position = Vector2(0, -18)
-projectile_collision_mask = 32
+projectile_collision_mask = 36
 
 [node name="LeftAttachPoint" parent="." instance=ExtResource("3_cmso1")]
 unique_name_in_owner = true
@@ -37,3 +45,5 @@ position = Vector2(0, -8)
 [node name="RearAttachPoint" parent="." instance=ExtResource("3_cmso1")]
 unique_name_in_owner = true
 position = Vector2(0, 8)
+
+[editable path="Hurtbox"]

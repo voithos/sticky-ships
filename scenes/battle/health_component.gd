@@ -14,3 +14,11 @@ func adjust_health(delta: float) -> void:
 		health_changed.emit(health, prev_health)
 	if is_equal_approx(health, 0.0):
 		health_depleted.emit()
+
+
+func take_damage(damage: float) -> void:
+	adjust_health(-damage)
+
+
+func heal(amount: float) -> void:
+	adjust_health(amount)
