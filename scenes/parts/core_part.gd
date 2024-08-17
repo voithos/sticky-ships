@@ -11,5 +11,4 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Screen.is_debug_pressed():
-		$BasicGun.try_fire()
+	pass

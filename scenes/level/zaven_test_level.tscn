@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2k44vm6uk81p"]
+[gd_scene load_steps=7 format=3 uid="uid://c2k44vm6uk81p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_7r1pg"]
 [ext_resource type="PackedScene" uid="uid://i6ryy2kr5lyk" path="res://scenes/player/player.tscn" id="2_8gtrx"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_sygiw"]
 [ext_resource type="Texture2D" uid="uid://owf0haa8rp2w" path="res://icon.svg" id="3_xn8hx"]
+[ext_resource type="PackedScene" uid="uid://buedulm0clu5e" path="res://scenes/parts/basic_gun_part.tscn" id="5_yy4jp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkr8e"]
 size = Vector2(117, 113)
@@ -28,3 +29,6 @@ shape = SubResource("RectangleShape2D_hkr8e")
 collision_layer = 1
 collision_mask = 1
 motion_mode = 1
+
+[node name="BasicGunPart" parent="." instance=ExtResource("5_yy4jp")]
+position = Vector2(69, 56)
