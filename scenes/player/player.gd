@@ -70,7 +70,7 @@ func handle_movement(delta: float) -> void:
 
 
 func try_fire() -> void:
-	for part in parts:
+	for part in body.parts:
 		for gun in part.light_guns:
 			gun.try_fire()
 
