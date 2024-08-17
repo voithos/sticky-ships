@@ -100,6 +100,10 @@ func on_part_removed(part: Part) -> void:
 
 
 func attach_part(overlap: PotentialConnectionOverlap) -> void:
+	call_deferred("attach_part_deferred", overlap)
+
+
+func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 	assert(is_instance_valid(overlap.attached_point) and
 		is_instance_valid(overlap.detached_point) and
 		overlap.attached_point.part.attached_to_player)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_7r1pg"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_sygiw"]
 [ext_resource type="Texture2D" uid="uid://owf0haa8rp2w" path="res://icon.svg" id="3_xn8hx"]
-[ext_resource type="PackedScene" path="res://scenes/parts/basic_thruster_part.tscn" id="5_yfcfs"]
+[ext_resource type="PackedScene" uid="uid://chy8i0ynxsylr" path="res://scenes/parts/basic_thruster_part.tscn" id="5_yfcfs"]
 [ext_resource type="PackedScene" uid="uid://buedulm0clu5e" path="res://scenes/parts/basic_gun_part.tscn" id="5_yy4jp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkr8e"]
