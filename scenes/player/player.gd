@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 
 	var direction := get_orientation()
 
-
 	linear_velocity += (
 		movement.y
 		* direction
@@ -56,7 +55,7 @@ func _physics_process(delta: float) -> void:
 
 	rotation += angular_velocity * delta
 
-	if Input.is_action_just_pressed("debug"):
+	if Input.is_action_just_pressed("debug") and OS.is_debug_build():
 		health.adjust_health(-20)
 
 
