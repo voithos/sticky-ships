@@ -5,7 +5,12 @@ extends Area2D
 enum Type {
 	Core,
 	BasicGun,
+	BasicThruster,
 }
+
+# The mass of this part, as a whole.
+# TODO: Replace this with rigidbody mass?
+@export var mass: float = 1.0
 
 var attached_to_player := false
 
@@ -18,6 +23,8 @@ var child_connections: Array[Connection] = []
 # Component constituents of this part. These are auto-registered.
 var light_guns: Array[LightGun] = []
 var heavy_guns: Array[HeavyGun] = []
+
+var thrusters: Array[Thruster] = []
 
 # Health is special, as there's only ever one
 var health: HealthComponent = null
@@ -36,6 +43,8 @@ func _init_components(node: Node) -> void:
 		light_guns.push_back(node)
 	elif node is HeavyGun:
 		heavy_guns.push_back(node)
+	elif node is Thruster:
+		thrusters.push_back(node)
 
 	for child in node.get_children():
 		_init_components(child)
