@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=6 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_kak22"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="3_5xm2m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yqttc"]
 
@@ -27,5 +28,9 @@ collision_mask = 22
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_bgfwb")
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_5xm2m")
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]

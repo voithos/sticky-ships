@@ -13,3 +13,5 @@ position = Vector2(175, 44)
 texture = ExtResource("3_xn8hx")
 
 [node name="Player" parent="." instance=ExtResource("2_8gtrx")]
+collision_layer = 1
+collision_mask = 1

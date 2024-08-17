@@ -17,6 +17,9 @@ var angular_velocity := 0.0
 var is_reversing := false
 var can_fire := true
 
+# Components.
+@onready var health: HealthComponent = $HealthComponent
+
 func _ready() -> void:
 	Global.player = self
 
@@ -51,6 +54,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	rotation += angular_velocity * delta
 
+	if Input.is_action_just_pressed("debug"):
+		health.adjust_health(-20)
+
 
 func get_movement() -> Vector2:
 	return Vector2(
@@ -84,3 +90,10 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	elif area is Enemy:
 		pass
 		area.on_player_entered(self)
+
+
+func _on_health_component_health_depleted() -> void:
+	die()
+
+func die() -> void:
+	print('we died!')
