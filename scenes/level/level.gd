@@ -20,13 +20,13 @@ func _ready() -> void:
 
 	# TODO: Remove these extra parts.
 
-	var gun_part_1: Part = Global.part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
+	var gun_part_1: Part = Global.part_type_to_packed_scene(Global.PartType.BasicGun).instantiate()
 	dropped_parts.push_back(gun_part_1)
 	add_child(gun_part_1)
 	gun_part_1.rotation = -PI / 2
 	gun_part_1.position = Vector2(0.0, 48.0)
 
-	var gun_part_2: Part = Global.part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
+	var gun_part_2: Part = Global.part_type_to_packed_scene(Global.PartType.BasicGun).instantiate()
 	dropped_parts.push_back(gun_part_2)
 	add_child(gun_part_2)
 	gun_part_2.rotation = PI / 2
@@ -34,7 +34,7 @@ func _ready() -> void:
 	var gun_part_2_attach_point := gun_part_2.get_node("RearAttachPoint")
 	gun_part_1.add_child_connection(gun_part_1_attach_point, gun_part_2_attach_point)
 
-	var gun_part_3: Part = Global.part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
+	var gun_part_3: Part = Global.part_type_to_packed_scene(Global.PartType.BasicGun).instantiate()
 	dropped_parts.push_back(gun_part_3)
 	add_child(gun_part_3)
 	gun_part_3.rotation = PI

@@ -9,13 +9,19 @@ var level: Level
 var player: Player
 
 
-static func part_type_to_packed_scene(type: Part.Type) -> PackedScene:
+enum PartType {
+	Core,
+	BasicGun,
+	BasicThruster,
+}
+
+static func part_type_to_packed_scene(type: PartType) -> PackedScene:
 	match type:
-		Part.Type.Core:
+		PartType.Core:
 			return CORE_PART_SCENE
-		Part.Type.BasicGun:
+		PartType.BasicGun:
 			return BASIC_GUN_PART_SCENE
-		Part.Type.BasicThruster:
+		PartType.BasicThruster:
 			return BASIC_THRUSTER_PART_SCENE
 		_:
 			assert(false)

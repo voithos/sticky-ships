@@ -1,13 +1,6 @@
 class_name Part
 extends Area2D
 
-
-enum Type {
-	Core,
-	BasicGun,
-	BasicThruster,
-}
-
 # The mass of this part, as a whole.
 # TODO: Replace this with rigidbody mass?
 @export var mass: float = 1.0

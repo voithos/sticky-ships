@@ -42,13 +42,13 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 
 
 func add_root_part() -> void:
-	var core_part: Part = Global.part_type_to_packed_scene(Part.Type.Core).instantiate()
+	var core_part: Part = Global.part_type_to_packed_scene(Global.PartType.Core).instantiate()
 	parts.push_back(core_part)
 	add_child(core_part)
 	core_part.attached_to_player = true
 
 	# TODO: Remove this extra part.
-	var gun_part: Part = Global.part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
+	var gun_part: Part = Global.part_type_to_packed_scene(Global.PartType.BasicGun).instantiate()
 	parts.push_back(gun_part)
 	add_child(gun_part)
 	var core_part_attach_point := core_part.get_node("RightAttachPoint")
