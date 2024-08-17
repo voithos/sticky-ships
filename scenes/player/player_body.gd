@@ -82,7 +82,9 @@ func _remove_sub_part(part: Part) -> void:
 
 
 func attach_part(overlap: PotentialConnectionOverlap) -> void:
-	assert(overlap.is_valid())
+	assert(is_instance_valid(overlap.attached_point) and
+		is_instance_valid(overlap.detached_point) and
+		overlap.attached_point.part.attached_to_player)
 
 	attaching = true
 
@@ -164,11 +166,3 @@ class PotentialConnectionOverlap extends RefCounted:
 	var attached_point: AttachPoint
 	var detached_point: AttachPoint
 	var indicator: PotentialConnectionIndicator
-
-	func is_valid() -> bool:
-		return (
-			is_instance_valid(attached_point) and
-			is_instance_valid(detached_point) and
-			attached_point.part.attached_to_player and
-			!detached_point.part.attached_to_player
-			)

@@ -108,13 +108,28 @@ func reassign_parent_connection(new_parent_connection: Connection) -> void:
 	var old_parent_connection := parent_connection
 	var old_parent := old_parent_connection.parent if parent_connection != null else null
 	var old_child := old_parent_connection.child if parent_connection != null else null
+
 	parent_connection = new_parent_connection
 
-	if parent_connection == null:
+	# Make sure this part no longer considers the new parent as a child.
+	if new_parent_connection != null:
+		var old_child_connection: Connection
+		for connection in child_connections:
+			if (connection.child.part == new_parent_connection.parent.part or
+					connection.parent.part == new_parent_connection.parent.part):
+				old_child_connection = connection
+				break
+		if old_child_connection != null:
+			child_connections.erase(old_child_connection)
+
+	if old_parent_connection == null:
 		# We don't need to recurse to re-assign the old parent's connection since
 		# this part used to be the root.
 		return
 
+	child_connections.push_back(old_parent_connection)
+
+	# Update the old parent to now consider this part as its parent.
 	old_parent_connection.parent = old_child
 	old_parent_connection.child = old_parent
 	old_parent.part.reassign_parent_connection(old_parent_connection)
