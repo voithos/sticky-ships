@@ -5,11 +5,9 @@ extends CharacterBody2D
 const CORE_PART_SCENE := preload("res://scenes/parts/core_part.tscn")
 
 @export var drag_linear_coeff := 0.05
+@export var drag_angular_coeff := 0.1
 ## The % of max speed when going backwards.
 @export var reverse_multiplier := 0.25
-
-@export var drag_linear_coeff := 0.05
-@export var drag_angular_coeff := 0.1
 
 @export var MAX_ACCELERATION = 600
 @export var MAX_LINEAR_SPEED = 180
