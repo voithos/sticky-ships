@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmc6nx7ggqism"]
+[gd_scene load_steps=10 format=3 uid="uid://bmc6nx7ggqism"]
 
 [ext_resource type="Script" path="res://scenes/battle/basic_projectile.gd" id="1_dyrb1"]
 [ext_resource type="Texture2D" uid="uid://baarl67m76hh0" path="res://assets/sprites/battle/basic_projectile.png" id="2_6uiut"]
@@ -6,12 +6,52 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
 radius = 3.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kyri"]
+atlas = ExtResource("2_6uiut")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quy82"]
+atlas = ExtResource("2_6uiut")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc5oh"]
+atlas = ExtResource("2_6uiut")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_curt3"]
+atlas = ExtResource("2_6uiut")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bii84"]
+atlas = ExtResource("2_6uiut")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5v50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kyri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quy82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc5oh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_curt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bii84")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
 [node name="BasicProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
 script = ExtResource("1_dyrb1")
 visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
-
-[node name="BasicProjectile" type="Sprite2D" parent="."]
-texture = ExtResource("2_6uiut")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2qn3j")
@@ -19,3 +59,8 @@ shape = SubResource("CircleShape2D_2qn3j")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 0.5)
 scale = Vector2(0.3, 0.35)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a5v50")
+autoplay = "default"
+frame_progress = 0.406925
