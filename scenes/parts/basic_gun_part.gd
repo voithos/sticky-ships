@@ -1,13 +1,14 @@
+@tool
 class_name BasicGunPart
 extends Part
 
 
 func _ready() -> void:
-	super()
+	pass
 
 
 func _process(delta: float) -> void:
-	super(delta)
+	pass
 
 
 func _physics_process(delta: float) -> void:

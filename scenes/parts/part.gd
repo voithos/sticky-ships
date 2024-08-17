@@ -1,5 +1,6 @@
+@tool
 class_name Part
-extends Area2D
+extends Node2D
 
 # The mass of this part, as a whole.
 # TODO: Replace this with rigidbody mass?
@@ -12,6 +13,7 @@ var attach_points: Array[AttachPoint] = []
 var parent_connection: Connection
 var child_connections: Array[Connection] = []
 
+var player_collision_shape_instance: CollisionShape2D
 
 # Component constituents of this part. These are auto-registered.
 var light_guns: Array[LightGun] = []
@@ -24,10 +26,19 @@ var health: HealthComponent = null
 # TODO: Add thrusters, shields, heavy guns, etc
 
 
+func _enter_tree() -> void:
+	_init_shape()
+
+
 func _ready() -> void:
-	area_entered.connect(_on_area_entered)
-	area_exited.connect(_on_area_exited)
 	_init_components(self)
+
+
+func _init_shape() -> void:
+	var hurtbox = get_node("Hurtbox")
+	assert(hurtbox != null and hurtbox is Area2D)
+	assert(hurtbox.get_children().size() == 1 and hurtbox.get_children()[0] is CollisionShape2D)
+
 
 func _init_components(node: Node) -> void:
 	if node is HealthComponent:
@@ -58,12 +69,8 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_area_entered(area: Area2D) -> void:
-	Global.player.on_part_area_entered(area, self)
-
-
-func _on_area_exited(area: Area2D) -> void:
-	Global.player.on_part_area_exited(area, self)
+func get_healthbox_collision_shape() -> CollisionShape2D:
+	return get_node("Hurtbox").get_children()[0]
 
 
 func get_all_descendants(out_descendants: Array[Part]) -> void:

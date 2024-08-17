@@ -15,8 +15,9 @@ func _ready() -> void:
 	player = PLAYER_SCENE.instantiate()
 	add_child(player)
 
-	var drop = ENERGY_DROP_SCENE.instantiate()
-	add_child(drop)
+	# TODO: Remove.
+	#var drop = ENERGY_DROP_SCENE.instantiate()
+	#add_child(drop)
 
 	# TODO: Remove these extra parts.
 
@@ -55,3 +56,7 @@ func destroy_player_part(part: Part) -> void:
 
 	for descendant_part in descendant_parts:
 		descendant_part.reparent(self)
+		Global.player.body.on_part_removed(descendant_part)
+
+	Global.player.body.on_part_removed(part)
+	part.queue_free()

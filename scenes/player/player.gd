@@ -97,21 +97,3 @@ func _on_health_component_health_depleted() -> void:
 
 func die() -> void:
 	print('we died!')
-
-
-func on_part_area_entered(area: Area2D, part: Part) -> void:
-	if area is Drop:
-		area.on_player_part_entered(part)
-	elif area is Enemy:
-		area.on_player_part_entered(part)
-	elif area is EnemyProjectile:
-		area.on_player_part_entered(part)
-
-
-func on_part_area_exited(area: Area2D, part: Part) -> void:
-	if area is Drop:
-		area.on_player_part_exited(part)
-	elif area is Enemy:
-		area.on_player_part_exited(part)
-	elif area is EnemyProjectile:
-		area.on_player_part_exited(part)

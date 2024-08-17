@@ -40,12 +40,15 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 	for connection in sub_part.child_connections:
 		_add_attached_sub_part(connection.child.part)
 
+	on_part_added(sub_part)
+
 
 func add_root_part() -> void:
 	var core_part: Part = Global.part_type_to_packed_scene(Global.PartType.Core).instantiate()
 	parts.push_back(core_part)
 	add_child(core_part)
 	core_part.attached_to_player = true
+	on_part_added(core_part)
 
 	# TODO: Remove this extra part.
 	var gun_part: Part = Global.part_type_to_packed_scene(Global.PartType.BasicGun).instantiate()
@@ -54,6 +57,7 @@ func add_root_part() -> void:
 	var core_part_attach_point := core_part.get_node("RightAttachPoint")
 	var gun_part_attach_point := gun_part.get_node("LeftAttachPoint")
 	core_part.add_child_connection(core_part_attach_point, gun_part_attach_point)
+	on_part_added(gun_part)
 
 
 func destroy_part(part: Part) -> void:
@@ -79,6 +83,20 @@ func _remove_sub_part(part: Part) -> void:
 
 	for child in part.children:
 		_remove_sub_part(child)
+
+
+func on_part_added(part: Part) -> void:
+	var healthbox_collision_shape := part.get_healthbox_collision_shape()
+	var collision_shape := CollisionShape2D.new()
+	collision_shape.shape = healthbox_collision_shape.shape
+	Global.player.add_child(collision_shape)
+	collision_shape.global_transform = healthbox_collision_shape.global_transform
+	part.player_collision_shape_instance = collision_shape
+
+
+func on_part_removed(part: Part) -> void:
+	Global.player.remove_child(part.player_collision_shape_instance)
+	part.player_collision_shape_instance = null
 
 
 func attach_part(overlap: PotentialConnectionOverlap) -> void:
