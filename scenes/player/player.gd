@@ -18,7 +18,7 @@ var is_reversing := false
 var can_fire := true
 
 func _ready() -> void:
-	pass # Replace with function body.
+	Global.player = self
 
 
 func _process(delta: float) -> void:
