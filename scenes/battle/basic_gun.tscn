@@ -8,6 +8,8 @@
 script = ExtResource("1_bdwbd")
 projectile = ExtResource("2_qp3n7")
 spawn_point = NodePath("SpawnPoint")
+cooldown = 0.2
+spread = 5.0
 
 [node name="BasicGun" type="Sprite2D" parent="."]
 texture = ExtResource("2_lv2k4")
