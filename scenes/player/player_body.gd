@@ -86,13 +86,13 @@ func attach_part(overlap: PotentialConnectionOverlap) -> void:
 		is_instance_valid(overlap.detached_point) and
 		overlap.attached_point.part.attached_to_player)
 
-	attaching = true
-
 	_remove_potential_overlap_mapping(overlap.attached_point)
 
 	if overlap.detached_point.part.attached_to_player:
 		# Already attached from another AttachPoint this frame.
 		return
+
+	attaching = true
 
 	# Re-orient the part subtree such that the newly-attached part is the root.
 	overlap.detached_point.part.reassign_parent_connection(null)
