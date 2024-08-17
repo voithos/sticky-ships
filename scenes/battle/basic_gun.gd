@@ -1,1 +1,1 @@
-extends Gun
+extends LightGun

@@ -15,7 +15,8 @@ var parent_connection: Connection
 var child_connections: Array[Connection] = []
 
 # Component constituents of this part. These are auto-registered.
-var light_guns: Array[Gun] = []
+var light_guns: Array[LightGun] = []
+var heavy_guns: Array[HeavyGun] = []
 # TODO: Add thrusters, shields, heavy guns, etc
 
 
@@ -25,8 +26,11 @@ func _ready() -> void:
 	_init_components(self)
 
 func _init_components(node: Node) -> void:
-	if node is Gun:
+	if node is LightGun:
 		light_guns.push_back(node)
+	elif node is HeavyGun:
+		heavy_guns.push_back(node)
+
 	for child in node.get_children():
 		_init_components(child)
 
