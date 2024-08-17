@@ -110,6 +110,9 @@ func attach_part(overlap: PotentialConnectionOverlap) -> void:
 		# Already attached from another AttachPoint this frame.
 		return
 
+	var old_parent_node := overlap.detached_point.part.get_parent()
+	assert(old_parent_node is Drop)
+
 	attaching = true
 
 	# Re-orient the part subtree such that the newly-attached part is the root.
@@ -120,6 +123,8 @@ func attach_part(overlap: PotentialConnectionOverlap) -> void:
 	_add_attached_sub_part(overlap.detached_point.part)
 
 	attaching = false
+
+	old_parent_node.queue_free()
 
 	Sfx.play(Sfx.PARTS_CONNECTED)
 
