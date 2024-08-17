@@ -3,7 +3,7 @@ class_name Part
 extends Node2D
 
 # The mass of this part, as a whole.
-@export var mass: float = 1.0
+@export var mass: float = 0.5
 
 var attached_to_player := false
 

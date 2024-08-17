@@ -10,6 +10,7 @@ var parts: Array[Part] = []
 # Dictionary<AttachPoint, PotentialConnectionOverlap>
 var potential_connection_overlaps := {}
 
+var total_mass := 0.0
 
 func _ready() -> void:
 	add_root_part()
@@ -50,15 +51,6 @@ func add_root_part() -> void:
 	core_part.attached_to_player = true
 	on_part_added(core_part)
 
-	# TODO: Remove this extra part.
-	var gun_part: Part = Global.part_type_to_packed_scene(Global.PartType.BasicGun).instantiate()
-	parts.push_back(gun_part)
-	add_child(gun_part)
-	var core_part_attach_point := core_part.get_node("RightAttachPoint")
-	var gun_part_attach_point := gun_part.get_node("LeftAttachPoint")
-	core_part.add_child_connection(core_part_attach_point, gun_part_attach_point)
-	on_part_added(gun_part)
-
 
 func destroy_part(part: Part) -> void:
 	assert(is_instance_valid(part))
@@ -93,10 +85,16 @@ func on_part_added(part: Part) -> void:
 	collision_shape.global_transform = healthbox_collision_shape.global_transform
 	part.player_collision_shape_instance = collision_shape
 
+	total_mass += part.mass
+	assert(total_mass > 0)
+
 
 func on_part_removed(part: Part) -> void:
 	Global.player.remove_child(part.player_collision_shape_instance)
 	part.player_collision_shape_instance = null
+
+	total_mass -= part.mass
+	assert(total_mass >= 0)
 
 
 func attach_part(overlap: PotentialConnectionOverlap) -> void:

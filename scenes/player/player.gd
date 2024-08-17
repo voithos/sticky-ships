@@ -4,18 +4,19 @@ extends CharacterBody2D
 
 @export var drag_linear_coeff := 0.05
 @export var drag_angular_coeff := 0.1
-## The % of max speed when going backwards.
+## The % of max speed when going backwards. This is just the default, added thrusters will not be affected.
 @export var reverse_multiplier := 0.25
 
-@export var MAX_ACCELERATION = 600
-@export var MAX_LINEAR_SPEED = 180
-@export var MAX_ANGULAR_SPEED = 200
-@export var MAX_ANGULAR_ACCELERATION = 3000
+@export var acceleration_factor := 500.0
+@export var MAX_ANGULAR_SPEED := 200.0
+@export var MAX_ANGULAR_ACCELERATION := 3000.0
 
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
 var is_reversing := false
 var can_fire := true
+
+const MIN_THRUSTER_CONTRIBUTION_COS := cos(deg_to_rad(45.0))
 
 # Components.
 @onready var health: HealthComponent = $HealthComponent
@@ -45,17 +46,29 @@ func handle_movement(delta: float) -> void:
 	var movement := get_movement()
 	is_reversing = movement.y < 0
 
-	var direction := get_orientation()
+	var forward := get_orientation()
+	var direction := -forward if is_reversing else forward
 
+	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
+	# We start with the core's default movement capabilities.
+	var max_propulsion := (reverse_multiplier if is_reversing else 1.0)
+
+	for part in body.parts:
+		for thruster in part.thrusters:
+			var thrust_vector := thruster.get_thrust_vector()
+			# Only add contribution when it is at least a certain degrees aligned.
+			if direction.dot(thrust_vector) > MIN_THRUSTER_CONTRIBUTION_COS:
+				max_propulsion += thruster.propulsion
+
+	print((max_propulsion / body.total_mass))
 	linear_velocity += (
 		movement.y
-		* direction
-		* MAX_ACCELERATION
-		* (reverse_multiplier if is_reversing else 1.0)
+		* forward
+		* acceleration_factor
+		* (max_propulsion / body.total_mass)
 		* delta
 	)
 
-	linear_velocity = linear_velocity.limit_length(MAX_LINEAR_SPEED)
 	linear_velocity = linear_velocity.lerp(Vector2.ZERO, drag_linear_coeff)
 
 	velocity = linear_velocity
@@ -88,7 +101,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func get_orientation() -> Vector2:
-	return Vector2.from_angle(rotation - PI/2)
+	return Vector2.from_angle(global_rotation - PI/2)
 
 
 func _on_health_component_health_depleted() -> void:
