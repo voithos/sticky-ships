@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bj27d2ad4h57k"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_hjins"]
+[ext_resource type="Script" path="res://scenes/enemies/basic_enemy.gd" id="1_lphny"]
 [ext_resource type="Texture2D" uid="uid://dfsnggri2xi5f" path="res://assets/sprites/enemies/basic_enemy.png" id="2_olgq7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_muxgy"]
@@ -73,7 +73,7 @@ radius = 8.0
 [node name="BasicEnemy" type="Area2D"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_hjins")
+script = ExtResource("1_lphny")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ux3vb")

@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 
 const CORE_PART_SCENE := preload("res://scenes/parts/core_part.tscn")
+const BASIC_GUN_PART_SCENE := preload("res://scenes/parts/basic_gun_part.tscn")
 const POTENTIAL_CONNECTION_INDICATOR_SCENE := preload("res://scenes/parts/potential_connection_indicator.tscn")
 
 @export var drag_linear_coeff := 0.05
@@ -98,20 +99,20 @@ func die() -> void:
 
 func on_area_entered(area: Area2D, part: Part) -> void:
 	if area is Drop:
-		area.on_player_part_entered(self)
+		area.on_player_part_entered(part)
 	elif area is Enemy:
-		area.on_player_part_entered(self)
+		area.on_player_part_entered(part)
 	elif area is EnemyProjectile:
-		area.on_player_part_entered(self)
+		area.on_player_part_entered(part)
 
 
 func on_area_exited(area: Area2D, part: Part) -> void:
 	if area is Drop:
-		area.on_player_part_exited(self)
+		area.on_player_part_exited(part)
 	elif area is Enemy:
-		area.on_player_part_exited(self)
+		area.on_player_part_exited(part)
 	elif area is EnemyProjectile:
-		area.on_player_part_exited(self)
+		area.on_player_part_exited(part)
 
 
 func _add_attached_sub_part(sub_part: Part) -> void:
@@ -124,10 +125,20 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 
 
 func add_root_part() -> void:
-	var part: Part = part_type_to_packed_scene(Part.Type.Core).instantiate()
-	parts.push_back(part)
-	add_child(part)
-	part.attached_to_player = true
+	var core_part: Part = part_type_to_packed_scene(Part.Type.Core).instantiate()
+	parts.push_back(core_part)
+	add_child(core_part)
+	core_part.attached_to_player = true
+
+	# TODO: Remove this extra part.
+	var gun_part: Part = part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
+	parts.push_back(gun_part)
+	add_child(gun_part)
+	# FIXME: LEFT OFF HERE: Update add_child_connection to adjust the transforms of all newly-connected sub-parts to snap accordingly to fit the new AttachPoint Connection.
+	gun_part.position = Vector2(16.0, 0.0)
+	var core_part_attach_point := core_part.get_node("RightAttachPoint")
+	var gun_part_attach_point := gun_part.get_node("LeftAttachPoint")
+	core_part.add_child_connection(core_part_attach_point, gun_part_attach_point)
 
 
 func destroy_part(part: Part) -> void:
@@ -159,6 +170,8 @@ func part_type_to_packed_scene(type: Part.Type) -> PackedScene:
 	match type:
 		Part.Type.Core:
 			return CORE_PART_SCENE
+		Part.Type.BasicGun:
+			return BASIC_GUN_PART_SCENE
 		_:
 			assert(false)
 			return null

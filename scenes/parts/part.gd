@@ -4,6 +4,7 @@ extends Area2D
 
 enum Type {
 	Core,
+	BasicGun,
 }
 
 var attached_to_player := false
@@ -39,6 +40,7 @@ func get_all_descendants(out_descendants: Array[Part]) -> void:
 
 func add_child_connection(parent_point: AttachPoint, child_point: AttachPoint) -> void:
 	assert(!is_instance_valid(child_point.part.parent_connection))
+	assert(attach_points.has(parent_point))
 	for connection in child_connections:
 		assert(connection.parent != parent_point)
 		assert(connection.child != child_point)

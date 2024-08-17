@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqf0kup6mvy2q"]
+
+[ext_resource type="Script" path="res://scenes/parts/basic_gun_part.gd" id="1_48u7a"]
+[ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_blxg6"]
+[ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="3_4ewls"]
+[ext_resource type="PackedScene" uid="uid://darmautjiq1qe" path="res://scenes/parts/attach_point.tscn" id="4_bogoi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4bmit"]
+radius = 8.0
+
+[node name="BasicGunPart" type="Area2D"]
+collision_mask = 22
+script = ExtResource("1_48u7a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4bmit")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_blxg6")
+
+[node name="BasicGun" parent="." instance=ExtResource("3_4ewls")]
+position = Vector2(0, -18)
+projectile_collision_mask = 32
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("4_bogoi")]
+unique_name_in_owner = true
+position = Vector2(-8, 0)
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("4_bogoi")]
+unique_name_in_owner = true
+position = Vector2(8, 0)
+
+[node name="RearAttachPoint" parent="." instance=ExtResource("4_bogoi")]
+unique_name_in_owner = true
+position = Vector2(0, 8)

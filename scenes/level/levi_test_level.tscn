@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://g7f5cxgcrpm3"]
 
-[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_nni1g"]
+[ext_resource type="Script" path="res://scenes/level/levi_test_level.gd" id="1_k7gru"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_jkqrg"]
 
 [node name="LeviTestLevel" type="Node2D"]
-script = ExtResource("1_nni1g")
+script = ExtResource("1_k7gru")
 
 [node name="Background" parent="." instance=ExtResource("2_jkqrg")]
 unique_name_in_owner = true

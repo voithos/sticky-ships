@@ -1,4 +1,4 @@
-class_name CorePart
+class_name BasicGunPart
 extends Part
 
 

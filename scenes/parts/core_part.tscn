@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2ddtvmfs2v5i"]
+[gd_scene load_steps=6 format=3 uid="uid://b2ddtvmfs2v5i"]
 
 [ext_resource type="Script" path="res://scenes/parts/core_part.gd" id="1_cyajj"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_58uv2"]
@@ -21,14 +21,19 @@ texture = ExtResource("2_58uv2")
 [node name="BasicGun" parent="." instance=ExtResource("3_5khfa")]
 position = Vector2(0, -18)
 projectile_collision_mask = 32
-[node name="AttachPoint" parent="." instance=ExtResource("3_cmso1")]
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("3_cmso1")]
+unique_name_in_owner = true
 position = Vector2(-8, 0)
 
-[node name="AttachPoint2" parent="." instance=ExtResource("3_cmso1")]
+[node name="RightAttachPoint" parent="." instance=ExtResource("3_cmso1")]
+unique_name_in_owner = true
 position = Vector2(8, 0)
 
-[node name="AttachPoint3" parent="." instance=ExtResource("3_cmso1")]
+[node name="ForwardAttachPoint" parent="." instance=ExtResource("3_cmso1")]
+unique_name_in_owner = true
 position = Vector2(0, -8)
 
-[node name="AttachPoint4" parent="." instance=ExtResource("3_cmso1")]
+[node name="RearAttachPoint" parent="." instance=ExtResource("3_cmso1")]
+unique_name_in_owner = true
 position = Vector2(0, 8)

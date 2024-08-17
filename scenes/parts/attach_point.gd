@@ -13,7 +13,7 @@ func _ready() -> void:
 	var parent := get_parent()
 	assert(get_parent() is Part)
 	part = parent
-	parent.attach_points.push_back(self)
+	part.attach_points.push_back(self)
 
 
 func _process(delta: float) -> void:
