@@ -6,6 +6,8 @@ extends Area2D
 # The damage inflicted.
 @export var damage := 10.0
 
+@export var visibility_notifier: VisibleOnScreenNotifier2D
+
 var direction := Vector2.ZERO
 # The entity that shot this projectile
 var shooter: Node
@@ -15,6 +17,9 @@ func _ready() -> void:
 	direction = -GSAIUtils.angle_to_vector2(rotation)
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
+
+	if visibility_notifier:
+		visibility_notifier.screen_exited.connect(die)
 
 
 func _physics_process(delta: float) -> void:
@@ -30,5 +35,4 @@ func _on_body_entered(body: Node2D):
 
 
 func die() -> void:
-	print('died')
 	queue_free()

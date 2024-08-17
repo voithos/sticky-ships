@@ -6,11 +6,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
 radius = 3.0
 
-[node name="BasicProjectile" type="Area2D"]
+[node name="BasicProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
 script = ExtResource("1_dyrb1")
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
 
 [node name="BasicProjectile" type="Sprite2D" parent="."]
 texture = ExtResource("2_6uiut")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2qn3j")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(0.3, 0.35)
