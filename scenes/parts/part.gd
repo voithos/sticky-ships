@@ -36,11 +36,11 @@ func _process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	Global.player.on_area_entered(area, self)
+	Global.player.on_part_area_entered(area, self)
 
 
 func _on_area_exited(area: Area2D) -> void:
-	Global.player.on_area_exited(area, self)
+	Global.player.on_part_area_exited(area, self)
 
 
 func get_all_descendants(out_descendants: Array[Part]) -> void:
