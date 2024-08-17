@@ -39,6 +39,12 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	handle_movement(delta)
+	if Input.is_action_just_pressed("attach"):
+		attach_overlapping_parts()
+
+
+func handle_movement(delta: float) -> void:
 	var movement := get_movement()
 	is_reversing = movement.y < 0
 
@@ -65,12 +71,14 @@ func _physics_process(delta: float) -> void:
 
 	rotation += angular_velocity * delta
 
-	if Input.is_action_just_pressed("attach"):
-		var overlaps: Array[PotentialConnectionOverlap] = []
-		for attached_point in potential_connection_overlaps:
-			overlaps.push_back(potential_connection_overlaps[attached_point])
-		for overlap in overlaps:
-			attach_part(overlap)
+
+func attach_overlapping_parts() -> void:
+	var overlaps: Array[PotentialConnectionOverlap] = []
+	for attached_point in potential_connection_overlaps:
+		overlaps.push_back(potential_connection_overlaps[attached_point])
+	for overlap in overlaps:
+		attach_part(overlap)
+
 
 
 func get_movement() -> Vector2:
