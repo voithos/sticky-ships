@@ -2,9 +2,7 @@ class_name PlayerBody
 extends Node2D
 
 
-const CORE_PART_SCENE := preload("res://scenes/parts/core_part.tscn")
-const BASIC_GUN_PART_SCENE := preload("res://scenes/parts/basic_gun_part.tscn")
-const POTENTIAL_CONNECTION_INDICATOR_SCENE := preload("res://scenes/parts/potential_connection_indicator.tscn")
+const POTENTIAL_CONNECTION_INDICATOR_SCENE := preload("res://scenes/player/potential_connection_indicator.tscn")
 
 var parts: Array[Part] = []
 # Dictionary<AttachPoint, PotentialConnectionOverlap>
@@ -42,17 +40,15 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 
 
 func add_root_part() -> void:
-	var core_part: Part = part_type_to_packed_scene(Part.Type.Core).instantiate()
+	var core_part: Part = Global.part_type_to_packed_scene(Part.Type.Core).instantiate()
 	parts.push_back(core_part)
 	add_child(core_part)
 	core_part.attached_to_player = true
 
 	# TODO: Remove this extra part.
-	var gun_part: Part = part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
+	var gun_part: Part = Global.part_type_to_packed_scene(Part.Type.BasicGun).instantiate()
 	parts.push_back(gun_part)
 	add_child(gun_part)
-	# FIXME: LEFT OFF HERE: Update add_child_connection to adjust the transforms of all newly-connected sub-parts to snap accordingly to fit the new AttachPoint Connection.
-	gun_part.position = Vector2(16.0, 0.0)
 	var core_part_attach_point := core_part.get_node("RightAttachPoint")
 	var gun_part_attach_point := gun_part.get_node("LeftAttachPoint")
 	core_part.add_child_connection(core_part_attach_point, gun_part_attach_point)
@@ -83,23 +79,14 @@ func _remove_sub_part(part: Part) -> void:
 		_remove_sub_part(child)
 
 
-func part_type_to_packed_scene(type: Part.Type) -> PackedScene:
-	match type:
-		Part.Type.Core:
-			return CORE_PART_SCENE
-		Part.Type.BasicGun:
-			return BASIC_GUN_PART_SCENE
-		_:
-			assert(false)
-			return null
-
-
 func attach_part(overlap: PotentialConnectionOverlap) -> void:
 	assert(overlap.is_valid())
 
-	Sfx.play(Sfx.PARTS_CONNECTED)
-
 	_remove_potential_overlap_mapping(overlap.attached_point)
+
+	if overlap.detached_point.part.attached_to_player:
+		# Already attached from another AttachPoint this frame.
+		return
 
 	# Re-orient the part subtree such that the newly-attached part is the root.
 	overlap.detached_point.part.reassign_parent_connection(null)
@@ -107,6 +94,8 @@ func attach_part(overlap: PotentialConnectionOverlap) -> void:
 	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
 
 	_add_attached_sub_part(overlap.detached_point.part)
+
+	Sfx.play(Sfx.PARTS_CONNECTED)
 
 
 func on_potential_attach_point_overlap_started(point_a: AttachPoint, point_b: AttachPoint) -> void:
@@ -126,8 +115,10 @@ func on_potential_attach_point_overlap_started(point_a: AttachPoint, point_b: At
 
 	if potential_connection_overlaps.has(attached_point):
 		var overlap: PotentialConnectionOverlap = potential_connection_overlaps[attached_point]
-		# This should have been caught by the check above.
-		assert(overlap.detached_point != detached_point)
+		if overlap.detached_point == detached_point:
+			# Already recorded this overlap from the other AttachPoint's
+			# on-intersection event.
+			return
 		# This might be because a different possible fallen AttachPoint was recorded.
 		_remove_potential_overlap_mapping(attached_point)
 

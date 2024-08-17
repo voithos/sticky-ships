@@ -67,6 +67,12 @@ func add_child_connection(parent_point: AttachPoint, child_point: AttachPoint) -
 	child_connections.push_back(connection)
 	child_point.part.parent_connection = connection
 
+	child_point.part.attached_to_player = parent_point.part.attached_to_player
+
+	# Snap the new part to align attachment points.
+	var translation := parent_point.global_position - child_point.global_position
+	child_point.part.translate_part(translation)
+
 
 func remove_child_connection(connection: Connection) -> void:
 	assert(child_connections.has(connection))
@@ -81,13 +87,26 @@ func reassign_parent_connection(new_parent_connection: Connection) -> void:
 	if parent_connection == new_parent_connection:
 		# Already done.
 		return
+
 	var old_parent_connection := parent_connection
-	var old_parent := old_parent_connection.parent
-	var old_child := old_parent_connection.child
+	var old_parent := old_parent_connection.parent if parent_connection != null else null
+	var old_child := old_parent_connection.child if parent_connection != null else null
 	parent_connection = new_parent_connection
+
+	if parent_connection == null:
+		# We don't need to recurse to re-assign the old parent's connection since
+		# this part used to be the root.
+		return
+
 	old_parent_connection.parent = old_child
 	old_parent_connection.child = old_parent
-	old_parent.reassign_parent_connection(old_parent_connection)
+	old_parent.part.reassign_parent_connection(old_parent_connection)
+
+
+func translate_part(translation: Vector2) -> void:
+	position += translation
+	for connection in child_connections:
+		connection.child.part.translate_part(translation)
 
 
 class Connection extends RefCounted:
