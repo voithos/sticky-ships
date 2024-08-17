@@ -1,16 +1,16 @@
 class_name Player
 extends CharacterBody2D
 
-@export var drag_linear_coeff := 0.05
 ## The % of max speed when going backwards.
 @export var reverse_multiplier := 0.25
 
+@export var drag_linear_coeff := 0.05
 @export var drag_angular_coeff := 0.1
 
-const MAX_ACCELERATION = 1200
-const MAX_LINEAR_SPEED = 540
-const MAX_ANGULAR_SPEED = 200
-const MAX_ANGULAR_ACCELERATION = 3600
+@export var MAX_ACCELERATION = 600
+@export var MAX_LINEAR_SPEED = 180
+@export var MAX_ANGULAR_SPEED = 200
+@export var MAX_ANGULAR_ACCELERATION = 3000
 
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 
 	var direction := get_orientation()
 
+
 	linear_velocity += (
 		movement.y
 		* direction
@@ -41,16 +42,18 @@ func _physics_process(delta: float) -> void:
 		* (reverse_multiplier if is_reversing else 1)
 		* delta
 	)
-	angular_velocity += movement.x * MAX_ANGULAR_ACCELERATION * delta
 
 	linear_velocity = linear_velocity.limit_length(MAX_LINEAR_SPEED)
 	linear_velocity = linear_velocity.lerp(Vector2.ZERO, drag_linear_coeff)
 
+	velocity = linear_velocity
+	move_and_slide()
+
+	# Rotation.
+	angular_velocity += movement.x * MAX_ANGULAR_ACCELERATION * delta
 	angular_velocity = clamp(angular_velocity, -deg_to_rad(MAX_ANGULAR_SPEED), deg_to_rad(MAX_ANGULAR_SPEED))
 	angular_velocity = lerp(angular_velocity, 0.0, drag_angular_coeff)
 
-	velocity = linear_velocity
-	move_and_slide()
 	rotation += angular_velocity * delta
 
 	if Input.is_action_just_pressed("debug"):
