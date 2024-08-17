@@ -50,7 +50,6 @@ func _physics_process(delta: float) -> void:
 	angular_velocity = lerp(angular_velocity, 0.0, drag_angular_coeff)
 
 	velocity = linear_velocity
-	#print(velocity)
 	move_and_slide()
 	rotation += angular_velocity * delta
 
