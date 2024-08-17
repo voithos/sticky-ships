@@ -12,10 +12,14 @@ const BACKGROUND_QUIET_DB = -40.0
 # ========================
 enum {
 	EXAMPLE,
+	CONNECTION_AVAILABLE,
+	PARTS_CONNECTED,
 }
 
 const SAMPLES = {
 	EXAMPLE: preload("res://assets/sfx/example.wav"),
+	CONNECTION_AVAILABLE: preload("res://assets/sfx/connection_available.wav"),
+	PARTS_CONNECTED: preload("res://assets/sfx/parts_connected.wav"),
 }
 # ========================
 
