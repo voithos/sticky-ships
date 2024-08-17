@@ -4,6 +4,8 @@ extends Node2D
 
 const POTENTIAL_CONNECTION_INDICATOR_SCENE := preload("res://scenes/player/potential_connection_indicator.tscn")
 
+var attaching := false
+
 var parts: Array[Part] = []
 # Dictionary<AttachPoint, PotentialConnectionOverlap>
 var potential_connection_overlaps := {}
@@ -82,6 +84,8 @@ func _remove_sub_part(part: Part) -> void:
 func attach_part(overlap: PotentialConnectionOverlap) -> void:
 	assert(overlap.is_valid())
 
+	attaching = true
+
 	_remove_potential_overlap_mapping(overlap.attached_point)
 
 	if overlap.detached_point.part.attached_to_player:
@@ -94,6 +98,8 @@ func attach_part(overlap: PotentialConnectionOverlap) -> void:
 	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
 
 	_add_attached_sub_part(overlap.detached_point.part)
+
+	attaching = false
 
 	Sfx.play(Sfx.PARTS_CONNECTED)
 
