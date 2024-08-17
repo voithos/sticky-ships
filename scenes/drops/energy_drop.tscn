@@ -76,7 +76,7 @@ script = ExtResource("1_q5eng")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cyijo")
 autoplay = "default"
-frame_progress = 0.337434
+frame_progress = 0.829747
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

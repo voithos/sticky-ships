@@ -1,6 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj27d2ad4h57k"]
+[gd_scene load_steps=13 format=3 uid="uid://bj27d2ad4h57k"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_hjins"]
+[ext_resource type="Texture2D" uid="uid://dfsnggri2xi5f" path="res://assets/sprites/enemies/basic_enemy.png" id="2_olgq7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muxgy"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g7ju"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_827sv"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqqse"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihtjv"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgrhm"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s48j"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_241cm"]
+atlas = ExtResource("2_olgq7")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ux3vb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muxgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g7ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_827sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqqse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihtjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgrhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s48j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_241cm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h60r0"]
+radius = 8.0
 
 [node name="BasicEnemy" type="Node2D"]
 script = ExtResource("1_hjins")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ux3vb")
+autoplay = "default"
+frame_progress = 0.414494
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h60r0")
