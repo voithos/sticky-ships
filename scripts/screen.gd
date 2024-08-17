@@ -23,3 +23,7 @@ func _input(event):
 			if event.keycode == KEY_P:
 				is_paused = not is_paused
 				get_tree().set_pause(is_paused)
+
+
+func is_debug_pressed():
+	return OS.is_debug_build() and Input.is_action_just_pressed("debug")

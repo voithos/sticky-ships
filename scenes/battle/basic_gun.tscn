@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk0ob0f1kxgmm"]
+
+[ext_resource type="Script" path="res://scenes/battle/basic_gun.gd" id="1_bdwbd"]
+[ext_resource type="Texture2D" uid="uid://bbedc73bo7str" path="res://assets/sprites/battle/basic_gun.png" id="2_lv2k4"]
+[ext_resource type="PackedScene" uid="uid://bmc6nx7ggqism" path="res://scenes/battle/basic_projectile.tscn" id="2_qp3n7"]
+
+[node name="BasicGun" type="Node2D"]
+script = ExtResource("1_bdwbd")
+projectile = ExtResource("2_qp3n7")
+spawn_point = NodePath("SpawnPoint")
+
+[node name="BasicGun" type="Sprite2D" parent="."]
+texture = ExtResource("2_lv2k4")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, 2)

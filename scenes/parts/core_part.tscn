@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2ddtvmfs2v5i"]
+[gd_scene load_steps=5 format=3 uid="uid://b2ddtvmfs2v5i"]
 
 [ext_resource type="Script" path="res://scenes/parts/core_part.gd" id="1_cyajj"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="2_58uv2"]
+[ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="3_5khfa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bmit"]
 radius = 8.0
@@ -15,3 +16,7 @@ shape = SubResource("CircleShape2D_4bmit")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_58uv2")
+
+[node name="BasicGun" parent="." instance=ExtResource("3_5khfa")]
+position = Vector2(0, -18)
+projectile_collision_mask = 32
