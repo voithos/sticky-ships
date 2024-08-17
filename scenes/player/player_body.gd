@@ -1,5 +1,5 @@
 class_name PlayerBody
-extends Node
+extends Node2D
 
 
 const CORE_PART_SCENE := preload("res://scenes/parts/core_part.tscn")
