@@ -3,7 +3,6 @@ class_name Part
 extends Node2D
 
 # The mass of this part, as a whole.
-# TODO: Replace this with rigidbody mass?
 @export var mass: float = 1.0
 
 var attached_to_player := false
@@ -18,7 +17,6 @@ var player_collision_shape_instance: CollisionShape2D
 # Component constituents of this part. These are auto-registered.
 var light_guns: Array[LightGun] = []
 var heavy_guns: Array[HeavyGun] = []
-
 var thrusters: Array[Thruster] = []
 
 # Health is special, as there's only ever one
@@ -36,7 +34,7 @@ func _ready() -> void:
 
 func _init_shape() -> void:
 	var hurtbox = get_node("Hurtbox")
-	assert(hurtbox != null and hurtbox is Area2D)
+	assert(hurtbox != null and hurtbox is Hurtbox)
 	assert(hurtbox.get_children().size() == 1 and hurtbox.get_children()[0] is CollisionShape2D)
 
 

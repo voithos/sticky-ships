@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_d7g85"]
 [ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="4_rnd8u"]
 [ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="5_bicd5"]
-[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/parts/attach_point.tscn" id="6_b4615"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_b4615"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bmit"]
 radius = 8.0
