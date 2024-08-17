@@ -63,5 +63,24 @@ func unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 
+
 func get_orientation() -> Vector2:
 	return Vector2.from_angle(rotation - PI/2)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area is Drop:
+		pass
+		area.on_player_entered(self)
+	elif area is Enemy:
+		pass
+		area.on_player_entered(self)
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area is Drop:
+		pass
+		area.on_player_entered(self)
+	elif area is Enemy:
+		pass
+		area.on_player_entered(self)

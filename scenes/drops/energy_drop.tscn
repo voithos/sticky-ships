@@ -70,7 +70,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_15yln"]
 radius = 8.0
 
-[node name="EnergyDrop" type="Node2D"]
+[node name="EnergyDrop" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_q5eng")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -78,9 +80,5 @@ sprite_frames = SubResource("SpriteFrames_cyijo")
 autoplay = "default"
 frame_progress = 0.829747
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_15yln")
