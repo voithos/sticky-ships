@@ -3,7 +3,7 @@ extends Node
 
 @export var projectile: PackedScene
 # A node used as the spawn position when spawning bullets
-@export var spawn_point: NodePath
+@export var spawn_point: Node2D
 @export var cooldown: float = 0.5
 
 # The angle in degrees of spread when firing
@@ -22,11 +22,9 @@ func try_fire() -> void:
 	if cooldown_left > 0:
 		return
 
-	var spawner = get_node(spawn_point)
-
 	var p: Projectile = projectile.instantiate()
-	p.global_position = spawner.global_position
-	p.rotation = spawner.global_rotation + deg_to_rad(random_spread(spread))
+	p.global_position = spawn_point.global_position
+	p.rotation = spawn_point.global_rotation + deg_to_rad(random_spread(spread))
 	p.speed *= (1.0 + random_spread(speed_spread))
 	p.collision_mask = projectile_collision_mask
 	p.shooter = owner

@@ -51,7 +51,7 @@ func handle_movement(delta: float) -> void:
 		movement.y
 		* direction
 		* MAX_ACCELERATION
-		* (reverse_multiplier if is_reversing else 1)
+		* (reverse_multiplier if is_reversing else 1.0)
 		* delta
 	)
 

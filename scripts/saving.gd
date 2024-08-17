@@ -24,7 +24,7 @@ func save_game():
 	save_file.store_line(JSON.stringify(save_data))
 	save_file.close()
 
-	emit_signal("saved")
+	saved.emit()
 
 func load_game():
 	var save_file = FileAccess.open(SAVE_FILE, FileAccess.READ)
@@ -42,4 +42,4 @@ func load_game():
 		assert(node.has_method("load_state"))
 		node.load_state(save_data[node_path])
 
-	emit_signal("loaded")
+	loaded.emit()

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bbedc73bo7str" path="res://assets/sprites/battle/basic_gun.png" id="2_lv2k4"]
 [ext_resource type="PackedScene" uid="uid://bmc6nx7ggqism" path="res://scenes/battle/basic_projectile.tscn" id="2_qp3n7"]
 
-[node name="BasicGun" type="Node2D"]
+[node name="BasicGun" type="Node2D" node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("1_bdwbd")
 projectile = ExtResource("2_qp3n7")
 spawn_point = NodePath("SpawnPoint")
