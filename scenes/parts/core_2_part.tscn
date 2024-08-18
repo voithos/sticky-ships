@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_2mdf0"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_5m3ij"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_elbxn"]
-[ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="4_8xicd"]
+[ext_resource type="Texture2D" uid="uid://dtuk0owfyw8cw" path="res://assets/sprites/parts/core_2.png" id="4_ubxy6"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_agrs4"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_me8w0"]
 
@@ -19,7 +19,7 @@ script = ExtResource("2_5m3ij")
 health_component = NodePath("../HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_8xicd")
+texture = ExtResource("4_ubxy6")
 
 [node name="BasicGun" parent="." instance=ExtResource("5_agrs4")]
 position = Vector2(0, -18)
