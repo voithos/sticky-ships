@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2k44vm6uk81p"]
+[gd_scene load_steps=8 format=3 uid="uid://c2k44vm6uk81p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_7r1pg"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_sygiw"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bbny0j6b3dwts" path="res://scenes/drops/empty_parts_drop.tscn" id="5_ts01t"]
 [ext_resource type="PackedScene" uid="uid://chy8i0ynxsylr" path="res://scenes/parts/basic_thruster_part.tscn" id="5_yfcfs"]
 [ext_resource type="PackedScene" uid="uid://buedulm0clu5e" path="res://scenes/parts/basic_gun_part.tscn" id="5_yy4jp"]
-[ext_resource type="PackedScene" uid="uid://b2ddtvmfs2v5i" path="res://scenes/parts/core_1_part.tscn" id="7_pa4tu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkr8e"]
 size = Vector2(117, 113)
@@ -42,18 +41,5 @@ position = Vector2(-46, -23)
 
 [node name="BasicThrusterPart" parent="EmptyPartsDrop2" instance=ExtResource("5_yfcfs")]
 
-[node name="EmptyPartsDrop3" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(-117, -41)
-
-[node name="CorePart2" parent="EmptyPartsDrop3" instance=ExtResource("7_pa4tu")]
-
-[node name="HealthComponent" parent="EmptyPartsDrop3/CorePart2" index="0"]
-max_health = 10.0
-
-[node name="Hurtbox" parent="EmptyPartsDrop3/CorePart2" index="1"]
-collision_layer = 4
-
 [editable path="EmptyPartsDrop/BasicGunPart"]
 [editable path="EmptyPartsDrop/BasicGunPart/Hurtbox"]
-[editable path="EmptyPartsDrop3/CorePart2"]
-[editable path="EmptyPartsDrop3/CorePart2/Hurtbox"]

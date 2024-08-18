@@ -21,7 +21,9 @@ func _physics_process(delta: float) -> void:
 func try_fire() -> void:
 	if cooldown_left > 0:
 		return
+	_fire()
 
+func _fire() -> void:
 	var p: Projectile = projectile.instantiate()
 	p.global_position = spawn_point.global_position
 	p.rotation = spawn_point.global_rotation + deg_to_rad(random_spread(spread))

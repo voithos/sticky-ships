@@ -1,8 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk0ob0f1kxgmm"]
+[gd_scene load_steps=10 format=3 uid="uid://bk0ob0f1kxgmm"]
 
 [ext_resource type="Script" path="res://scenes/battle/basic_gun.gd" id="1_bdwbd"]
 [ext_resource type="Texture2D" uid="uid://bbedc73bo7str" path="res://assets/sprites/battle/basic_gun.png" id="2_lv2k4"]
 [ext_resource type="PackedScene" uid="uid://bmc6nx7ggqism" path="res://scenes/battle/basic_projectile.tscn" id="2_qp3n7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srcs5"]
+atlas = ExtResource("2_lv2k4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tutwv"]
+atlas = ExtResource("2_lv2k4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avokw"]
+atlas = ExtResource("2_lv2k4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmnp4"]
+atlas = ExtResource("2_lv2k4")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ssj3"]
+atlas = ExtResource("2_lv2k4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmvoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srcs5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tutwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avokw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmnp4")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ssj3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="BasicGun" type="Node2D" node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("1_bdwbd")
@@ -11,8 +59,14 @@ spawn_point = NodePath("SpawnPoint")
 cooldown = 0.2
 spread = 5.0
 
-[node name="BasicGun" type="Sprite2D" parent="."]
-texture = ExtResource("2_lv2k4")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hmvoc")
+animation = &"fire"
+autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, -3)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_basic_gun_animation_finished"]

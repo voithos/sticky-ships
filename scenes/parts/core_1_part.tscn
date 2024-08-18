@@ -75,7 +75,7 @@ autoplay = "default"
 frame_progress = 0.320882
 
 [node name="BasicGun" parent="." instance=ExtResource("5_vorh6")]
-position = Vector2(0, -18)
+position = Vector2(0, 2)
 projectile_collision_mask = 36
 
 [node name="LeftAttachPoint" parent="." instance=ExtResource("6_23b82")]

@@ -22,7 +22,7 @@ health_component = NodePath("../HealthComponent")
 texture = ExtResource("2_blxg6")
 
 [node name="BasicGun" parent="." instance=ExtResource("3_4ewls")]
-position = Vector2(0, -18)
+position = Vector2(0, -14)
 projectile_collision_mask = 32
 
 [node name="LeftAttachPoint" parent="." instance=ExtResource("4_bogoi")]
