@@ -4,8 +4,15 @@ extends Node2D
 
 const AUTO_CONNECT_DISTANCE_SQUARED_THRESHOLD := 3.0 * 3.0
 
-const MAX_HEALTH_MODULATION := Color(Color.WHITE, 1.0)
-const MIN_HEALTH_MODULATION := Color(Color.BLACK, 0.5)
+const MAX_HEALTH_MODULATION_ALPHA := 1.0
+const MIN_HEALTH_MODULATION_ALPHA := 0.5
+
+const FIRE_EFFECT_ALPHA := 1.0
+const FIRE_EFFECT_SCALE := 0.6
+
+const HIGH_HEALTH_RATIO_THRESHOLD := 0.8
+const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
+const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 
 @export var type := Global.PartType.UNKNOWN
 @export var growth_level := 1
@@ -17,6 +24,9 @@ var attached_to_player := false
 
 var looks_for_nearby_connections_when_entering_tree := true
 var initialized_connections := false
+
+var fire_level := 0
+var fire_effect: Node2D
 
 var attach_points: Array[AttachPoint] = []
 
@@ -44,6 +54,9 @@ func _ready() -> void:
 	_init_components(self)
 	if looks_for_nearby_connections_when_entering_tree:
 		_init_connections()
+
+	# TODO: Remove.
+	#_on_health_changed($HealthComponent.max_health * 0.1, $HealthComponent.max_health)
 
 
 func _init_shape() -> void:
@@ -122,7 +135,41 @@ func _init_health_component(h: HealthComponent) -> void:
 
 func _on_health_changed(new_health: float, prev_health: float) -> void:
 	var weight: float = new_health / $HealthComponent.max_health
-	self.modulate = lerp(MIN_HEALTH_MODULATION, MAX_HEALTH_MODULATION, weight)
+
+	#get_sprite().modulate.a = lerp(MIN_HEALTH_MODULATION_ALPHA, MAX_HEALTH_MODULATION_ALPHA, weight)
+
+	var next_fire_level: int
+	if weight <= LOW_HEALTH_RATIO_THRESHOLD:
+		next_fire_level = 3
+	elif weight <= MEDIUM_HEALTH_RATIO_THRESHOLD:
+		next_fire_level = 2
+	elif weight <= HIGH_HEALTH_RATIO_THRESHOLD:
+		next_fire_level = 1
+	else:
+		next_fire_level = 0
+
+	if fire_level != next_fire_level:
+		fire_level = next_fire_level
+
+		if is_instance_valid(fire_effect):
+			fire_effect.queue_free()
+
+		var fire_effect_scene: PackedScene
+		match next_fire_level:
+			1:
+				fire_effect_scene = Global.PART_FIRE_LOW_EFFECT_SCENE
+			2:
+				fire_effect_scene = Global.PART_FIRE_MEDIUM_EFFECT_SCENE
+			3:
+				fire_effect_scene = Global.PART_FIRE_HIGH_EFFECT_SCENE
+			_:
+				assert(false)
+				return
+
+		fire_effect = fire_effect_scene.instantiate()
+		fire_effect.modulate.a = FIRE_EFFECT_ALPHA
+		fire_effect.scale = Vector2.ONE * FIRE_EFFECT_SCALE
+		add_child(fire_effect)
 
 
 func destroy_part() -> void:
@@ -147,32 +194,31 @@ func get_bounding_box() -> Rect2:
 	return bounds
 
 
+func get_sprite() -> Node2D:
+	var sprite := get_node("AnimatedSprite2D")
+	if is_instance_valid(sprite):
+		assert(sprite is AnimatedSprite2D)
+		return sprite
+	else:
+		sprite = get_node("Sprite2D")
+		assert(is_instance_valid(sprite) and sprite is Sprite2D)
+		return sprite
+
+
 func get_sprite_size() -> Vector2:
 	var texture: Texture2D
-	var sprite := get_node("AnimatedSprite2D")
-	if sprite != null:
-		assert(sprite is AnimatedSprite2D)
+	var sprite := get_sprite()
+	if sprite is AnimatedSprite2D:
 		var animation: StringName = sprite.animation
 		texture = sprite.sprite_frames.get_frame_texture(animation, 0)
 	else:
-		sprite = get_node("Sprite2D")
-		assert(sprite != null and sprite is Sprite2D)
 		texture = sprite.texture
 	return texture.get_size()
 
 
 func get_sprite_position() -> Vector2:
-	var sprite := get_node("AnimatedSprite2D")
-	if sprite != null:
-		assert(sprite is AnimatedSprite2D)
-	else:
-		sprite = get_node("Sprite2D")
-		assert(sprite != null and sprite is Sprite2D)
+	var sprite := get_sprite()
 	return sprite.global_position
-
-
-func _process(delta: float) -> void:
-	pass
 
 
 func get_healthbox_collision_shape() -> CollisionShape2D:
