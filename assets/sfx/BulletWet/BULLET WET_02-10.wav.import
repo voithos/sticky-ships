@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcad51p0f61qx"
+path="res://.godot/imported/BULLET WET_02-10.wav-6a5eeb403c6d3cc8a8253e66a48478be.sample"
+
+[deps]
+
+source_file="res://assets/sfx/BulletWet/BULLET WET_02-10.wav"
+dest_files=["res://.godot/imported/BULLET WET_02-10.wav-6a5eeb403c6d3cc8a8253e66a48478be.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

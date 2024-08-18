@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://eedobldq1q63"
+path="res://.godot/imported/BULLET DRY_01-03.wav-95787717487039cf2a63148b79eae941.sample"
+
+[deps]
+
+source_file="res://assets/sfx/BulletDry/BULLET DRY_01-03.wav"
+dest_files=["res://.godot/imported/BULLET DRY_01-03.wav-95787717487039cf2a63148b79eae941.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
