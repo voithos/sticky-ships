@@ -134,6 +134,8 @@ func _init_health_component(h: HealthComponent) -> void:
 
 
 func _on_health_changed(new_health: float, prev_health: float) -> void:
+	if type == Global.PartType.Core:
+		print(new_health)
 	var weight: float = new_health / $HealthComponent.max_health
 
 	#get_sprite().modulate.a = lerp(MIN_HEALTH_MODULATION_ALPHA, MAX_HEALTH_MODULATION_ALPHA, weight)

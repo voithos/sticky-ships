@@ -13,6 +13,7 @@ var potential_connection_overlaps := {}
 
 var total_mass := 0.0
 
+const PLAYER_COLLISION_LAYER = 1
 
 func _ready() -> void:
 	set_core(Global.level.current_growth_level)
@@ -108,6 +109,11 @@ func _remove_sub_part(part: Part) -> void:
 func on_part_added(part: Part) -> void:
 	total_mass += part.mass
 	assert(total_mass > 0)
+
+	# Assign the hurtbox to the right layer
+	var hurtbox: Area2D = part.get_node("Hurtbox")
+	if hurtbox:
+		hurtbox.collision_layer = PLAYER_COLLISION_LAYER
 
 	var collision_shape := CollisionShape2D.new()
 	Global.player.add_child(collision_shape)

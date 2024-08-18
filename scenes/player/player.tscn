@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=2 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
-[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="3_5xm2m"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 38
@@ -9,8 +8,3 @@ script = ExtResource("1_monq1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
-
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("3_5xm2m")
-
-[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]

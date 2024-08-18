@@ -78,5 +78,6 @@ shape = SubResource("CircleShape2D_m33n7")
 position = Vector2(0, -10)
 cooldown = 0.5
 spread = 20.0
+projectile_collision_mask = 1
 
 [editable path="Hurtbox"]

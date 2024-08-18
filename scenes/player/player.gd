@@ -18,9 +18,6 @@ var can_fire := true
 
 const MIN_THRUSTER_CONTRIBUTION_COS := cos(deg_to_rad(45.0))
 
-# Components.
-@onready var health: HealthComponent = $HealthComponent
-
 var agent := GSAISteeringAgent.new()
 
 var body: PlayerBody
