@@ -72,29 +72,29 @@ func increment_growth_level() -> void:
 
 	var next_zoom := Vector2.ONE * INITIAL_CAMERA_ZOOM / pow(GROWTH_LEVEL_CAMERA_ZOOM_FACTOR, current_growth_level - 1)
 
-	# FIXME: Implement growth system
-	# /- Zoom-out
+	# TODO: Implement growth system
 	# - For every non-player sprite:
 	#   - Fade in/out new/old sprites for that entity.
-	# - For the all player-ship sprites:
-	#   - Fade-out
-	# - For the new core:
-	#   - Fade-in
-	# - Show some sort of particle effect
+	# - Show some sort of particle effect.
+	# - Show sprite overlays for whichever aspects have been upgraded.
 	# - Damage everything within a radius?
-	# - Show sprite overlays for whichever aspects have been upgraded
-	# - Heal core health
-	pass
+	# - Heal core health?
 
 	if is_instance_valid(growth_level_tween):
 		growth_level_tween.kill()
+
+	# TODO: It'd be nice to fade/transition the old and new sprites of the ship,
+	#       rather than this instantaneous swap.
+	player.body.set_core(current_growth_level)
 
 	growth_level_tween = get_tree() \
 		.create_tween() \
 		.set_ease(Tween.EaseType.EASE_IN_OUT) \
 		.set_trans(Tween.TransitionType.TRANS_QUINT)
-	growth_level_tween.tween_property(
+	growth_level_tween.parallel().tween_property(
 		camera, "zoom", next_zoom, GROWTH_LEVEL_TRANSITION_DURATION)
+	growth_level_tween.parallel().tween_property(
+		player, "modulate:a", 1.0, GROWTH_LEVEL_TRANSITION_DURATION).from(0.0)
 	growth_level_tween.tween_callback(_on_growth_transition_finished)
 
 

@@ -12,8 +12,9 @@ var potential_connection_overlaps := {}
 
 var total_mass := 0.0
 
+
 func _ready() -> void:
-	add_root_part()
+	set_core(Global.level.current_growth_level)
 
 
 func _process(delta: float) -> void:
@@ -41,12 +42,21 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 		_add_attached_sub_part(connection.child.part)
 
 
-func add_root_part() -> void:
+func set_core(growth_level: int) -> void:
+	clear_parts()
+
 	var core_part: Part = Global.part_type_to_packed_scene(
 		Global.PartType.Core,
-		Global.level.current_growth_level).instantiate()
+		growth_level).instantiate()
 	core_part.looks_for_nearby_connections_when_entering_tree = false
 	add_child(core_part)
+
+
+func clear_parts() -> void:
+	for part in parts:
+		on_part_removed(part)
+		part.queue_free()
+	parts.clear()
 
 
 func destroy_part(part: Part) -> void:

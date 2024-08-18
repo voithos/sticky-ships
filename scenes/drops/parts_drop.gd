@@ -10,10 +10,6 @@ func _ready() -> void:
 	Global.level.drops.push_back(self)
 
 
-func add_part(part: Part) -> void:
-	parts.push_back(part)
-
-
 func remove_part(part: Part) -> void:
 	parts.erase(part)
 	remove_child(part)

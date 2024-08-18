@@ -52,7 +52,7 @@ func _init_shape() -> void:
 func _init_parent() -> void:
 	var parent_node := get_parent()
 	if parent_node is PartsDrop:
-		parent_node.add_part(self)
+		parent_node.parts.push_back(self)
 		attached_to_player = false
 		parent_node.on_part_added(self)
 	elif parent_node is PlayerBody:
