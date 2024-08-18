@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://gfroa5bgjhlo"]
+
+[ext_resource type="AudioStream" uid="uid://dg13ojbocsi1q" path="res://assets/sfx/Impact/Impact-cm-02.wav" id="1_bcgmv"]
+[ext_resource type="AudioStream" uid="uid://bk0nhf36gqs2d" path="res://assets/sfx/Impact/Impact-cm_01-02.wav" id="2_67wuh"]
+[ext_resource type="AudioStream" uid="uid://cbn8am8587ctk" path="res://assets/sfx/Impact/Impact-cm_02-02.wav" id="3_kdj8l"]
+[ext_resource type="AudioStream" uid="uid://cd5iaevpvjb00" path="res://assets/sfx/Impact/Impact-cm_03-02.wav" id="4_j5kg0"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l3jj7"]
+streams_count = 4
+stream_0/stream = ExtResource("1_bcgmv")
+stream_1/stream = ExtResource("2_67wuh")
+stream_2/stream = ExtResource("3_kdj8l")
+stream_3/stream = ExtResource("4_j5kg0")
+
+[node name="SoundsPlaceholder" type="Node2D"]
+
+[node name="ImpactSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_l3jj7")
+volume_db = -10.165
+bus = &"SFX"
