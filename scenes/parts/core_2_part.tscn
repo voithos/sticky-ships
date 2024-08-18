@@ -9,6 +9,7 @@
 
 [node name="CorePart" type="Node2D"]
 script = ExtResource("1_2mdf0")
+mass = 2.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_5m3ij")

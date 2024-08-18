@@ -5,11 +5,11 @@ extends CharacterBody2D
 @export var drag_linear_coeff := 0.05
 @export var drag_angular_coeff := 0.1
 ## The % of max speed when going backwards. This is just the default, added thrusters will not be affected.
-@export var reverse_multiplier := 0.25
+@export var reverse_multiplier := 0.5
 
-@export var acceleration_factor := 500.0
-@export var MAX_ANGULAR_SPEED := 200.0
-@export var MAX_ANGULAR_ACCELERATION := 3000.0
+## These are like the "starting point" for movement. The actual propulsion + mass determine the final speed.
+@export var acceleration_factor := 300.0
+@export var angular_acceleration_factor := 200.0
 
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
@@ -41,32 +41,56 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("fire"):
 		try_fire()
 
+func rot_90_cw(v: Vector2) -> Vector2:
+	return Vector2(-v.y, v.x)
+
+func rot_90_ccw(v: Vector2) -> Vector2:
+	return Vector2(v.y, -v.x)
+
+func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, direction_y: Vector2) -> Vector2:
+	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
+	# We start with the core's default movement capabilities.
+	var max_propulsion := Vector2(1.0, (reverse_multiplier if is_reversing else 1.0))
+
+	for part in body.parts:
+		for thruster in part.thrusters:
+			var thrust_vector := thruster.get_thrust_vector()
+			# First compute forward/back component
+			# Only add contribution when it is at least a certain degrees aligned.
+			var satisfies_y := direction_y.dot(thrust_vector) > MIN_THRUSTER_CONTRIBUTION_COS
+			if satisfies_y:
+				max_propulsion.y += thruster.propulsion
+
+			var dir_x_cos := direction_x.dot(thrust_vector)
+			var satisfies_x := absf(dir_x_cos) > MIN_THRUSTER_CONTRIBUTION_COS
+			if satisfies_x:
+				var rel_pos := thruster.global_position - global_position
+				var is_front_of_center := rel_pos.project(forward).dot(forward) > 0
+				# Figure out if it's in the same dir as the desired turn, or in the opposite dir
+				if (dir_x_cos > 0 and is_front_of_center) or dir_x_cos <= 0 and !is_front_of_center:
+					max_propulsion.x += thruster.propulsion
+				else:
+					satisfies_x = false
+
+			thruster.set_is_thrusting((satisfies_y and movement.y != 0) or (satisfies_x and movement.x != 0))
+	return max_propulsion
 
 func handle_movement(delta: float) -> void:
 	var movement := get_movement()
 	is_reversing = movement.y < 0
 
 	var forward := get_orientation()
-	var direction := -forward if is_reversing else forward
+	var direction_y := -forward if is_reversing else forward
+	var direction_x := rot_90_ccw(forward) if movement.x < 0 else rot_90_cw(forward)
 
-	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
-	# We start with the core's default movement capabilities.
-	var max_propulsion := (reverse_multiplier if is_reversing else 1.0)
-
-	for part in body.parts:
-		for thruster in part.thrusters:
-			var thrust_vector := thruster.get_thrust_vector()
-			# Only add contribution when it is at least a certain degrees aligned.
-			var direction_correct := direction.dot(thrust_vector) > MIN_THRUSTER_CONTRIBUTION_COS
-			if direction_correct:
-				max_propulsion += thruster.propulsion
-			thruster.set_is_thrusting(direction_correct and movement.y != 0)
+	var max_propulsion := gather_thrust(movement, forward, direction_x, direction_y)
+	var propulsion_factor := (max_propulsion / body.total_mass)
 
 	linear_velocity += (
 		movement.y
 		* forward
 		* acceleration_factor
-		* (max_propulsion / body.total_mass)
+		* propulsion_factor.y
 		* delta
 	)
 
@@ -76,8 +100,9 @@ func handle_movement(delta: float) -> void:
 	move_and_slide()
 
 	# Rotation.
-	angular_velocity += movement.x * MAX_ANGULAR_ACCELERATION * delta
-	angular_velocity = clamp(angular_velocity, -deg_to_rad(MAX_ANGULAR_SPEED), deg_to_rad(MAX_ANGULAR_SPEED))
+	#angular_velocity += movement.x * deg_to_rad(angular_acceleration_factor) * propulsion_factor.x * delta
+	angular_velocity = lerp(angular_velocity, movement.x * angular_acceleration_factor * propulsion_factor.x * delta, 0.15)
+	#angular_velocity = clamp(angular_velocity, -deg_to_rad(MAX_ANGULAR_SPEED), deg_to_rad(MAX_ANGULAR_SPEED))
 	angular_velocity = lerp(angular_velocity, 0.0, drag_angular_coeff)
 
 	rotation += angular_velocity * delta

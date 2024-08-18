@@ -14,7 +14,7 @@ radius = 8.0
 collision_mask = 22
 script = ExtResource("1_yvmc1")
 type = 2
-mass = 0.25
+mass = 0.1
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_fqwmo")
