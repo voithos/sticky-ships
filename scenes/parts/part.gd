@@ -1,4 +1,3 @@
-@tool
 class_name Part
 extends Node2D
 
