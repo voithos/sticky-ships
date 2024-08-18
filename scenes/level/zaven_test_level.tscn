@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2k44vm6uk81p"]
+[gd_scene load_steps=9 format=3 uid="uid://c2k44vm6uk81p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_7r1pg"]
-[ext_resource type="PackedScene" uid="uid://dyutd33mkou7y" path="res://scenes/ui/ui_container.tscn" id="2_c7dkv"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_sygiw"]
 [ext_resource type="Texture2D" uid="uid://owf0haa8rp2w" path="res://icon.svg" id="3_xn8hx"]
 [ext_resource type="PackedScene" uid="uid://bbny0j6b3dwts" path="res://scenes/drops/empty_parts_drop.tscn" id="5_ts01t"]
@@ -14,8 +13,6 @@ size = Vector2(117, 113)
 
 [node name="ZavenTestLevel" type="Node2D"]
 script = ExtResource("1_7r1pg")
-
-[node name="UiContainer" parent="." instance=ExtResource("2_c7dkv")]
 
 [node name="Background" parent="." instance=ExtResource("2_sygiw")]
 
@@ -35,7 +32,6 @@ position = Vector2(34, -52)
 rotation = -1.49585
 
 [node name="BasicGunPart" parent="EmptyPartsDrop" instance=ExtResource("5_yy4jp")]
-type = 0
 
 [node name="Hurtbox" parent="EmptyPartsDrop/BasicGunPart" index="1"]
 collision_layer = 4

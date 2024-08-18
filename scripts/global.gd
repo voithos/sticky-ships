@@ -1,6 +1,10 @@
 extends Node
 
 
+const MAIN_LEVEL_SCENE = preload("res://scenes/level/main_level.tscn")
+const LEVI_TEST_LEVEL_SCENE = preload("res://scenes/level/levi_test_level.tscn")
+const ZAVEN_TEST_LEVEL_SCENE = preload("res://scenes/level/zaven_test_level.tscn")
+
 const PLAYER_SCENE = preload("res://scenes/player/player.tscn")
 const ENERGY_DROP_SCENE = preload("res://scenes/drops/energy_drop.tscn")
 const EMPTY_PARTS_DROP_SCENE = preload("res://scenes/drops/empty_parts_drop.tscn")
@@ -93,6 +97,11 @@ const PART_TYPE_CONFIG := {
 	},
 }
 
+const skip_main_menu := true
+
+var level_container: LevelContainer
+var hud: Hud
+var main_menu: MainMenu
 var level: Level
 var player: Player
 

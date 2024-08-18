@@ -6,9 +6,6 @@ signal level_up
 
 const GROWTH_LEVEL_TRANSITION_DURATION := 0.7
 
-var hud: Hud
-var main_menu: MainMenu
-
 var current_growth_level := 1
 var levelling_up := false
 
@@ -20,13 +17,6 @@ var growth_level_tween: Tween
 
 func _enter_tree() -> void:
 	Global.level = self
-
-
-func start() -> void:
-	var ui_container: UIContainer = get_node("UiContainer")
-	assert(is_instance_valid(ui_container) and ui_container is UIContainer)
-	hud = ui_container.hud
-	main_menu = ui_container.main_menu
 
 	player = Global.PLAYER_SCENE.instantiate()
 	Global.player = player
@@ -44,8 +34,6 @@ func start() -> void:
 	# TODO: Remove.
 	#await get_tree().create_timer(1.0).timeout
 	#increment_growth_level()
-
-	main_menu.visible = false
 
 
 func destroy_player_part(part: Part) -> void:

@@ -3,4 +3,4 @@ extends PanelContainer
 
 
 func _on_play_button_pressed() -> void:
-	Global.level.start()
+	Global.level_container.start()

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxtcef3mnltwq"]
+
+[ext_resource type="Script" path="res://scenes/level/level_container.gd" id="1_gafb5"]
+[ext_resource type="PackedScene" uid="uid://dyutd33mkou7y" path="res://scenes/ui/ui_container.tscn" id="2_cp4nb"]
+
+[node name="LevelContainer" type="Node2D"]
+script = ExtResource("1_gafb5")
+
+[node name="UiContainer" parent="." instance=ExtResource("2_cp4nb")]
