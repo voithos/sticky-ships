@@ -4,6 +4,9 @@ extends Node2D
 
 const AUTO_CONNECT_DISTANCE_SQUARED_THRESHOLD := 3.0 * 3.0
 
+const MAX_HEALTH_MODULATION := Color(Color.WHITE, 1.0)
+const MIN_HEALTH_MODULATION := Color(Color.BLACK, 0.5)
+
 @export var type := Global.PartType.UNKNOWN
 @export var growth_level := 1
 
@@ -113,7 +116,13 @@ func _init_components(node: Node) -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
+	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(destroy_part)
+
+
+func _on_health_changed(new_health: float, prev_health: float) -> void:
+	var weight: float = new_health / $HealthComponent.max_health
+	self.modulate = lerp(MIN_HEALTH_MODULATION, MAX_HEALTH_MODULATION, weight)
 
 
 func destroy_part() -> void:
@@ -121,7 +130,45 @@ func destroy_part() -> void:
 	if type == Global.PartType.Core:
 		# Destruction of core means death
 		Global.player.die()
-	queue_free()
+	else:
+		Global.level.destroy_player_part(self)
+
+
+func get_bounding_box() -> Rect2:
+	var sprite_size := get_sprite_size()
+	var sprite_position := get_sprite_position()
+	var sprite_bounds := Rect2(sprite_position, sprite_size)
+
+	var bounds := sprite_bounds
+
+	for attach_point in attach_points:
+		bounds.expand(attach_point.global_position)
+
+	return bounds
+
+
+func get_sprite_size() -> Vector2:
+	var texture: Texture2D
+	var sprite := get_node("AnimatedSprite2D")
+	if sprite != null:
+		assert(sprite is AnimatedSprite2D)
+		var animation: StringName = sprite.animation
+		texture = sprite.sprite_frames.get_frame_texture(animation, 0)
+	else:
+		sprite = get_node("Sprite2D")
+		assert(sprite != null and sprite is Sprite2D)
+		texture = sprite.texture
+	return texture.get_size()
+
+
+func get_sprite_position() -> Vector2:
+	var sprite := get_node("AnimatedSprite2D")
+	if sprite != null:
+		assert(sprite is AnimatedSprite2D)
+	else:
+		sprite = get_node("Sprite2D")
+		assert(sprite != null and sprite is Sprite2D)
+	return sprite.global_position
 
 
 func _process(delta: float) -> void:

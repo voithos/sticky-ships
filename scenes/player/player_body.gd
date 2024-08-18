@@ -6,6 +6,7 @@ const POTENTIAL_CONNECTION_INDICATOR_SCENE := preload("res://scenes/player/poten
 
 var attaching := false
 
+var core_part: Part
 var parts: Array[Part] = []
 # Dictionary<AttachPoint, PotentialConnectionOverlap>
 var potential_connection_overlaps := {}
@@ -37,6 +38,7 @@ func attach_overlapping_parts() -> void:
 func _add_attached_sub_part(sub_part: Part) -> void:
 	sub_part.looks_for_nearby_connections_when_entering_tree = false
 	sub_part.reparent(self)
+	move_child(sub_part, 0)
 
 	for connection in sub_part.child_connections:
 		_add_attached_sub_part(connection.child.part)
@@ -45,11 +47,27 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 func set_core(growth_level: int) -> void:
 	clear_parts()
 
-	var core_part: Part = Global.part_type_to_packed_scene(
+	core_part = Global.part_type_to_packed_scene(
 		Global.PartType.Core,
 		growth_level).instantiate()
 	core_part.looks_for_nearby_connections_when_entering_tree = false
 	add_child(core_part)
+
+
+func get_bounding_box() -> Rect2:
+	if !is_instance_valid(core_part):
+		return Rect2()
+	var bounds := core_part.get_bounding_box()
+	for part in parts:
+		bounds = bounds.merge(part.get_bounding_box())
+	return bounds
+
+
+func get_core_sprite_size() -> Vector2:
+	if is_instance_valid(core_part):
+		return core_part.get_sprite_size()
+	else:
+		return Vector2.ZERO
 
 
 func clear_parts() -> void:
@@ -57,6 +75,7 @@ func clear_parts() -> void:
 		on_part_removed(part)
 		part.queue_free()
 	parts.clear()
+	core_part = null
 
 
 func destroy_part(part: Part) -> void:
@@ -79,6 +98,8 @@ func _remove_sub_part(part: Part) -> void:
 
 	part.attached_to_player = false
 	parts.erase(part)
+	if part == core_part:
+		core_part = null
 
 	for child in part.children:
 		_remove_sub_part(child)

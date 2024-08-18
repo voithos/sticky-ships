@@ -2,6 +2,8 @@ class_name AttachPoint
 extends Area2D
 
 
+const ATTACH_POINT_DEFAULT_RADIUS := 5
+
 const EDITOR_HINT_FILL_COLOR := Color(Color.AQUAMARINE, 0.3)
 const EDITOR_HINT_OUTLINE_COLOR := Color(Color.AQUAMARINE, 0.7)
 
@@ -17,8 +19,13 @@ func _enter_tree() -> void:
 	part.attach_points.push_back(self)
 
 
-func _process(delta: float) -> void:
-	pass
+func _ready() -> void:
+	_update_radius()
+	Global.level.level_up.connect(_update_radius)
+
+
+func _update_radius() -> void:
+	$CollisionShape2D.shape.radius = ATTACH_POINT_DEFAULT_RADIUS * pow(Level.GROWTH_LEVEL_CAMERA_ZOOM_FACTOR, Global.level.current_growth_level - 1)
 
 
 func _draw() -> void:

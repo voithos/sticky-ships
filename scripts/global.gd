@@ -12,6 +12,8 @@ const BASIC_THRUSTER_PART_SCENE := preload("res://scenes/parts/basic_thruster_pa
 
 const TRIPLE_GUN_DROP_CHUNK_SCENE := preload("res://scenes/drop_chunks/triple_gun_drop_chunk.tscn")
 
+const LEVEL_UP_EFFECT_SCENE := preload("res://scenes/player/level_up_effect.tscn")
+
 var level: Level
 var player: Player
 

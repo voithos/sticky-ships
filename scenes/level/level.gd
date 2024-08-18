@@ -2,11 +2,14 @@ class_name Level
 extends Node2D
 
 
-const GROWTH_LEVEL_TRANSITION_DURATION := 0.8
+signal level_up
+
+const GROWTH_LEVEL_TRANSITION_DURATION := 0.7
 const INITIAL_CAMERA_ZOOM := 1.0
 const GROWTH_LEVEL_CAMERA_ZOOM_FACTOR := 4.0
 
 var current_growth_level := 1
+var levelling_up := false
 
 var player: Player
 var drops: Array[Drop] = []
@@ -67,11 +70,13 @@ func destroy_player_part(part: Part) -> void:
 
 
 func increment_growth_level() -> void:
-	current_growth_level += 1
+	var next_level := current_growth_level + 1
+
+	levelling_up = true
 
 	var camera := get_viewport().get_camera_2d()
 
-	var next_zoom := Vector2.ONE * INITIAL_CAMERA_ZOOM / pow(GROWTH_LEVEL_CAMERA_ZOOM_FACTOR, current_growth_level - 1)
+	var next_zoom := Vector2.ONE * INITIAL_CAMERA_ZOOM / pow(GROWTH_LEVEL_CAMERA_ZOOM_FACTOR, next_level - 1)
 
 	# TODO: Implement growth system
 	# - For every non-player sprite:
@@ -84,9 +89,12 @@ func increment_growth_level() -> void:
 	if is_instance_valid(growth_level_tween):
 		growth_level_tween.kill()
 
-	# TODO: It'd be nice to fade/transition the old and new sprites of the ship,
-	#       rather than this instantaneous swap.
-	player.body.set_core(current_growth_level)
+	player.level_up(next_level)
+
+	await get_tree().create_timer(LevelUpEffect.ANIMATION_FULL_SHIELD_DELAY).timeout
+
+	current_growth_level = next_level
+	level_up.emit()
 
 	growth_level_tween = get_tree() \
 		.create_tween() \
@@ -95,9 +103,10 @@ func increment_growth_level() -> void:
 	growth_level_tween.parallel().tween_property(
 		camera, "zoom", next_zoom, GROWTH_LEVEL_TRANSITION_DURATION)
 	growth_level_tween.parallel().tween_property(
-		player, "modulate:a", 1.0, GROWTH_LEVEL_TRANSITION_DURATION).from(0.0)
+		player.body, "modulate:a", 1.0, GROWTH_LEVEL_TRANSITION_DURATION / 2).from(0.0)
 	growth_level_tween.tween_callback(_on_growth_transition_finished)
 
 
 func _on_growth_transition_finished() -> void:
 	growth_level_tween = null
+	levelling_up = false

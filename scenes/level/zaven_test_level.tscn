@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbny0j6b3dwts" path="res://scenes/drops/empty_parts_drop.tscn" id="5_ts01t"]
 [ext_resource type="PackedScene" uid="uid://chy8i0ynxsylr" path="res://scenes/parts/basic_thruster_part.tscn" id="5_yfcfs"]
 [ext_resource type="PackedScene" uid="uid://buedulm0clu5e" path="res://scenes/parts/basic_gun_part.tscn" id="5_yy4jp"]
-[ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="7_3w60v"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/gunner_enemy.tscn" id="7_3w60v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkr8e"]
 size = Vector2(117, 113)

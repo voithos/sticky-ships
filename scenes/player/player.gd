@@ -154,3 +154,28 @@ func _update_agent() -> void:
 	agent.linear_velocity.y = linear_velocity.y
 	agent.angular_velocity = angular_velocity
 	agent.orientation = rotation
+
+
+func level_up(next_level: int) -> void:
+	var level_up_effect: LevelUpEffect = Global.LEVEL_UP_EFFECT_SCENE.instantiate()
+	add_child(level_up_effect)
+	var level_up_effect_sprite_size := level_up_effect.get_sprite_size()
+
+	var bounding_box := body.get_bounding_box()
+	var desired_level_up_effect_size := bounding_box.size * LevelUpEffect.BOUNDING_BOX_SCALE_MULTIPLIER
+	var level_up_effect_scale := desired_level_up_effect_size / level_up_effect_sprite_size
+	if level_up_effect_scale.x > level_up_effect_scale.y:
+		level_up_effect_scale.y = level_up_effect_scale.x
+	else:
+		level_up_effect_scale.x = level_up_effect_scale.y
+
+	#level_up_effect.global_position = bounding_box.get_center() - desired_level_up_effect_size / 2
+	level_up_effect.scale = level_up_effect_scale
+
+	await level_up_effect.half_finished
+
+	body.set_core(next_level)
+
+	await level_up_effect.finished
+
+	level_up_effect.queue_free()
