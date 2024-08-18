@@ -75,15 +75,20 @@ func _remove_sub_part(part: Part) -> void:
 
 
 func on_part_added(part: Part) -> void:
-	var healthbox_collision_shape := part.get_healthbox_collision_shape()
-	var collision_shape := CollisionShape2D.new()
-	collision_shape.shape = healthbox_collision_shape.shape
-	Global.player.add_child(collision_shape)
-	collision_shape.global_transform = healthbox_collision_shape.global_transform
-	part.player_collision_shape_instance = collision_shape
-
 	total_mass += part.mass
 	assert(total_mass > 0)
+
+	var collision_shape := CollisionShape2D.new()
+	Global.player.add_child(collision_shape)
+
+	call_deferred("deferred_on_part_added", part, collision_shape)
+
+
+func deferred_on_part_added(part: Part, collision_shape: CollisionShape2D) -> void:
+	var healthbox_collision_shape := part.get_healthbox_collision_shape()
+	collision_shape.shape = healthbox_collision_shape.shape
+	collision_shape.global_transform = healthbox_collision_shape.global_transform
+	part.player_collision_shape_instance = collision_shape
 
 
 func on_part_removed(part: Part) -> void:
@@ -117,9 +122,9 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 	# Re-orient the part subtree such that the newly-attached part is the root.
 	overlap.detached_point.part.reassign_parent_connection(null)
 
-	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
-
 	_add_attached_sub_part(overlap.detached_point.part)
+
+	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
 
 	attaching = false
 
