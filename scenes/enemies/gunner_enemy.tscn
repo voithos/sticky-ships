@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://71virob0imkf"]
+
+[ext_resource type="Script" path="res://scenes/enemies/gunner_enemy.gd" id="1_hl36b"]
+[ext_resource type="Texture2D" uid="uid://c1fkgmggkqdw6" path="res://assets/sprites/enemies/gunner_enemy.png" id="2_v46qx"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="3_hhxo5"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="4_3ui24"]
+[ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_doe2v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at3n4"]
+atlas = ExtResource("2_v46qx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdlvv"]
+atlas = ExtResource("2_v46qx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v0x0"]
+atlas = ExtResource("2_v46qx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f2tyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at3n4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdlvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v0x0")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74ghu"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m33n7"]
+radius = 8.0
+
+[node name="GunnerEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_hl36b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f2tyi")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_hhxo5")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_3ui24")]
+position = Vector2(0, 1)
+collision_layer = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_74ghu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_m33n7")
+
+[node name="BasicGun" parent="." instance=ExtResource("5_doe2v")]
+position = Vector2(0, -10)
+
+[editable path="Hurtbox"]

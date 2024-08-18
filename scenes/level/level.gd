@@ -18,6 +18,7 @@ func _enter_tree() -> void:
 	Global.level = self
 
 	player = Global.PLAYER_SCENE.instantiate()
+	Global.player = player
 	add_child(player)
 
 	# TODO: Remove.

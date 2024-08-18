@@ -21,11 +21,14 @@ const MIN_THRUSTER_CONTRIBUTION_COS := cos(deg_to_rad(45.0))
 # Components.
 @onready var health: HealthComponent = $HealthComponent
 
+var agent := GSAISteeringAgent.new()
+
 var body: PlayerBody
 
 
 func _ready() -> void:
 	Global.player = self
+	agent.bounding_radius = 1
 	body = PlayerBody.new()
 	add_child(body)
 
@@ -111,6 +114,8 @@ func handle_movement(delta: float) -> void:
 
 	rotation += angular_velocity * delta
 
+	_update_agent()
+
 
 func try_fire() -> void:
 	for part in body.parts:
@@ -140,3 +145,12 @@ func _on_health_component_health_depleted() -> void:
 
 func die() -> void:
 	print('we died!')
+
+
+func _update_agent() -> void:
+	agent.position.x = global_position.x
+	agent.position.y = global_position.y
+	agent.linear_velocity.x = linear_velocity.x
+	agent.linear_velocity.y = linear_velocity.y
+	agent.angular_velocity = angular_velocity
+	agent.orientation = rotation

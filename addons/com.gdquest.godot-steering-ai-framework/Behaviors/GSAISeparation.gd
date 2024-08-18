@@ -39,6 +39,6 @@ func _report_neighbor(neighbor: GSAISteeringAgent) -> bool:
 	if strength > acceleration_max:
 		strength = acceleration_max
 
-	_acceleration.linear += to_agent * (strength / sqrt(distance_squared))
+	_acceleration.linear += to_agent * (strength)
 
 	return true
