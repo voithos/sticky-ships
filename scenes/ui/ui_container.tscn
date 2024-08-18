@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyutd33mkou7y"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui_container.gd" id="1_mg7j0"]
+[ext_resource type="PackedScene" uid="uid://gi7ysmql1hcl" path="res://scenes/ui/hud.tscn" id="1_rh8kw"]
+[ext_resource type="PackedScene" uid="uid://b8pposh8tw6y5" path="res://scenes/ui/main_menu.tscn" id="2_65l1j"]
+
+[node name="UiContainer" type="Node2D"]
+script = ExtResource("1_mg7j0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("1_rh8kw")]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_65l1j")]

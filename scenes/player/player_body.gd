@@ -54,6 +54,38 @@ func set_core(growth_level: int) -> void:
 	core_part.looks_for_nearby_connections_when_entering_tree = false
 	add_child(core_part)
 
+	core_part.health.max_health = Global.get_max_health(growth_level)
+
+	core_part.health.health_changed.connect(_on_core_health_changed)
+	core_part.health.health_depleted.connect(_on_core_health_depleted)
+	_update_xp_display()
+	_update_hp_display()
+
+
+func _on_core_health_changed(new_health: float, prev_health: float) -> void:
+	_update_hp_display()
+
+
+func _on_core_health_depleted() -> void:
+	# TODO: GAME OVER!
+	pass
+
+
+func _update_hp_display() -> void:
+	var health_ratio := (
+		core_part.health.health / core_part.health.max_health if
+		is_instance_valid(core_part) else
+		0.0)
+	Global.level.hud.set_hp_ratio(health_ratio)
+
+
+func _update_xp_display() -> void:
+	var current_xp := 0
+	for part in parts:
+		current_xp += Global.get_xp_for_part(part.type, part.size_type, Global.level.current_growth_level)
+	var xp_ratio := current_xp / Global.get_next_level_xp(Global.level.current_growth_level)
+	Global.level.hud.set_xp_ratio(xp_ratio)
+
 
 func get_bounding_box() -> Rect2:
 	if !is_instance_valid(core_part):
@@ -162,6 +194,8 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 	_add_attached_sub_part(overlap.detached_point.part)
 
 	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
+
+	_update_xp_display()
 
 	attaching = false
 

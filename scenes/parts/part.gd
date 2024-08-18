@@ -15,6 +15,7 @@ const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
 const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 
 @export var type := Global.PartType.UNKNOWN
+@export var size_type := Global.SizeType.Normal
 @export var growth_level := 1
 
 # The mass of this part, as a whole.

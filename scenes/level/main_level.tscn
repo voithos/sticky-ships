@@ -3,9 +3,12 @@
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_trb5r"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_u3510"]
 [ext_resource type="AudioStream" uid="uid://bl86s63e05r83" path="res://assets/music/Theme.02.wav" id="3_jt13c"]
+[ext_resource type="PackedScene" uid="uid://dyutd33mkou7y" path="res://scenes/ui/ui_container.tscn" id="3_ru7qk"]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_trb5r")
+
+[node name="UiContainer" parent="." instance=ExtResource("3_ru7qk")]
 
 [node name="Background" parent="." instance=ExtResource("2_u3510")]
 

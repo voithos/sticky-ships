@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://gi7ysmql1hcl"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_ltgkg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oplbw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lodn"]
+bg_color = Color(0.188235, 0.156863, 0.427451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkbuv"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l71kn"]
+bg_color = Color(0.133333, 0.760784, 0.470588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w74f5"]
+bg_color = Color(1, 0.619608, 0.545098, 1)
+
+[node name="Hud" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oplbw")
+script = ExtResource("1_ltgkg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 4
+text = "HP"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 4)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lodn")
+
+[node name="HPProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_gkbuv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_l71kn")
+max_value = 1.0
+step = 0.001
+value = 0.5
+show_percentage = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 4
+text = "XP"
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 4)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lodn")
+
+[node name="XPProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/PanelContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_gkbuv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w74f5")
+max_value = 1.0
+step = 0.001
+value = 0.5
+show_percentage = false
