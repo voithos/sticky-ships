@@ -57,10 +57,11 @@ func handle_movement(delta: float) -> void:
 		for thruster in part.thrusters:
 			var thrust_vector := thruster.get_thrust_vector()
 			# Only add contribution when it is at least a certain degrees aligned.
-			if direction.dot(thrust_vector) > MIN_THRUSTER_CONTRIBUTION_COS:
+			var direction_correct := direction.dot(thrust_vector) > MIN_THRUSTER_CONTRIBUTION_COS
+			if direction_correct:
 				max_propulsion += thruster.propulsion
+			thruster.set_is_thrusting(direction_correct and movement.y != 0)
 
-	print((max_propulsion / body.total_mass))
 	linear_velocity += (
 		movement.y
 		* forward

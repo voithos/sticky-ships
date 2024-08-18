@@ -63,4 +63,4 @@ scale = Vector2(0.3, 0.35)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a5v50")
 autoplay = "default"
-frame_progress = 0.406925
+frame_progress = 0.862869

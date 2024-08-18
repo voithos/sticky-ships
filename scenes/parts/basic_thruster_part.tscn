@@ -41,6 +41,6 @@ unique_name_in_owner = true
 position = Vector2(0, -8)
 
 [node name="BasicThruster" parent="." instance=ExtResource("5_bicd5")]
-position = Vector2(0, 10)
+position = Vector2(0, 16)
 
 [editable path="Hurtbox"]
