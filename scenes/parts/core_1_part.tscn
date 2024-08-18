@@ -81,18 +81,21 @@ projectile_collision_mask = 36
 [node name="LeftAttachPoint" parent="." instance=ExtResource("6_23b82")]
 unique_name_in_owner = true
 position = Vector2(-10, 0)
+rotation = -1.57079
 
 [node name="RightAttachPoint" parent="." instance=ExtResource("6_23b82")]
 unique_name_in_owner = true
 position = Vector2(10, 0)
+rotation = 1.57079
 
 [node name="ForwardAttachPoint" parent="." instance=ExtResource("6_23b82")]
 unique_name_in_owner = true
-position = Vector2(0, -10)
+position = Vector2(0, -12)
 
 [node name="RearAttachPoint" parent="." instance=ExtResource("6_23b82")]
 unique_name_in_owner = true
-position = Vector2(0, 10)
+position = Vector2(0, 13)
+rotation = -3.14159
 
 [node name="BasicThruster" parent="." instance=ExtResource("7_517eh")]
 position = Vector2(0, 17)

@@ -2,7 +2,7 @@ class_name AttachPoint
 extends Area2D
 
 
-const ATTACH_POINT_DEFAULT_RADIUS := 5
+const ATTACH_POINT_DEFAULT_RADIUS := 6
 
 const EDITOR_HINT_FILL_COLOR := Color(Color.AQUAMARINE, 0.3)
 const EDITOR_HINT_OUTLINE_COLOR := Color(Color.AQUAMARINE, 0.7)
@@ -18,6 +18,9 @@ func _enter_tree() -> void:
 	part = parent
 	part.attach_points.push_back(self)
 
+
+func stop_animation() -> void:
+	$Anchor.play("idle")
 
 func _ready() -> void:
 	_update_radius()

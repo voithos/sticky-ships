@@ -1,9 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddtt2pxrfir0a"]
+[gd_scene load_steps=10 format=3 uid="uid://ddtt2pxrfir0a"]
 
 [ext_resource type="Script" path="res://scenes/player/attach_point.gd" id="1_nm4qr"]
+[ext_resource type="Texture2D" uid="uid://dm1c1s2lfu46c" path="res://assets/sprites/parts/anchor.png" id="2_lcoy7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ud1r6"]
 radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm7qv"]
+atlas = ExtResource("2_lcoy7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl1cd"]
+atlas = ExtResource("2_lcoy7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbhb4"]
+atlas = ExtResource("2_lcoy7")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ne3cy"]
+atlas = ExtResource("2_lcoy7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jytsy"]
+atlas = ExtResource("2_lcoy7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xb6st"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_wm7qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yl1cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbhb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ne3cy")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jytsy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="AttachPoint" type="Area2D"]
 collision_layer = 64
@@ -12,6 +61,12 @@ script = ExtResource("1_nm4qr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ud1r6")
+
+[node name="Anchor" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xb6st")
+animation = &"blink"
+autoplay = "blink"
+frame_progress = 0.449788
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

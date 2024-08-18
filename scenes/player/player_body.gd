@@ -201,6 +201,9 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 
 	old_parent_node.queue_free()
 
+	overlap.attached_point.stop_animation()
+	overlap.detached_point.stop_animation()
+
 	Sfx.play(Sfx.PARTS_CONNECTED)
 
 

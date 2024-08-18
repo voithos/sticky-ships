@@ -122,6 +122,8 @@ func _init_components(node: Node) -> void:
 		heavy_guns.push_back(node)
 	elif node is Thruster:
 		thrusters.push_back(node)
+	elif node is AttachPoint:
+		attach_points.push_back(node)
 
 	for child in node.get_children():
 		_init_components(child)

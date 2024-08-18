@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://c80onf8fc5s7e"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_458ei"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_0l2uo"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_62mb5"]
+[ext_resource type="Texture2D" uid="uid://bd8if5vdfcxwo" path="res://assets/sprites/parts/gunner_enemy_parts.png" id="4_hui16"]
+[ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_8souk"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_e2f2d"]
+[ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="7_v5e6o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2k8oe"]
+radius = 8.0
+
+[node name="GunnerEnemyPartGun2" type="Node2D"]
+script = ExtResource("1_458ei")
+type = 2
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_0l2uo")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_62mb5")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_2k8oe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_hui16")
+hframes = 3
+frame = 1
+
+[node name="BasicGun" parent="." instance=ExtResource("5_8souk")]
+position = Vector2(0, -10)
+projectile_collision_mask = 32
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("6_e2f2d")]
+unique_name_in_owner = true
+position = Vector2(-6, 1)
+rotation = -1.5708
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("6_e2f2d")]
+unique_name_in_owner = true
+position = Vector2(10, 1)
+rotation = 1.5708
+
+[node name="BasicThruster" parent="." instance=ExtResource("7_v5e6o")]
+position = Vector2(0, 15)
+
+[editable path="Hurtbox"]

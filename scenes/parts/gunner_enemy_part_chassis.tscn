@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddg7jalg6t4pd"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_4tjgs"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_i3hql"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_rpvra"]
+[ext_resource type="Texture2D" uid="uid://bd8if5vdfcxwo" path="res://assets/sprites/parts/gunner_enemy_parts.png" id="4_v6j8d"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_pex2e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2k8oe"]
+radius = 8.0
+
+[node name="GunnerEnemyPartChassis" type="Node2D"]
+script = ExtResource("1_4tjgs")
+type = 2
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_i3hql")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_rpvra")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_2k8oe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_v6j8d")
+hframes = 3
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("6_pex2e")]
+unique_name_in_owner = true
+position = Vector2(-10, 0)
+rotation = -1.5708
+
+[node name="TopAttachPoint" parent="." instance=ExtResource("6_pex2e")]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("6_pex2e")]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+rotation = 1.5708
+
+[node name="BottomAttachPoint" parent="." instance=ExtResource("6_pex2e")]
+unique_name_in_owner = true
+position = Vector2(0, 10)
+rotation = -3.14159
+
+[editable path="Hurtbox"]
