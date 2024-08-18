@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnxf638rjtql8"]
+[gd_scene load_steps=4 format=3 uid="uid://dnxf638rjtql8"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_trb5r"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_u3510"]
+[ext_resource type="AudioStream" uid="uid://bl86s63e05r83" path="res://assets/music/Theme.02.wav" id="3_jt13c"]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_trb5r")
 
 [node name="Background" parent="." instance=ExtResource("2_u3510")]
+
+[node name="ThemeMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jt13c")
+autoplay = true
+bus = &"Music"
