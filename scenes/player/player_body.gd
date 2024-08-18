@@ -34,22 +34,19 @@ func attach_overlapping_parts() -> void:
 
 
 func _add_attached_sub_part(sub_part: Part) -> void:
+	sub_part.looks_for_nearby_connections_when_entering_tree = false
 	sub_part.reparent(self)
-	parts.push_back(sub_part)
-	sub_part.attached_to_player = true
 
 	for connection in sub_part.child_connections:
 		_add_attached_sub_part(connection.child.part)
 
-	on_part_added(sub_part)
-
 
 func add_root_part() -> void:
-	var core_part: Part = Global.part_type_to_packed_scene(Global.PartType.Core).instantiate()
-	parts.push_back(core_part)
+	var core_part: Part = Global.part_type_to_packed_scene(
+		Global.PartType.Core,
+		Global.level.current_growth_level).instantiate()
+	core_part.looks_for_nearby_connections_when_entering_tree = false
 	add_child(core_part)
-	core_part.attached_to_player = true
-	on_part_added(core_part)
 
 
 func destroy_part(part: Part) -> void:

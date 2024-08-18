@@ -7,8 +7,10 @@ const EDITOR_HINT_OUTLINE_COLOR := Color(Color.AQUAMARINE, 0.7)
 
 var part: Part
 
+var connection: PartConnection
 
-func _ready() -> void:
+
+func _enter_tree() -> void:
 	var parent := get_parent()
 	assert(get_parent() is Part)
 	part = parent

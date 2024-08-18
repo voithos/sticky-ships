@@ -6,19 +6,12 @@ var parts: Array[Part] = []
 
 
 func _ready() -> void:
-	pass
+	super()
+	Global.level.drops.push_back(self)
 
 
-func _process(delta: float) -> void:
-	pass
-
-
-func add_part(part: Part, is_reparenting := false) -> void:
+func add_part(part: Part) -> void:
 	parts.push_back(part)
-	if is_reparenting:
-		part.reparent(self)
-	else:
-		add_child(part)
 
 
 func remove_part(part: Part) -> void:
@@ -30,8 +23,12 @@ func on_part_added(part: Part) -> void:
 	var healthbox_collision_shape := part.get_healthbox_collision_shape()
 	var collision_shape := CollisionShape2D.new()
 	collision_shape.shape = healthbox_collision_shape.shape
+	call_deferred("deferred_on_part_added", part, collision_shape, healthbox_collision_shape.global_transform)
+
+
+func deferred_on_part_added(part: Part, collision_shape: CollisionShape2D, global_transform: Transform2D) -> void:
 	add_child(collision_shape)
-	collision_shape.global_transform = healthbox_collision_shape.global_transform
+	collision_shape.global_transform = global_transform
 	part.player_collision_shape_instance = collision_shape
 
 
