@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://del7hg6ux6mxm"]
+
+[ext_resource type="Script" path="res://scenes/fx/effect.gd" id="1_7ewvp"]
+[ext_resource type="Texture2D" uid="uid://vmqoeflkuahh" path="res://assets/sprites/fx/projectile_pop1.png" id="1_uu08h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asf1k"]
+atlas = ExtResource("1_uu08h")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojv03"]
+atlas = ExtResource("1_uu08h")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfvg7"]
+atlas = ExtResource("1_uu08h")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2v54l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asf1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojv03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfvg7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="ParticlePop1" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_2v54l")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("1_7ewvp")

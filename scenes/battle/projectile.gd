@@ -7,6 +7,7 @@ extends Area2D
 @export var damage := 1.0
 
 @export var visibility_notifier: VisibleOnScreenNotifier2D
+@export var explosion_effect_scene: PackedScene
 
 var direction := Vector2.ZERO
 # The entity that shot this projectile
@@ -19,7 +20,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
 	if visibility_notifier:
-		visibility_notifier.screen_exited.connect(die)
+		visibility_notifier.screen_exited.connect(queue_free)
 
 
 func _physics_process(delta: float) -> void:
@@ -41,4 +42,8 @@ func maybe_do_damage(to: Node2D) -> void:
 
 
 func die() -> void:
+	if explosion_effect_scene:
+		var fx := explosion_effect_scene.instantiate()
+		fx.global_position = global_position
+		add_sibling(fx)
 	queue_free()

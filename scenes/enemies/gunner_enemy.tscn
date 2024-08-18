@@ -74,5 +74,7 @@ shape = SubResource("CircleShape2D_m33n7")
 
 [node name="BasicGun" parent="." instance=ExtResource("5_doe2v")]
 position = Vector2(0, -10)
+cooldown = 0.5
+spread = 20.0
 
 [editable path="Hurtbox"]
