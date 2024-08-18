@@ -35,7 +35,9 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 
 	if area is AttachPoint:
-		if area.part.attached_to_player != part.attached_to_player:
+		if (connection == null and
+				area.connection == null and
+				area.part.attached_to_player != part.attached_to_player):
 			Global.player.body.on_potential_attach_point_overlap_started(self, area)
 
 

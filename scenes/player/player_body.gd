@@ -81,10 +81,10 @@ func on_part_added(part: Part) -> void:
 	var collision_shape := CollisionShape2D.new()
 	Global.player.add_child(collision_shape)
 
-	call_deferred("deferred_on_part_added", part, collision_shape)
+	call_deferred("on_part_added_deferred", part, collision_shape)
 
 
-func deferred_on_part_added(part: Part, collision_shape: CollisionShape2D) -> void:
+func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> void:
 	var healthbox_collision_shape := part.get_healthbox_collision_shape()
 	collision_shape.shape = healthbox_collision_shape.shape
 	collision_shape.global_transform = healthbox_collision_shape.global_transform
@@ -115,7 +115,7 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 		return
 
 	var old_parent_node := overlap.detached_point.part.get_parent()
-	assert(old_parent_node is Drop)
+	assert(old_parent_node is PartsDrop)
 
 	attaching = true
 

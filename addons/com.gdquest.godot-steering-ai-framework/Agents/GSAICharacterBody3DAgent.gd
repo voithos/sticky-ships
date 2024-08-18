@@ -55,9 +55,9 @@ func _apply_sliding_steering(accel: Vector3, delta: float) -> void:
 	)
 	if apply_linear_drag:
 		_body.velocity = _body.velocity.lerp(Vector3.ZERO, linear_drag_percentage)
-		
+
 	_body.move_and_slide()
-	
+
 	if calculate_velocities:
 		linear_velocity = _body.velocity
 
@@ -72,10 +72,10 @@ func _apply_collide_steering(accel: Vector3, delta: float) -> void:
 	)
 	if apply_linear_drag:
 		_body.velocity = _body.velocity.lerp(Vector3.ZERO, linear_drag_percentage)
-	
+
 	# warning-ignore:return_value_discarded
 	_body.move_and_collide(_body.velocity * delta)
-	
+
 	if calculate_velocities:
 		linear_velocity = _body.velocity
 
@@ -90,7 +90,7 @@ func _apply_position_steering(accel: Vector3, delta: float) -> void:
 	)
 	if apply_linear_drag:
 		velocity = velocity.lerp(Vector3.ZERO, linear_drag_percentage)
-		
+
 	_body.global_transform.origin += velocity * delta
 	if calculate_velocities:
 		linear_velocity = velocity
