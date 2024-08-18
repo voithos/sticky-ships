@@ -1,11 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2ddtvmfs2v5i"]
+[gd_scene load_steps=15 format=3 uid="uid://b2ddtvmfs2v5i"]
 
 [ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_biq3a"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_yvjf3"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_gc0vn"]
-[ext_resource type="Texture2D" uid="uid://c0dj67bk7f3hp" path="res://assets/sprites/player/player.png" id="4_sf438"]
+[ext_resource type="Texture2D" uid="uid://b1b6k03kxa1or" path="res://assets/sprites/player/core1.png" id="4_c0t68"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_vorh6"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_23b82"]
+[ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="7_517eh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt1tu"]
+atlas = ExtResource("4_c0t68")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psprk"]
+atlas = ExtResource("4_c0t68")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27vty"]
+atlas = ExtResource("4_c0t68")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkcpq"]
+atlas = ExtResource("4_c0t68")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gakc4"]
+atlas = ExtResource("4_c0t68")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1m43"]
+atlas = ExtResource("4_c0t68")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kci36"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_kt1tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psprk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27vty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkcpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gakc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1m43")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="CorePart2" type="Node2D"]
 script = ExtResource("1_biq3a")
@@ -18,8 +69,10 @@ script = ExtResource("2_yvjf3")
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_gc0vn")]
 health_component = NodePath("../HealthComponent")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_sf438")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kci36")
+autoplay = "default"
+frame_progress = 0.320882
 
 [node name="BasicGun" parent="." instance=ExtResource("5_vorh6")]
 position = Vector2(0, -18)
@@ -40,5 +93,8 @@ position = Vector2(0, -10)
 [node name="RearAttachPoint" parent="." instance=ExtResource("6_23b82")]
 unique_name_in_owner = true
 position = Vector2(0, 10)
+
+[node name="BasicThruster" parent="." instance=ExtResource("7_517eh")]
+position = Vector2(0, 17)
 
 [editable path="Hurtbox"]
