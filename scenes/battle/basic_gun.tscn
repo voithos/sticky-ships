@@ -1,8 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk0ob0f1kxgmm"]
+[gd_scene load_steps=16 format=3 uid="uid://bk0ob0f1kxgmm"]
 
 [ext_resource type="Script" path="res://scenes/battle/basic_gun.gd" id="1_bdwbd"]
 [ext_resource type="Texture2D" uid="uid://bbedc73bo7str" path="res://assets/sprites/battle/basic_gun.png" id="2_lv2k4"]
 [ext_resource type="PackedScene" uid="uid://bmc6nx7ggqism" path="res://scenes/battle/basic_projectile.tscn" id="2_qp3n7"]
+[ext_resource type="AudioStream" uid="uid://huflma4e5xrr" path="res://assets/sfx/Laser/Lazer Gun-cm_01-02.wav" id="4_gkapo"]
+[ext_resource type="AudioStream" uid="uid://f4q3jj3g6lg8" path="res://assets/sfx/Laser/Lazer Gun-cm_02-01.wav" id="5_ai801"]
+[ext_resource type="AudioStream" uid="uid://ngvw5wpvk0jt" path="res://assets/sfx/Laser/Lazer Gun-cm_03-01.wav" id="6_qm3cf"]
+[ext_resource type="AudioStream" uid="uid://wtf4rdcfo3p0" path="res://assets/sfx/Laser/Lazer Gun-cm_04-01.wav" id="7_xqnfv"]
+[ext_resource type="AudioStream" uid="uid://dcx6dru75snij" path="res://assets/sfx/Laser/Lazer Gun-cm_05-01.wav" id="8_aaqad"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_srcs5"]
 atlas = ExtResource("2_lv2k4")
@@ -52,10 +57,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BasicGun" type="Node2D" node_paths=PackedStringArray("spawn_point")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ib0um"]
+random_pitch = 1.35
+streams_count = 6
+stream_1/stream = ExtResource("4_gkapo")
+stream_2/stream = ExtResource("5_ai801")
+stream_3/stream = ExtResource("6_qm3cf")
+stream_4/stream = ExtResource("7_xqnfv")
+stream_5/stream = ExtResource("8_aaqad")
+
+[node name="BasicGun" type="Node2D" node_paths=PackedStringArray("spawn_point", "sfx")]
 script = ExtResource("1_bdwbd")
 projectile = ExtResource("2_qp3n7")
 spawn_point = NodePath("SpawnPoint")
+sfx = NodePath("LaserSFX")
 cooldown = 0.2
 spread = 5.0
 
@@ -68,5 +83,8 @@ frame_progress = 1.0
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(0, -3)
+
+[node name="LaserSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ib0um")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_basic_gun_animation_finished"]

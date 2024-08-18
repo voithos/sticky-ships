@@ -1,22 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnxf638rjtql8"]
+[gd_scene load_steps=4 format=3 uid="uid://dnxf638rjtql8"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_trb5r"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_u3510"]
 [ext_resource type="AudioStream" uid="uid://bl86s63e05r83" path="res://assets/music/Theme.02.wav" id="3_jt13c"]
-[ext_resource type="AudioStream" uid="uid://huflma4e5xrr" path="res://assets/sfx/Laser/Lazer Gun-cm_01-02.wav" id="4_c1tnh"]
-[ext_resource type="AudioStream" uid="uid://f4q3jj3g6lg8" path="res://assets/sfx/Laser/Lazer Gun-cm_02-01.wav" id="5_uxsx8"]
-[ext_resource type="AudioStream" uid="uid://ngvw5wpvk0jt" path="res://assets/sfx/Laser/Lazer Gun-cm_03-01.wav" id="6_4efsr"]
-[ext_resource type="AudioStream" uid="uid://wtf4rdcfo3p0" path="res://assets/sfx/Laser/Lazer Gun-cm_04-01.wav" id="7_vuiya"]
-[ext_resource type="AudioStream" uid="uid://dcx6dru75snij" path="res://assets/sfx/Laser/Lazer Gun-cm_05-01.wav" id="8_57vsv"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rs1o4"]
-random_pitch = 1.35
-streams_count = 6
-stream_1/stream = ExtResource("4_c1tnh")
-stream_2/stream = ExtResource("5_uxsx8")
-stream_3/stream = ExtResource("6_4efsr")
-stream_4/stream = ExtResource("7_vuiya")
-stream_5/stream = ExtResource("8_57vsv")
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_trb5r")
@@ -26,8 +12,3 @@ script = ExtResource("1_trb5r")
 [node name="ThemeMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_jt13c")
 autoplay = true
-bus = &"Music"
-
-[node name="LaserSFX" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_rs1o4")
-bus = &"SFX"

@@ -4,6 +4,7 @@ extends Node
 @export var projectile: PackedScene
 # A node used as the spawn position when spawning bullets
 @export var spawn_point: Node2D
+@export var sfx: AudioStreamPlayer
 @export var cooldown: float = 0.5
 
 # The angle in degrees of spread when firing
@@ -31,6 +32,9 @@ func _fire() -> void:
 	p.collision_mask = projectile_collision_mask
 	p.shooter = owner
 	Global.level.add_child(p)
+
+	if sfx:
+		sfx.play()
 
 	cooldown_left = cooldown
 
