@@ -4,7 +4,7 @@ extends Node2D
 
 const AUTO_CONNECT_DISTANCE_SQUARED_THRESHOLD := 3.0 * 3.0
 
-@export var type := Global.PartType.Core
+@export var type := Global.PartType.UNKNOWN
 @export var growth_level := 1
 
 # The mass of this part, as a whole.
@@ -118,6 +118,9 @@ func _init_health_component(h: HealthComponent) -> void:
 
 func destroy_part() -> void:
 	print('part destroyed!')
+	if type == Global.PartType.Core:
+		# Destruction of core means death
+		Global.player.die()
 	queue_free()
 
 

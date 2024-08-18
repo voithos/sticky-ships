@@ -17,6 +17,7 @@ var player: Player
 
 
 enum PartType {
+	UNKNOWN,
 	Core,
 	BasicGun,
 	BasicThruster,

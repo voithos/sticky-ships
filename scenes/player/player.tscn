@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=3 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="3_5xm2m"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jd6dw"]
-radius = 8.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 38
@@ -15,8 +12,5 @@ position_smoothing_enabled = true
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_5xm2m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_jd6dw")
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]

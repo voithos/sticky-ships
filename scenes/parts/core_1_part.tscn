@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_vorh6"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_23b82"]
 
-[node name="CorePart" type="Node2D"]
+[node name="CorePart2" type="Node2D"]
 script = ExtResource("1_biq3a")
+type = 1
 mass = 1.0
 
 [node name="HealthComponent" type="Node" parent="."]
