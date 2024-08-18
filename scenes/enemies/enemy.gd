@@ -53,6 +53,9 @@ func _init_health_component(h: HealthComponent) -> void:
 	health = h
 	health.health_depleted.connect(die)
 
+func player_distance_squared() -> float:
+	return Global.player.global_position.distance_squared_to(global_position)
+
 
 func _process(delta: float) -> void:
 	pass

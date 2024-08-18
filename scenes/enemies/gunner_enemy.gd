@@ -1,12 +1,22 @@
 extends Enemy
 
 
+@export var firing_distance := 100.0
 
 func _ready() -> void:
 	super()
 	_setup_steering()
 
-# TODO: Try to fire the gun
+func _physics_process(delta: float) -> void:
+	super(delta)
+	if player_distance_squared() < firing_distance*firing_distance:
+		try_fire_light()
+
+	if accel.linear.length_squared() < 1000:
+		$AnimatedSprite2D.play("idle")
+	else:
+		$AnimatedSprite2D.play("thrust")
+
 
 func _steering_process(delta: float) -> void:
 	super(delta)
