@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dt44cvacv2nb2"]
+[gd_scene load_steps=12 format=3 uid="uid://cb1aqyfqofkmc"]
 
 [ext_resource type="Texture2D" uid="uid://b441jod2fbcxf" path="res://assets/sprites/fx/boom1.png" id="1_5lwg2"]
 [ext_resource type="Script" path="res://scenes/fx/effect.gd" id="2_ta1w8"]
@@ -73,3 +73,4 @@ autoplay = "default"
 frame = 7
 frame_progress = 1.0
 script = ExtResource("2_ta1w8")
+random_rotation = false

@@ -44,7 +44,6 @@ func maybe_do_damage(to: Node2D) -> void:
 func die() -> void:
 	if explosion_effect_scene:
 		var fx := explosion_effect_scene.instantiate()
-		fx.rotation = randi_range(0, 3) * PI / 2
 		fx.global_position = global_position
 		add_sibling(fx)
 	queue_free()
