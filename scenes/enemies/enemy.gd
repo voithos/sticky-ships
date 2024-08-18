@@ -2,6 +2,8 @@ class_name Enemy
 extends CharacterBody2D
 
 
+@export var explosion_scene: PackedScene
+
 var health: HealthComponent = null
 
 var light_guns: Array[LightGun] = []
@@ -101,4 +103,8 @@ func _physics_process(delta: float) -> void:
 
 
 func die() -> void:
+	if explosion_scene:
+		var explosion := explosion_scene.instantiate()
+		explosion.global_position = global_position
+		add_sibling(explosion)
 	queue_free()

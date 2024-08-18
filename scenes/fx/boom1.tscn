@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://dt44cvacv2nb2"]
+
+[ext_resource type="Texture2D" uid="uid://b441jod2fbcxf" path="res://assets/sprites/fx/boom1.png" id="1_5lwg2"]
+[ext_resource type="Script" path="res://scenes/fx/effect.gd" id="2_ta1w8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqikj"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaq0b"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svo0e"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltnqk"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bes8d"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0w0f"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80c0g"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32my0"]
+atlas = ExtResource("1_5lwg2")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2v54l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqikj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaq0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svo0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltnqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bes8d")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_u0w0f")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_80c0g")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_32my0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="Boom1" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_2v54l")
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+script = ExtResource("2_ta1w8")
