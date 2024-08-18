@@ -115,7 +115,6 @@ stream = SubResource("AudioStreamRandomizer_ib0um")
 
 [node name="BulletDrySFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_t4jd3")
-volume_db = 12.0
 bus = &"SFX"
 playback_type = 2
 

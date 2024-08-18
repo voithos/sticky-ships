@@ -159,7 +159,7 @@ static func get_item_size_xp_multiplier(type: SizeType) -> float:
 			assert(false)
 			return 0.0
 
-
+ 
 static func get_max_health(growth_level: int) -> float:
 	return get_hp_for_part(PartType.Core, SizeType.Normal, growth_level)
 

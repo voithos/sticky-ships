@@ -12,3 +12,4 @@ script = ExtResource("1_trb5r")
 [node name="ThemeMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_jt13c")
 autoplay = true
+bus = &"Music"
