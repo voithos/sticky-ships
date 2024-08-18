@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 ## These are like the "starting point" for movement. The actual propulsion + mass determine the final speed.
 @export var acceleration_factor := 300.0
-@export var angular_acceleration_factor := 200.0
+@export var angular_acceleration_factor := 300.0
 
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
@@ -41,11 +41,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("fire"):
 		try_fire()
 
+
 func rot_90_cw(v: Vector2) -> Vector2:
 	return Vector2(-v.y, v.x)
 
+
 func rot_90_ccw(v: Vector2) -> Vector2:
 	return Vector2(v.y, -v.x)
+
 
 func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, direction_y: Vector2) -> Vector2:
 	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
@@ -74,6 +77,7 @@ func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, di
 
 			thruster.set_is_thrusting((satisfies_y and movement.y != 0) or (satisfies_x and movement.x != 0))
 	return max_propulsion
+
 
 func handle_movement(delta: float) -> void:
 	var movement := get_movement()
