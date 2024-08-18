@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://huflma4e5xrr"
+path="res://.godot/imported/Lazer Gun-cm_01-02.wav-9f57860973426e78aa713d6e89404aed.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Laser/Lazer Gun-cm_01-02.wav"
+dest_files=["res://.godot/imported/Lazer Gun-cm_01-02.wav-9f57860973426e78aa713d6e89404aed.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
