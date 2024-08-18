@@ -8,7 +8,7 @@ var player: Player
 var drops: Array[Drop] = []
 
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	Global.level = self
 
 	player = Global.PLAYER_SCENE.instantiate()
@@ -22,7 +22,6 @@ func _ready() -> void:
 	var drop_chunk := Global.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
 	drop_chunk.position = Vector2(0.0, 48.0)
 	add_child(drop_chunk)
-
 
 
 func _process(delta: float) -> void:
