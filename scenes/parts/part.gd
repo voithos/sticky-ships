@@ -8,7 +8,7 @@ const MAX_HEALTH_MODULATION_ALPHA := 1.0
 const MIN_HEALTH_MODULATION_ALPHA := 0.5
 
 const FIRE_EFFECT_ALPHA := 1.0
-const FIRE_EFFECT_SCALE := 0.6
+const FIRE_EFFECT_SCALE := 0.4
 
 const HIGH_HEALTH_RATIO_THRESHOLD := 0.8
 const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
@@ -169,7 +169,14 @@ func _on_health_changed(new_health: float, prev_health: float) -> void:
 		fire_effect = fire_effect_scene.instantiate()
 		fire_effect.modulate.a = FIRE_EFFECT_ALPHA
 		fire_effect.scale = Vector2.ONE * FIRE_EFFECT_SCALE
+		fire_effect.rotation = randi_range(0, 3) * PI / 2
 		add_child(fire_effect)
+
+		# Randomize the starting frame.
+		var animated_sprite: AnimatedSprite2D = fire_effect.get_node("AnimatedSprite2D")
+		var animation: StringName = animated_sprite.animation
+		var frame_count := animated_sprite.sprite_frames.get_frame_count(animation)
+		animated_sprite.frame = randi_range(0, frame_count - 1)
 
 
 func destroy_part() -> void:
