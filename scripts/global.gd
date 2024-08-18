@@ -97,7 +97,14 @@ const PART_TYPE_CONFIG := {
 	},
 }
 
+# TODO: Set this to true.
 const skip_main_menu := true
+
+# TODO: Adjust this.
+var default_level_scene := Global.MAIN_LEVEL_SCENE
+#var default_level_scene := Global.LEVI_TEST_LEVEL_SCENE
+#var default_level_scene := Global.ZAVEN_TEST_LEVEL_SCENE
+
 
 var level_container: LevelContainer
 var hud: Hud
@@ -117,7 +124,7 @@ static func get_hp_for_part(part_type: PartType, size_type: SizeType, growth_lev
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
 	var size_multiplier := get_item_size_health_multiplier(size_type)
-	return PART_TYPE_CONFIG[part_type].base_xp * level_config.part_hp_multiplier * size_multiplier
+	return PART_TYPE_CONFIG[part_type].base_hp * level_config.part_hp_multiplier * size_multiplier
 
 
 static func get_item_size_health_multiplier(type: SizeType) -> float:

@@ -17,12 +17,7 @@ func _ready() -> void:
 func start() -> void:
 	var level_scene: PackedScene
 
-	# TODO: Adjust this.
-	#level_scene = Global.MAIN_LEVEL_SCENE
-	#level_scene = Global.LEVI_TEST_LEVEL_SCENE
-	level_scene = Global.ZAVEN_TEST_LEVEL_SCENE
-
-	var level: Level = level_scene.instantiate()
+	var level: Level = Global.default_level_scene.instantiate()
 	add_child(level)
 
 	Global.main_menu.visible = false
