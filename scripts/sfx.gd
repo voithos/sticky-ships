@@ -19,7 +19,7 @@ enum {
 const SAMPLES = {
 	EXAMPLE: preload("res://assets/sfx/example.wav"),
 	CONNECTION_AVAILABLE: preload("res://assets/sfx/ConnectionAvailable/Pickup-cm-cm-02.wav"),
-	PARTS_CONNECTED: preload("res://assets/sfx/parts_connected.wav"),
+	PARTS_CONNECTED: preload("res://assets/sfx/ConnectionMade.wav"),
 }
 # ========================
 
