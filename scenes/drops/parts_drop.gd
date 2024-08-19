@@ -6,18 +6,18 @@ var parts: Array[Part] = []
 
 
 func _ready() -> void:
-	super()
 	Global.level.drops.push_back(self)
 
 
 func _exit_tree() -> void:
 	for part in parts:
-		_on_part_removed(part)
+		part.on_removed()
 
 
-func remove_part(part: Part) -> void:
-	parts.erase(part)
-	remove_child(part)
+func remove_too_small_parts(growth_level: int) -> void:
+	var too_small_parts := parts.filter(func (part: Part): return part.growth_level < growth_level - 1)
+	for part in too_small_parts:
+		part.destroy()
 
 
 func on_part_added(part: Part) -> void:
@@ -36,9 +36,3 @@ func deferred_on_part_added(part: Part, collision_shape: CollisionShape2D) -> vo
 	add_child(collision_shape)
 	collision_shape.global_transform = part.get_healthbox_collision_shape().global_transform
 	part.player_collision_shape_instance = collision_shape
-
-
-func _on_part_removed(part: Part) -> void:
-	if is_instance_valid(part.player_collision_shape_instance):
-		part.player_collision_shape_instance.queue_free()
-	part.player_collision_shape_instance = null

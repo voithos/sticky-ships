@@ -2,9 +2,8 @@ class_name Drop
 extends RigidBody2D
 
 
-func _ready() -> void:
-	pass
+@export var growth_level := 1
 
 
-func _process(delta: float) -> void:
-	pass
+func _init() -> void:
+	add_to_group(Global.DROPS_GROUP)

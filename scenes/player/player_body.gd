@@ -114,46 +114,20 @@ func get_core_sprite_size() -> Vector2:
 
 func clear_parts() -> void:
 	for part in parts:
-		_on_part_removed(part)
+		part.on_removed()
 		part.queue_free()
 	parts.clear()
 	core_part = null
 
 
+func remove_too_small_parts(growth_level: int) -> void:
+	var too_small_parts := parts.filter(func (part: Part): return part.growth_level < growth_level - 1)
+	for part in too_small_parts:
+		destroy_part(part)
+
+
 func destroy_part(part: Part) -> void:
-	assert(is_instance_valid(part))
-	assert(parts.has(part))
-
-	var descendant_parts: Array[Part] = []
-	part.get_all_descendants(descendant_parts)
-
-	parts.erase(part)
-	if part == core_part:
-		core_part = null
-
-	# Detach from children.
-	for connection in part.child_connections:
-		part.remove_child_connection(connection)
-
-	# Detach from parent.
-	if is_instance_valid(part.parent_connection):
-		part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
-
-	var drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
-	Global.level.add_child(drop)
-	Global.level.drops.push_back(drop)
-
-	for descendant_part in descendant_parts:
-		assert(is_instance_valid(descendant_part))
-		assert(parts.has(descendant_part))
-		parts.erase(descendant_part)
-		descendant_part.looks_for_nearby_connections_when_entering_tree = false
-		_on_part_removed(descendant_part)
-		descendant_part.reparent(drop)
-
-	_on_part_removed(part)
-	part.queue_free()
-
+	part.destroy()
 	_update_part_stats()
 
 
@@ -174,12 +148,6 @@ func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> vo
 	collision_shape.shape = healthbox_collision_shape.shape
 	collision_shape.global_transform = healthbox_collision_shape.global_transform
 	part.player_collision_shape_instance = collision_shape
-
-
-func _on_part_removed(part: Part) -> void:
-	if is_instance_valid(part.player_collision_shape_instance):
-		part.player_collision_shape_instance.queue_free()
-	part.player_collision_shape_instance = null
 
 
 func attach_part(overlap: PotentialConnectionOverlap) -> void:

@@ -25,6 +25,11 @@ const PART_FIRE_LOW_EFFECT_SCENE := preload("res://scenes/player/part_fire_low_e
 const PART_FIRE_MEDIUM_EFFECT_SCENE := preload("res://scenes/player/part_fire_medium_effect.tscn")
 const PART_FIRE_HIGH_EFFECT_SCENE := preload("res://scenes/player/part_fire_high_effect.tscn")
 
+const DROPS_GROUP := "drops"
+const ENEMIES_GROUP := "enemies"
+const PARTS_GROUP := "parts"
+const PROJECTILES_GROUP := "projectiles"
+
 const GROWTH_LEVEL_SCALE_FACTOR := 8.0
 
 const MAX_GROWTH_LEVEL := 3
@@ -146,7 +151,7 @@ func get_item_size_health_multiplier(growth_level: int, current_growth_level := 
 		return 1
 	elif growth_level == current_growth_level - 1:
 		return SMALL_ITEM_HEALTH_MULTIPLIER
-	return 0
+	return 0.0000000001
 
 
 func get_item_size_damage_multiplier(growth_level: int, current_growth_level := -1) -> float:
@@ -156,7 +161,7 @@ func get_item_size_damage_multiplier(growth_level: int, current_growth_level := 
 		return 1
 	elif growth_level == current_growth_level - 1:
 		return SMALL_ITEM_DAMAGE_MULTIPLIER
-	return 0
+	return 0.0000000001
 
 
 func get_item_size_growth_multiplier(growth_level: int, current_growth_level := -1) -> float:
@@ -166,7 +171,7 @@ func get_item_size_growth_multiplier(growth_level: int, current_growth_level := 
 		return 1
 	elif growth_level == current_growth_level - 1:
 		return SMALL_ITEM_GROWTH_MULTIPLIER
-	return 0
+	return 0.0000000001
 
 
 func get_max_health(growth_level: int) -> float:

@@ -34,6 +34,10 @@ var _player_seek_location := GSAIAgentLocation.new()
 @export var droppables: Array[Droppable] = []
 
 
+func _init() -> void:
+	add_to_group(Global.ENEMIES_GROUP)
+
+
 func _ready() -> void:
 	_init_components(self)
 

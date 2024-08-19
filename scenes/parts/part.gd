@@ -45,6 +45,10 @@ var health: HealthComponent = null
 # TODO: Add thrusters, shields, heavy guns, etc
 
 
+func _init() -> void:
+	add_to_group(Global.PARTS_GROUP)
+
+
 func _enter_tree() -> void:
 	_init_shape()
 	_init_parent()
@@ -71,6 +75,7 @@ func _init_parent() -> void:
 		parent_node.parts.push_back(self)
 		attached_to_player = false
 		parent_node.on_part_added(self)
+		parent_node.growth_level = max(parent_node.growth_level, growth_level)
 	elif parent_node is PlayerBody:
 		parent_node.parts.push_back(self)
 		attached_to_player = true
@@ -136,7 +141,7 @@ func _init_health_component(h: HealthComponent) -> void:
 	health = h
 	health.reset_health(Global.get_health_for_part(type, growth_level))
 	health.health_changed.connect(_on_health_changed)
-	health.health_depleted.connect(destroy_part)
+	health.health_depleted.connect(_on_health_depleted)
 
 
 func on_attached() -> void:
@@ -211,11 +216,11 @@ func _on_health_changed(new_health: float, prev_health: float) -> void:
 		animated_sprite.frame = randi_range(0, frame_count - 1)
 
 
-func destroy_part() -> void:
-	destroy_part_deferred.call_deferred()
+func _on_health_depleted() -> void:
+	_on_health_depleted_deferred.call_deferred()
 
 
-func destroy_part_deferred() -> void:
+func _on_health_depleted_deferred() -> void:
 	print('part destroyed!')
 	if type == Global.PartType.Core:
 		# Destruction of core means death
@@ -238,13 +243,14 @@ func get_bounding_box() -> Rect2:
 
 
 func get_sprite() -> Node2D:
-	var sprite := get_node("AnimatedSprite2D")
-	if is_instance_valid(sprite):
+	if has_node("AnimatedSprite2D"):
+		var sprite := get_node("AnimatedSprite2D")
 		assert(sprite is AnimatedSprite2D)
 		return sprite
 	else:
-		sprite = get_node("Sprite2D")
-		assert(is_instance_valid(sprite) and sprite is Sprite2D)
+		assert(has_node("Sprite2D"))
+		var sprite := get_node("Sprite2D")
+		assert(sprite is Sprite2D)
 		return sprite
 
 
@@ -345,3 +351,49 @@ func translate_part(translation: Vector2) -> void:
 	global_position += translation
 	for connection in child_connections:
 		connection.child.part.translate_part(translation)
+
+
+func destroy() -> void:
+	var part := self
+	var parent_node: Node2D = get_parent()
+	assert(parent_node is PlayerBody or parent_node is PartsDrop)
+	var parts: Array[Part] = parent_node.parts
+
+	assert(is_instance_valid(part))
+	assert(parts.has(part))
+
+	var descendant_parts: Array[Part] = []
+	part.get_all_descendants(descendant_parts)
+
+	parts.erase(part)
+	if part == Global.player.body.core_part:
+		Global.player.body.core_part = null
+
+	# Detach from children.
+	for connection in part.child_connections:
+		part.remove_child_connection(connection)
+
+	# Detach from parent.
+	if is_instance_valid(part.parent_connection):
+		part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
+
+	var drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
+	Global.level.add_child(drop)
+	Global.level.drops.push_back(drop)
+
+	for descendant_part in descendant_parts:
+		assert(is_instance_valid(descendant_part))
+		assert(parts.has(descendant_part))
+		parts.erase(descendant_part)
+		descendant_part.looks_for_nearby_connections_when_entering_tree = false
+		descendant_part.on_removed()
+		descendant_part.reparent(drop)
+
+	part.on_removed()
+	part.queue_free()
+
+
+func on_removed() -> void:
+	if is_instance_valid(player_collision_shape_instance):
+		player_collision_shape_instance.queue_free()
+	player_collision_shape_instance = null

@@ -16,6 +16,10 @@ var direction := Vector2.ZERO
 var shooter: Node
 
 
+func _init() -> void:
+	add_to_group(Global.PROJECTILES_GROUP)
+
+
 func _ready() -> void:
 	direction = -GSAIUtils.angle_to_vector2(rotation)
 	body_entered.connect(_on_body_entered)
