@@ -30,7 +30,7 @@ const GROWTH_LEVEL_CAMERA_ZOOM_FACTOR := 4.0
 
 const SMALL_ITEM_HEALTH_MULTIPLIER := 0.25
 const SMALL_ITEM_DAMAGE_MULTIPLIER := 0.25
-const SMALL_ITEM_growth_MULTIPLIER := 0.25
+const SMALL_ITEM_GROWTH_MULTIPLIER := 0.25
 
 const DEFAULT_NEXT_LEVEL_GROWTH := 100
 
@@ -40,13 +40,6 @@ const DEFAULT_PART_DROP_RATE_MULTIPLIER := 1.0
 const PLAYER_COLLISION_LAYER = 1 << 0
 const ENEMY_COLLISION_LAYER = 1 << 2
 const LEVEL_COLLISION_LAYER = 1 << 5
-
-enum SizeType {
-	UNKNOWN,
-	Small,
-	Normal,
-	Large,
-}
 
 enum PartType {
 	UNKNOWN,
@@ -122,68 +115,59 @@ var level
 var player: Player
 
 
-static func get_growth_for_part(part_type: PartType, size_type: SizeType, growth_level: int) -> float:
+func get_growth_for_part(part_type: PartType, growth_level: int) -> float:
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
-	var size_multiplier := get_item_size_growth_multiplier(size_type)
+	var size_multiplier := get_item_size_growth_multiplier(growth_level)
 	return PART_TYPE_CONFIG[part_type].base_growth * level_config.next_level_growth_multiplier * size_multiplier
 
 
-static func get_health_for_part(part_type: PartType, size_type: SizeType, growth_level: int) -> float:
+func get_health_for_part(part_type: PartType, growth_level: int) -> float:
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
-	var size_multiplier := get_item_size_health_multiplier(size_type)
+	var size_multiplier := get_item_size_health_multiplier(growth_level)
 	return PART_TYPE_CONFIG[part_type].base_health * level_config.part_health_multiplier * size_multiplier
 
 
-static func get_item_size_health_multiplier(type: SizeType) -> float:
-	match type:
-		SizeType.Small:
-			return SMALL_ITEM_HEALTH_MULTIPLIER
-		SizeType.Normal:
-			return 1.0
-		_:
-			assert(false)
-			return 0.0
+func get_item_size_health_multiplier(growth_level: int) -> float:
+	if growth_level == Session.current_growth_level:
+		return 1
+	elif growth_level == Session.current_growth_level - 1:
+		return SMALL_ITEM_HEALTH_MULTIPLIER
+	return 0
 
 
-static func get_item_size_damage_multiplier(type: SizeType) -> float:
-	match type:
-		SizeType.Small:
-			return SMALL_ITEM_DAMAGE_MULTIPLIER
-		SizeType.Normal:
-			return 1.0
-		_:
-			assert(false)
-			return 0.0
+func get_item_size_damage_multiplier(growth_level: int) -> float:
+	if growth_level == Session.current_growth_level:
+		return 1
+	elif growth_level == Session.current_growth_level - 1:
+		return SMALL_ITEM_DAMAGE_MULTIPLIER
+	return 0
 
 
-static func get_item_size_growth_multiplier(type: SizeType) -> float:
-	match type:
-		SizeType.Small:
-			return SMALL_ITEM_growth_MULTIPLIER
-		SizeType.Normal:
-			return 1.0
-		_:
-			assert(false)
-			return 0.0
+func get_item_size_growth_multiplier(growth_level: int) -> float:
+	if growth_level == Session.current_growth_level:
+		return 1
+	elif growth_level == Session.current_growth_level - 1:
+		return SMALL_ITEM_GROWTH_MULTIPLIER
+	return 0
 
 
-static func get_max_health(growth_level: int) -> float:
-	return get_health_for_part(PartType.Core, SizeType.Normal, growth_level)
+func get_max_health(growth_level: int) -> float:
+	return get_health_for_part(PartType.Core, growth_level)
 
 
-static func get_next_level_growth(growth_level: int) -> float:
+func get_next_level_growth(growth_level: int) -> float:
 	var level_config := get_current_level_config(growth_level)
 	return DEFAULT_NEXT_LEVEL_GROWTH * level_config.next_level_growth_multiplier
 
 
-static func get_enemies(growth_level: int) -> Array[EnemyType]:
+func get_enemies(growth_level: int) -> Array[EnemyType]:
 	var level_config := get_current_level_config(growth_level)
 	return level_config.enemies
 
 
-static func part_type_to_packed_scene(type: PartType, growth_level: int) -> PackedScene:
+func part_type_to_packed_scene(type: PartType, growth_level: int) -> PackedScene:
 	match type:
 		PartType.Core:
 			var level_config := get_current_level_config(growth_level)

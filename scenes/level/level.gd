@@ -44,13 +44,23 @@ func increment_growth_level() -> void:
 
 	var next_zoom := Vector2.ONE * Global.INITIAL_CAMERA_ZOOM / pow(Global.GROWTH_LEVEL_CAMERA_ZOOM_FACTOR, next_level - 1)
 
-	# TODO: Implement growth system
-	# - For every non-player sprite:
-	#   - Fade in/out new/old sprites for that entity.
+	# FIXME: Implement growth system
+	#
+	# - Add a new growth_level property on all parts, projectiles, and enemies.
+	# - Implement MVP end condition.
+	#   - Grow to level 3.
+	# - And update systems to spawn new items at the correct scale and resolution.
+	#   - No tiny guys on the first level.
+	# - Create high and low res copies of all parts, projectiles, and enemies.
+	# - Add some logic for spawning large-version drops in the current level.
+	#   - And chunks of them.
+	# - Reduce enemy drops to compensate.
+	# - Balance config multipliers for each growth level.
+	#
 	# - Show some sort of particle effect.
+	# - Damage everything within a radius.
+	#
 	# - Show sprite overlays for whichever aspects have been upgraded.
-	# - Damage everything within a radius?
-	# - Heal core health?
 
 	if is_instance_valid(growth_level_tween):
 		growth_level_tween.kill()

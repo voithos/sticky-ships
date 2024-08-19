@@ -76,7 +76,7 @@ func _update_health_display() -> void:
 func _update_growth_display() -> void:
 	var current_growth := 0.0
 	for part in parts:
-		current_growth += Global.get_growth_for_part(part.type, part.size_type, Session.current_growth_level)
+		current_growth += Global.get_growth_for_part(part.type, part.growth_level)
 	var xp_ratio := current_growth / Global.get_next_level_growth(Session.current_growth_level)
 	if Global.hud:
 		Global.hud.set_growth_ratio(xp_ratio)
