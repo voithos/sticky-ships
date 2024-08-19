@@ -106,7 +106,7 @@ const PART_TYPE_CONFIG := {
 }
 
 # TODO: Set this to true.
-const skip_main_menu := false
+const skip_main_menu := true
 
 # TODO: Adjust this.
 var default_level_scene := MAIN_LEVEL_SCENE
