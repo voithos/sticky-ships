@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnxf638rjtql8"]
+[gd_scene load_steps=9 format=3 uid="uid://dnxf638rjtql8"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_trb5r"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_u3510"]
 [ext_resource type="AudioStream" uid="uid://bl86s63e05r83" path="res://assets/music/Theme.02.wav" id="3_jt13c"]
+[ext_resource type="AudioStream" uid="uid://bduagx0p2ayc8" path="res://assets/sfx/ConnectionAvailable/Pickup-cm-cm-02.wav" id="4_f6pir"]
+[ext_resource type="AudioStream" uid="uid://dcmybybne3pq7" path="res://assets/sfx/ConnectionAvailable/Pickup-cm-cm_01-02.wav" id="5_mnhfm"]
+[ext_resource type="AudioStream" uid="uid://g0r35bd57tff" path="res://assets/sfx/ConnectionAvailable/Pickup-cm-cm_02-02.wav" id="6_p0r8d"]
+[ext_resource type="AudioStream" uid="uid://bmusvn0stxqfm" path="res://assets/sfx/ConnectionAvailable/Pickup-cm-cm_03-02.wav" id="7_pc3xa"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_alu0m"]
+streams_count = 4
+stream_0/stream = ExtResource("4_f6pir")
+stream_1/stream = ExtResource("5_mnhfm")
+stream_2/stream = ExtResource("6_p0r8d")
+stream_3/stream = ExtResource("7_pc3xa")
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_trb5r")
@@ -13,3 +24,7 @@ script = ExtResource("1_trb5r")
 stream = ExtResource("3_jt13c")
 autoplay = true
 bus = &"Music"
+
+[node name="ConnectionAvailable" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_alu0m")
+bus = &"SFX"
