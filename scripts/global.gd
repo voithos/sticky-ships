@@ -29,9 +29,9 @@ const GROWTH_LEVEL_CAMERA_ZOOM_FACTOR := 4.0
 
 const SMALL_ITEM_HEALTH_MULTIPLIER := 0.25
 const SMALL_ITEM_DAMAGE_MULTIPLIER := 0.25
-const SMALL_ITEM_XP_MULTIPLIER := 0.25
+const SMALL_ITEM_growth_MULTIPLIER := 0.25
 
-const DEFAULT_NEXT_LEVEL_XP := 100
+const DEFAULT_NEXT_LEVEL_growth := 100
 
 const DEFAULT_PART_DROP_RATE_MULTIPLIER := 1.0
 
@@ -62,8 +62,8 @@ enum EnemyType {
 const LEVEL_CONFIG := [
 	{
 		# Level 1
-		part_hp_multiplier = 1,
-		next_level_xp_multiplier = 1,
+		part_health_multiplier = 1,
+		next_level_growth_multiplier = 1,
 		core_scene = CORE_1_PART_SCENE,
 		enemies = [
 			EnemyType.Gunner,
@@ -71,8 +71,8 @@ const LEVEL_CONFIG := [
 	},
 	{
 		# Level 2
-		part_hp_multiplier = 4,
-		next_level_xp_multiplier = 4,
+		part_health_multiplier = 4,
+		next_level_growth_multiplier = 4,
 		core_scene = CORE_2_PART_SCENE,
 		enemies = [
 			EnemyType.Gunner,
@@ -80,8 +80,8 @@ const LEVEL_CONFIG := [
 	},
 	{
 		# Level 3
-		part_hp_multiplier = 16,
-		next_level_xp_multiplier = 16,
+		part_health_multiplier = 16,
+		next_level_growth_multiplier = 16,
 		core_scene = CORE_3_PART_SCENE,
 		enemies = [
 			EnemyType.Gunner,
@@ -91,16 +91,16 @@ const LEVEL_CONFIG := [
 
 const PART_TYPE_CONFIG := {
 	PartType.Core: {
-		base_hp = 100,
-		base_xp = 0,
+		base_health = 100,
+		base_growth = 0,
 	},
 	PartType.BasicGun: {
-		base_hp = 50,
-		base_xp = 10,
+		base_health = 50,
+		base_growth = 10,
 	},
 	PartType.BasicThruster: {
-		base_hp = 50,
-		base_xp = 10,
+		base_health = 50,
+		base_growth = 10,
 	},
 }
 
@@ -120,18 +120,18 @@ var level: Level
 var player: Player
 
 
-static func get_xp_for_part(part_type: PartType, size_type: SizeType, growth_level: int) -> float:
+static func get_growth_for_part(part_type: PartType, size_type: SizeType, growth_level: int) -> float:
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
-	var size_multiplier := get_item_size_xp_multiplier(size_type)
-	return PART_TYPE_CONFIG[part_type].base_xp * level_config.next_level_xp_multiplier * size_multiplier
+	var size_multiplier := get_item_size_growth_multiplier(size_type)
+	return PART_TYPE_CONFIG[part_type].base_growth * level_config.next_level_growth_multiplier * size_multiplier
 
 
-static func get_hp_for_part(part_type: PartType, size_type: SizeType, growth_level: int) -> float:
+static func get_health_for_part(part_type: PartType, size_type: SizeType, growth_level: int) -> float:
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
 	var size_multiplier := get_item_size_health_multiplier(size_type)
-	return PART_TYPE_CONFIG[part_type].base_hp * level_config.part_hp_multiplier * size_multiplier
+	return PART_TYPE_CONFIG[part_type].base_health * level_config.part_health_multiplier * size_multiplier
 
 
 static func get_item_size_health_multiplier(type: SizeType) -> float:
@@ -156,10 +156,10 @@ static func get_item_size_damage_multiplier(type: SizeType) -> float:
 			return 0.0
 
 
-static func get_item_size_xp_multiplier(type: SizeType) -> float:
+static func get_item_size_growth_multiplier(type: SizeType) -> float:
 	match type:
 		SizeType.Small:
-			return SMALL_ITEM_XP_MULTIPLIER
+			return SMALL_ITEM_growth_MULTIPLIER
 		SizeType.Normal:
 			return 1.0
 		_:
@@ -168,12 +168,12 @@ static func get_item_size_xp_multiplier(type: SizeType) -> float:
 
 
 static func get_max_health(growth_level: int) -> float:
-	return get_hp_for_part(PartType.Core, SizeType.Normal, growth_level)
+	return get_health_for_part(PartType.Core, SizeType.Normal, growth_level)
 
 
-static func get_next_level_xp(growth_level: int) -> float:
+static func get_next_level_growth(growth_level: int) -> float:
 	var level_config := get_current_level_config(growth_level)
-	return DEFAULT_NEXT_LEVEL_XP * level_config.next_level_xp_multiplier
+	return DEFAULT_NEXT_LEVEL_growth * level_config.next_level_growth_multiplier
 
 
 static func get_enemies(growth_level: int) -> Array[EnemyType]:

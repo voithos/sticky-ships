@@ -46,9 +46,10 @@ layout_mode = 2
 theme_override_constants/separation = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 4
-text = "HP"
+text = "Health"
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(48, 4)
@@ -75,10 +76,10 @@ layout_mode = 2
 theme_override_constants/separation = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(6, 0)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 4
-text = "XP"
+text = "Growth"
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(48, 4)

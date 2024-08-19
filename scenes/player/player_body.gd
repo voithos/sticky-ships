@@ -57,12 +57,12 @@ func set_core(growth_level: int) -> void:
 
 	core_part.health.health_changed.connect(_on_core_health_changed)
 	core_part.health.health_depleted.connect(_on_core_health_depleted)
-	_update_xp_display()
-	_update_hp_display()
+	_update_growth_display()
+	_update_health_display()
 
 
 func _on_core_health_changed(new_health: float, prev_health: float) -> void:
-	_update_hp_display()
+	_update_health_display()
 
 
 func _on_core_health_depleted() -> void:
@@ -70,22 +70,22 @@ func _on_core_health_depleted() -> void:
 	pass
 
 
-func _update_hp_display() -> void:
+func _update_health_display() -> void:
 	var health_ratio := (
 		core_part.health.health / core_part.health.max_health if
 		is_instance_valid(core_part) else
 		0.0)
 	if Global.hud:
-		Global.hud.set_hp_ratio(health_ratio)
+		Global.hud.set_health_ratio(health_ratio)
 
 
-func _update_xp_display() -> void:
-	var current_xp := 0
+func _update_growth_display() -> void:
+	var current_growth := 0
 	for part in parts:
-		current_xp += Global.get_xp_for_part(part.type, part.size_type, Global.level.current_growth_level)
-	var xp_ratio := current_xp / Global.get_next_level_xp(Global.level.current_growth_level)
+		current_growth += Global.get_growth_for_part(part.type, part.size_type, Global.level.current_growth_level)
+	var xp_ratio := current_growth / Global.get_next_level_growth(Global.level.current_growth_level)
 	if Global.hud:
-		Global.hud.set_xp_ratio(xp_ratio)
+		Global.hud.set_growth_ratio(xp_ratio)
 
 
 func get_bounding_box() -> Rect2:
@@ -114,12 +114,14 @@ func clear_parts() -> void:
 
 func destroy_part(part: Part) -> void:
 	assert(is_instance_valid(part))
-	assert(parts.has(part), "destroy_part: Player does not have part.")
+	assert(parts.has(part))
 
 	var descendant_parts: Array[Part] = []
 	part.get_all_descendants(descendant_parts)
 
-	_remove_sub_part(part)
+	parts.erase(part)
+	if part == core_part:
+		core_part = null
 
 	# Detach from children.
 	for connection in part.child_connections:
@@ -130,29 +132,19 @@ func destroy_part(part: Part) -> void:
 		part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
 
 	var drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
-	add_child(drop)
+	Global.level.add_child(drop)
 	Global.level.drops.push_back(drop)
 
 	for descendant_part in descendant_parts:
+		assert(is_instance_valid(descendant_part))
+		assert(parts.has(descendant_part))
+		parts.erase(descendant_part)
 		descendant_part.looks_for_nearby_connections_when_entering_tree = false
 		descendant_part.reparent(drop)
 		_on_part_removed(descendant_part)
 
 	_on_part_removed(part)
 	part.queue_free()
-
-
-func _remove_sub_part(part: Part) -> void:
-	assert(is_instance_valid(part))
-	assert(parts.has(part), "_remove_sub_part: Player does not have part.")
-
-	part.attached_to_player = false
-	parts.erase(part)
-	if part == core_part:
-		core_part = null
-
-	for connection in part.child_connections:
-		_remove_sub_part(connection.child.part)
 
 
 func on_part_added(part: Part) -> void:
@@ -175,7 +167,7 @@ func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> vo
 
 
 func _on_part_removed(part: Part) -> void:
-	Global.player.remove_child(part.player_collision_shape_instance)
+	part.player_collision_shape_instance.queue_free()
 	part.player_collision_shape_instance = null
 
 	total_mass -= part.mass
@@ -209,7 +201,7 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 
 	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
 
-	_update_xp_display()
+	_update_growth_display()
 
 	attaching = false
 
