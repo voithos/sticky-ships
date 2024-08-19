@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ceebwaa4yrwis"]
+[gd_scene load_steps=7 format=3 uid="uid://ctagqlnlgv0vx"]
 
 [ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_pnjst"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_rpb2l"]

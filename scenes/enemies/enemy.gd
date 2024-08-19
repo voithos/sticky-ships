@@ -55,6 +55,7 @@ func try_fire_light() -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
+	health.health_changed.connect(_health_changed)
 	health.health_depleted.connect(die)
 
 func player_distance_squared() -> float:
@@ -116,6 +117,16 @@ func maybe_drop_part() -> void:
 			# Only drop at most one thing
 			break
 
+
+func _health_changed(new_health: float, old_health: float) -> void:
+	if new_health < old_health:
+		_flash_damage()
+
+func _flash_damage() -> void:
+	var sprite: AnimatedSprite2D = $AnimatedSprite2D
+	sprite.material.set_shader_parameter("brightening", 2.0)
+	await get_tree().create_timer(0.05).timeout
+	sprite.material.set_shader_parameter("brightening", 1.0)
 
 func die() -> void:
 	die_deferred.call_deferred()

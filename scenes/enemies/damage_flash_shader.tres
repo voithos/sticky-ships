@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bad7xnst617kn"]
+
+[sub_resource type="Shader" id="Shader_jyjgq"]
+code = "shader_type canvas_item;
+
+uniform float brightening : hint_range(0.0, 2.0);
+
+void fragment() {
+	vec4 tex = texture(TEXTURE, UV);
+	COLOR = vec4((tex.rgb * brightening), tex.a);
+}
+
+"
+
+[resource]
+shader = SubResource("Shader_jyjgq")
+shader_parameter/brightening = 1.0
