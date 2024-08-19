@@ -6,8 +6,8 @@ const MIN_RADIUS := 12.0
 const MAX_RADIUS := 18.0
 const PULSE_PERIOD_SEC := 1.0
 
-const FILL_COLOR := Color(Color.AQUAMARINE, 0.1)
-const OUTLINE_COLOR := Color(Color.AQUAMARINE, 0.7)
+const FILL_COLOR := Color("ffc6fe", 0.1)
+const OUTLINE_COLOR := Color("ffc6fe", 0.7)
 
 var start_time := -1
 
