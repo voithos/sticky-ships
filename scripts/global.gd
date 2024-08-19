@@ -109,9 +109,9 @@ const PART_TYPE_CONFIG := {
 const skip_main_menu := true
 
 # TODO: Adjust this.
-#var default_level_scene := MAIN_LEVEL_SCENE
+var default_level_scene := MAIN_LEVEL_SCENE
 #var default_level_scene := LEVI_TEST_LEVEL_SCENE
-var default_level_scene := ZAVEN_TEST_LEVEL_SCENE
+#var default_level_scene := ZAVEN_TEST_LEVEL_SCENE
 
 
 var level_container
