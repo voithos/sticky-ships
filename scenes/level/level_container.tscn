@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxtcef3mnltwq"]
+[gd_scene load_steps=4 format=3 uid="uid://bxtcef3mnltwq"]
 
 [ext_resource type="Script" path="res://scenes/level/level_container.gd" id="1_gafb5"]
 [ext_resource type="PackedScene" uid="uid://dyutd33mkou7y" path="res://scenes/ui/ui_container.tscn" id="2_cp4nb"]
+[ext_resource type="AudioStream" uid="uid://btc8j6s8o1gj5" path="res://assets/music/Theme.03.wav" id="3_q5a6f"]
 
 [node name="LevelContainer" type="Node2D"]
 script = ExtResource("1_gafb5")
 
 [node name="UiContainer" parent="." instance=ExtResource("2_cp4nb")]
+
+[node name="ThemeMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_q5a6f")
+autoplay = true
+bus = &"Music"

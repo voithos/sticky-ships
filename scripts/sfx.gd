@@ -15,13 +15,15 @@ enum {
 	CONNECTION_AVAILABLE,
 	PARTS_CONNECTED,
 	THRUSTER,
+	SPACE_EXPLOSION,
 }
 
 const SAMPLES = {
 	EXAMPLE: preload("res://assets/sfx/example.wav"),
 	CONNECTION_AVAILABLE: preload("res://assets/sfx/ConnectionAvailable/Pickup-cm-cm-02.wav"),
 	PARTS_CONNECTED: preload("res://assets/sfx/ConnectionMade.wav"),
-	THRUSTER: preload("res://assets/sfx/Thruster.wav")
+	THRUSTER: preload("res://assets/sfx/Thruster.wav"),
+	SPACE_EXPLOSION: preload("res://assets/sfx/Space Explosion.wav")
 }
 # ========================
 

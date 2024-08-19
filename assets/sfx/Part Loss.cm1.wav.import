@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bx2wv1y4cq3s0"
+path="res://.godot/imported/Part Loss.cm1.wav-bb322bdf68d1253c6e5e1edb66ba98e0.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Part Loss.cm1.wav"
+dest_files=["res://.godot/imported/Part Loss.cm1.wav-bb322bdf68d1253c6e5e1edb66ba98e0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

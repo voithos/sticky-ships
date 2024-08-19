@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cux668rpyg0xm"
+path="res://.godot/imported/Space Explosion.wav-f7c00570019ccdff7385d5a3ab8d3271.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Space Explosion.wav"
+dest_files=["res://.godot/imported/Space Explosion.wav-f7c00570019ccdff7385d5a3ab8d3271.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

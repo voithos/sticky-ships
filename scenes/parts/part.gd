@@ -221,6 +221,7 @@ func _on_health_depleted() -> void:
 
 
 func _on_health_depleted_deferred() -> void:
+	Sfx.play(Sfx.SPACE_EXPLOSION)
 	print('part destroyed!')
 	if type == Global.PartType.Core:
 		# Destruction of core means death
