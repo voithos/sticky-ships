@@ -33,6 +33,8 @@ const SMALL_ITEM_XP_MULTIPLIER := 0.25
 
 const DEFAULT_NEXT_LEVEL_XP := 100
 
+const DEFAULT_PART_DROP_RATE_MULTIPLIER := 1.0
+
 enum SizeType {
 	UNKNOWN,
 	Small,

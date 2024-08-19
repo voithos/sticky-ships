@@ -29,6 +29,8 @@ var _player_seek_location := GSAIAgentLocation.new()
 
 @export var player_seek_offset := 50.0
 
+@export var droppables: Array[Droppable] = []
+
 func _ready() -> void:
 	_init_components(self)
 
@@ -102,9 +104,27 @@ func _physics_process(delta: float) -> void:
 	agent.linear_velocity = GSAIUtils.to_vector3(linear_velocity)
 
 
+func maybe_drop_part() -> void:
+	for droppable in droppables:
+		var chance := droppable.chance * Global.DEFAULT_PART_DROP_RATE_MULTIPLIER
+		if randf() < chance:
+			var dropped_scene := droppable.drop.instantiate()
+			var empty_drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
+			empty_drop.add_child(dropped_scene)
+			empty_drop.global_position = global_position
+			add_sibling(empty_drop)
+			# Only drop at most one thing
+			break
+
+
 func die() -> void:
+	die_deferred.call_deferred()
+
+
+func die_deferred() -> void:
 	if explosion_scene:
 		var explosion := explosion_scene.instantiate()
 		explosion.global_position = global_position
 		add_sibling(explosion)
+	maybe_drop_part()
 	queue_free()

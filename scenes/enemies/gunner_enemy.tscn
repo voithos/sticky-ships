@@ -1,12 +1,31 @@
-[gd_scene load_steps=14 format=3 uid="uid://71virob0imkf"]
+[gd_scene load_steps=21 format=3 uid="uid://71virob0imkf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/gunner_enemy.gd" id="1_hl36b"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_awgqx"]
 [ext_resource type="Texture2D" uid="uid://c1fkgmggkqdw6" path="res://assets/sprites/enemies/gunner_enemy.png" id="2_v46qx"]
+[ext_resource type="Script" path="res://scenes/enemies/droppable.gd" id="3_gvbd3"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="3_hhxo5"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="4_3ui24"]
+[ext_resource type="PackedScene" uid="uid://ddg7jalg6t4pd" path="res://scenes/parts/gunner_enemy_part_chassis.tscn" id="4_dw6bm"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_doe2v"]
+[ext_resource type="PackedScene" uid="uid://c3wp4nst03ky8" path="res://scenes/parts/gunner_enemy_part_gun1.tscn" id="5_qr4x0"]
+[ext_resource type="PackedScene" uid="uid://c80onf8fc5s7e" path="res://scenes/parts/gunner_enemy_part_gun2.tscn" id="6_tjl1k"]
 [ext_resource type="PackedScene" uid="uid://dvkwqmafsi7u5" path="res://scenes/enemies/basic_enemy_projectile.tscn" id="7_pex06"]
+
+[sub_resource type="Resource" id="Resource_uuke1"]
+script = ExtResource("3_gvbd3")
+drop = ExtResource("4_dw6bm")
+chance = 0.2
+
+[sub_resource type="Resource" id="Resource_mlqas"]
+script = ExtResource("3_gvbd3")
+drop = ExtResource("5_qr4x0")
+chance = 0.1
+
+[sub_resource type="Resource" id="Resource_pqyjn"]
+script = ExtResource("3_gvbd3")
+drop = ExtResource("6_tjl1k")
+chance = 0.1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at3n4"]
 atlas = ExtResource("2_v46qx")
@@ -53,6 +72,7 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_hl36b")
 explosion_scene = ExtResource("2_awgqx")
+droppables = Array[ExtResource("3_gvbd3")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas"), SubResource("Resource_pqyjn")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_f2tyi")
