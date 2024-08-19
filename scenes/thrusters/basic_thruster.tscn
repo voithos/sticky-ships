@@ -64,4 +64,4 @@ frame_progress = 0.50202
 
 [node name="Thruster_SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_s0b1t")
-volume_db = -8.0
+volume_db = -4.0
