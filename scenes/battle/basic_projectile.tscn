@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmc6nx7ggqism"]
+[gd_scene load_steps=12 format=3 uid="uid://bmc6nx7ggqism"]
 
 [ext_resource type="Script" path="res://scenes/battle/basic_projectile.gd" id="1_dyrb1"]
 [ext_resource type="Texture2D" uid="uid://baarl67m76hh0" path="res://assets/sprites/battle/basic_projectile.png" id="2_6uiut"]
 [ext_resource type="PackedScene" uid="uid://del7hg6ux6mxm" path="res://scenes/fx/particle_pop1.tscn" id="2_o8oui"]
+[ext_resource type="AudioStream" uid="uid://bx2wv1y4cq3s0" path="res://assets/sfx/ProjectileHit.wav" id="4_plv7n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
 radius = 3.0
@@ -67,3 +68,7 @@ scale = Vector2(0.3, 0.35)
 sprite_frames = SubResource("SpriteFrames_a5v50")
 autoplay = "default"
 frame_progress = 0.862869
+
+[node name="ProjectileHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_plv7n")
+bus = &"SFX"
