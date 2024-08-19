@@ -51,6 +51,7 @@ animations = [{
 }]
 
 [node name="BasicProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
+collision_mask = 0
 script = ExtResource("1_dyrb1")
 visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
 explosion_effect_scene = ExtResource("2_o8oui")

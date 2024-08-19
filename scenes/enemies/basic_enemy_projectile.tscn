@@ -44,6 +44,8 @@ animations = [{
 }]
 
 [node name="BasicEnemyProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_su2tt")
 speed = 50.0
 visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
