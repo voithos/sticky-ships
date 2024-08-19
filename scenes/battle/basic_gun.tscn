@@ -116,10 +116,10 @@ stream = SubResource("AudioStreamRandomizer_ib0um")
 [node name="BulletDrySFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_t4jd3")
 bus = &"SFX"
-playback_type = 2
 
 [node name="BulletWetSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_dq12q")
-bus = &"SFX"
+bus = &"BulletCompSFX"
+playback_type = 2
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_basic_gun_animation_finished"]

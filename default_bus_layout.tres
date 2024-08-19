@@ -1,4 +1,14 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://ta4i6ojy4inw"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://ta4i6ojy4inw"]
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_l062s"]
+resource_name = "Compressor"
+threshold = -3.0
+ratio = 6.0
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_6we3a"]
+resource_name = "Limiter"
+ceiling_db = -1.0
+threshold_db = -1.0
 
 [resource]
 bus/1/name = &"Music"
@@ -13,3 +23,13 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0694828
 bus/2/send = &"Master"
+bus/3/name = &"BulletCompSFX"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"SFX"
+bus/3/effect/0/effect = SubResource("AudioEffectCompressor_l062s")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectLimiter_6we3a")
+bus/3/effect/1/enabled = true
