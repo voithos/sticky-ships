@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8pposh8tw6y5"]
+[gd_scene load_steps=5 format=3 uid="uid://b8pposh8tw6y5"]
 
+[ext_resource type="Theme" uid="uid://bpgxvlp7d0yu8" path="res://main_theme.tres" id="1_eci2u"]
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_xmvbh"]
+[ext_resource type="PackedScene" uid="uid://kipbyxtg87h5" path="res://scenes/ui/my_button.tscn" id="3_rvh4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uimi"]
 bg_color = Color(0.054902, 0.0392157, 0.180392, 1)
@@ -13,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_eci2u")
 theme_override_styles/panel = SubResource("StyleBoxFlat_5uimi")
 script = ExtResource("1_xmvbh")
 
@@ -24,18 +27,18 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.698039, 0.584314, 1, 1)
 theme_override_font_sizes/font_size = 17
-text = "Expand-a-band-band!"
+text = "Sticky Ships"
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="PlayButton" parent="CenterContainer/VBoxContainer" instance=ExtResource("3_rvh4s")]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 11
-text = "    Play    "
+text = "Play"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

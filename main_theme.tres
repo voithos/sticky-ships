@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bpgxvlp7d0yu8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bccb4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_didbv"]
+bg_color = Color(0.698039, 0.584314, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndabw"]
+bg_color = Color(0.615686, 0.486275, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64s8s"]
+bg_color = Color(0.603922, 0.376471, 1, 1)
+
+[resource]
+Button/colors/font_color = Color(0.188235, 0.156863, 0.427451, 1)
+Button/colors/font_focus_color = Color(0.188235, 0.156863, 0.427451, 1)
+Button/colors/font_hover_color = Color(0.188235, 0.156863, 0.427451, 1)
+Button/colors/font_hover_pressed_color = Color(0.188235, 0.156863, 0.427451, 1)
+Button/colors/font_pressed_color = Color(0.188235, 0.156863, 0.427451, 1)
+Button/font_sizes/font_size = 9
+Button/styles/focus = SubResource("StyleBoxEmpty_bccb4")
+Button/styles/hover = SubResource("StyleBoxFlat_didbv")
+Button/styles/normal = SubResource("StyleBoxFlat_ndabw")
+Button/styles/pressed = SubResource("StyleBoxFlat_64s8s")
+LinkButton/colors/font_color = Color(0.376471, 1, 0.980392, 1)
+LinkButton/colors/font_focus_color = Color(0.376471, 1, 0.980392, 1)
+LinkButton/colors/font_hover_color = Color(0.376471, 1, 0.980392, 1)
+LinkButton/colors/font_pressed_color = Color(0.372549, 0.772549, 1, 1)

@@ -1,11 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bokx7wb2tjgmx"]
+[gd_scene load_steps=6 format=3 uid="uid://bokx7wb2tjgmx"]
 
 [ext_resource type="Script" path="res://scenes/ui/game_over_screen.gd" id="1_j8uag"]
+[ext_resource type="Theme" uid="uid://bpgxvlp7d0yu8" path="res://main_theme.tres" id="2_kotq0"]
+[ext_resource type="PackedScene" uid="uid://kipbyxtg87h5" path="res://scenes/ui/my_button.tscn" id="2_mdpaj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oplbw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lsro"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
 bg_color = Color(0.054902, 0.0392157, 0.180392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.188235, 0.156863, 0.427451, 1)
 
 [node name="GameOverScreen" type="PanelContainer"]
 anchors_preset = 15
@@ -15,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_kotq0")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oplbw")
 script = ExtResource("1_j8uag")
 
@@ -30,11 +42,12 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.698039, 0.584314, 1, 1)
 text = "Game Over"
 horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="GrowthProgressLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
@@ -50,7 +63,7 @@ theme_override_font_sizes/font_size = 7
 horizontal_alignment = 1
 
 [node name="Spacer3" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
@@ -59,52 +72,46 @@ theme_override_constants/separation = 0
 
 [node name="Label2" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "Made by "
 
 [node name="ZavenLink" type="LinkButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.376471, 1, 0.980392, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "Zaven"
 
 [node name="Label4" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = ", "
 
 [node name="AldenLink" type="LinkButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.376471, 1, 0.980392, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "Alden"
 
 [node name="Label6" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = ", and "
 
 [node name="LeviLink" type="LinkButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.376471, 1, 0.980392, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "Levi"
 
 [node name="Label8" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "."
 
 [node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="PlayButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="PlayButton" parent="CenterContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_mdpaj")]
 custom_minimum_size = Vector2(60, 18)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 9
 text = "Play again"
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ZavenLink" to="." method="_on_zaven_link_pressed"]
