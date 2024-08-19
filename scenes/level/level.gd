@@ -50,21 +50,21 @@ func level_up() -> void:
 
 	# FIXME: Implement growth system
 	#
-	# - Reduce projectile damage when its small.
+	# - Reduce projectile damage when it's small.
 	#   - Use/adapt Global.get_item_size_damage_multiplier.
 	# - Update systems to spawn new items at the correct scale and resolution.
 	#   - Enemy-wave system.
 	#   - Guns shooting projectiles.
 	#   - No tiny guys on the first level.
-	# - Create high and low res copies of all parts, projectiles, and enemies.
-	# - Add some logic for spawning large-version drops in the current level.
+	# - Create a new set of enemies, projectiles, and parts for each growth level.
+	# - Add some logic for spawning large-version drops in the current level?
 	#   - And chunks of them.
 	#   - These will be stationary, non-interactive obstacles for the player to move around.
 	#   - Then add logic to activate these as interactible when leveling-up.
 	#   - We could do the same thing for enemies.
 	#   - For this to work, we might need the scale factor to be bigger. x16?
 	#     - We probably would still want to only create art at x8 though, and then scale the art differently.
-	# - Slightly reduce enemy drops to compensate.
+	#   - Slightly reduce enemy drops to compensate.
 	# - Balance config multipliers for each growth level.
 	#
 	# - Damage/destroy all enemies within a radius when leveling-up.
