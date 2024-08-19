@@ -36,33 +36,6 @@ func _enter_tree() -> void:
 	#increment_growth_level()
 
 
-func destroy_player_part(part: Part) -> void:
-	var descendant_parts: Array[Part] = []
-	part.get_all_descendants(descendant_parts)
-
-	# Detach from children.
-	for connection in part.child_connections:
-		connection.child.connection = null
-		connection.child.part.parent_connection = null
-
-	# Detach from parent.
-	if part.parent_connection != null:
-		part.parent_connection.parent.connection = null
-		part.parent_connection.parent.part.child_connections.erase(part.parent_connection)
-
-	var drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
-	add_child(drop)
-	drops.push_back(drop)
-
-	for descendant_part in descendant_parts:
-		descendant_part.looks_for_nearby_connections_when_entering_tree = false
-		drop.add_child(descendant_part)
-		Global.player.body.on_part_removed(descendant_part)
-
-	Global.player.body.on_part_removed(part)
-	part.queue_free()
-
-
 func increment_growth_level() -> void:
 	var next_level := current_growth_level + 1
 

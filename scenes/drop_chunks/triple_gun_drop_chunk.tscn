@@ -1,18 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://yrq2k3psn60t"]
+[gd_scene load_steps=3 format=3 uid="uid://yrq2k3psn60t"]
 
 [ext_resource type="Script" path="res://scenes/drops/parts_drop.gd" id="1_4sil3"]
 [ext_resource type="PackedScene" uid="uid://buedulm0clu5e" path="res://scenes/parts/basic_gun_part.tscn" id="2_7wqah"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_tvnfr"]
-radius = 1.0
 
 [node name="TripleGunDropChunk" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_4sil3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_tvnfr")
 
 [node name="BasicGunPart" parent="." instance=ExtResource("2_7wqah")]
 position = Vector2(-3, -11)

@@ -106,7 +106,7 @@ func get_core_sprite_size() -> Vector2:
 
 func clear_parts() -> void:
 	for part in parts:
-		on_part_removed(part)
+		_on_part_removed(part)
 		part.queue_free()
 	parts.clear()
 	core_part = null
@@ -116,13 +116,29 @@ func destroy_part(part: Part) -> void:
 	assert(is_instance_valid(part))
 	assert(parts.has(part), "destroy_part: Player does not have part.")
 
+	var descendant_parts: Array[Part] = []
+	part.get_all_descendants(descendant_parts)
+
 	_remove_sub_part(part)
 
+	# Detach from children.
 	for connection in part.child_connections:
 		part.remove_child_connection(connection)
+
+	# Detach from parent.
 	if is_instance_valid(part.parent_connection):
 		part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
 
+	var drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
+	add_child(drop)
+	Global.level.drops.push_back(drop)
+
+	for descendant_part in descendant_parts:
+		descendant_part.looks_for_nearby_connections_when_entering_tree = false
+		descendant_part.reparent(drop)
+		_on_part_removed(descendant_part)
+
+	_on_part_removed(part)
 	part.queue_free()
 
 
@@ -135,8 +151,8 @@ func _remove_sub_part(part: Part) -> void:
 	if part == core_part:
 		core_part = null
 
-	for child in part.children:
-		_remove_sub_part(child)
+	for connection in part.child_connections:
+		_remove_sub_part(connection.child.part)
 
 
 func on_part_added(part: Part) -> void:
@@ -158,9 +174,7 @@ func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> vo
 	part.player_collision_shape_instance = collision_shape
 
 
-func on_part_removed(part: Part) -> void:
-	if !part.attached_to_player:
-		return
+func _on_part_removed(part: Part) -> void:
 	Global.player.remove_child(part.player_collision_shape_instance)
 	part.player_collision_shape_instance = null
 

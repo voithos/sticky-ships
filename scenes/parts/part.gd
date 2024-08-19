@@ -135,6 +135,7 @@ func _init_health_component(h: HealthComponent) -> void:
 	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(destroy_part)
 
+
 func on_attached() -> void:
 	# Assign the hurtbox to the right layer
 	var hurtbox: Area2D = get_node("Hurtbox")
@@ -198,13 +199,14 @@ func _on_health_changed(new_health: float, prev_health: float) -> void:
 func destroy_part() -> void:
 	destroy_part_deferred.call_deferred()
 
+
 func destroy_part_deferred() -> void:
 	print('part destroyed!')
 	if type == Global.PartType.Core:
 		# Destruction of core means death
 		Global.player.die()
 	else:
-		Global.level.destroy_player_part(self)
+		Global.player.body.destroy_part(self)
 
 
 func get_bounding_box() -> Rect2:
@@ -254,7 +256,7 @@ func get_healthbox_collision_shape() -> CollisionShape2D:
 func get_all_descendants(out_descendants: Array[Part]) -> void:
 	for connection in child_connections:
 		out_descendants.append(connection.child.part)
-		connection.get_all_descendants(out_descendants)
+		connection.child.part.get_all_descendants(out_descendants)
 
 
 func add_child_connection(parent_point: AttachPoint, child_point: AttachPoint) -> void:
@@ -280,9 +282,11 @@ func add_child_connection(parent_point: AttachPoint, child_point: AttachPoint) -
 
 func remove_child_connection(connection: PartConnection) -> void:
 	assert(child_connections.has(connection))
-	assert(connection.parent == self)
+	assert(connection.parent.part == self)
 
 	child_connections.erase(connection)
+	connection.parent.connection = null
+	connection.child.connection = null
 	connection.child.part.parent_connection = null
 	connection.child.part.attached_to_player = false
 
