@@ -149,6 +149,18 @@ func on_attached() -> void:
 		g.projectile_collision_mask = Global.ENEMY_COLLISION_LAYER | Global.LEVEL_COLLISION_LAYER
 
 
+func on_detached() -> void:
+	# Assign the hurtbox to the right layer
+	var hurtbox: Area2D = get_node("Hurtbox")
+	if hurtbox:
+		hurtbox.collision_layer = 0
+
+	for g in light_guns:
+		g.projectile_collision_mask = Global.LEVEL_COLLISION_LAYER
+	for g in heavy_guns:
+		g.projectile_collision_mask = Global.LEVEL_COLLISION_LAYER
+
+
 func _on_health_changed(new_health: float, prev_health: float) -> void:
 	if type == Global.PartType.Core:
 		print(new_health)

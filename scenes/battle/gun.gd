@@ -1,6 +1,7 @@
 class_name Gun
 extends Node
 
+
 @export var projectile: PackedScene
 # A node used as the spawn position when spawning bullets
 @export var spawn_point: Node2D
@@ -16,13 +17,16 @@ extends Node
 
 var cooldown_left := 0.0
 
+
 func _physics_process(delta: float) -> void:
 	cooldown_left = maxf(cooldown_left - delta, 0.0)
+
 
 func try_fire() -> void:
 	if cooldown_left > 0:
 		return
 	_fire()
+
 
 func _fire() -> void:
 	var p: Projectile = projectile.instantiate()

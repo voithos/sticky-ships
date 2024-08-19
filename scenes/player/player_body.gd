@@ -143,8 +143,8 @@ func destroy_part(part: Part) -> void:
 		assert(parts.has(descendant_part))
 		parts.erase(descendant_part)
 		descendant_part.looks_for_nearby_connections_when_entering_tree = false
-		descendant_part.reparent(drop)
 		_on_part_removed(descendant_part)
+		descendant_part.reparent(drop)
 
 	_on_part_removed(part)
 	part.queue_free()
@@ -158,6 +158,9 @@ func on_part_added(part: Part) -> void:
 	var collision_shape := CollisionShape2D.new()
 	Global.player.add_child(collision_shape)
 
+	if is_instance_valid(part.player_collision_shape_instance):
+		part.player_collision_shape_instance.queue_free()
+
 	call_deferred("on_part_added_deferred", part, collision_shape)
 
 
@@ -169,7 +172,8 @@ func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> vo
 
 
 func _on_part_removed(part: Part) -> void:
-	part.player_collision_shape_instance.queue_free()
+	if is_instance_valid(part.player_collision_shape_instance):
+		part.player_collision_shape_instance.queue_free()
 	part.player_collision_shape_instance = null
 
 
