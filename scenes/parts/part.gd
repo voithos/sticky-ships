@@ -20,6 +20,8 @@ const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 # The mass of this part, as a whole.
 @export var mass: float = 0.5
 
+@onready var space_explosion = $SpaceExplosion
+
 var attached_to_player := false
 
 var looks_for_nearby_connections_when_entering_tree := true
@@ -221,13 +223,20 @@ func _on_health_depleted() -> void:
 
 
 func _on_health_depleted_deferred() -> void:
-	Sfx.play(Sfx.SPACE_EXPLOSION)
+	# Sfx.play(Sfx.SPACE_EXPLOSION)
+	assert(is_instance_valid(space_explosion))
+	space_explosion.reparent(Global.level)
+	space_explosion.play()
+	
 	print('part destroyed!')
 	if type == Global.PartType.Core:
 		# Destruction of core means death
 		Global.player.die()
 	else:
 		Global.player.body.destroy_part(self)
+	
+	await space_explosion.finished
+	space_explosion.queue_free()
 
 
 func get_bounding_box() -> Rect2:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3wp4nst03ky8"]
+[gd_scene load_steps=9 format=3 uid="uid://c3wp4nst03ky8"]
 
 [ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_j2yde"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_ewdad"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bd8if5vdfcxwo" path="res://assets/sprites/parts/gunner_enemy_parts.png" id="4_e5opm"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_y7h7a"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_tgivh"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_w48l7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2k8oe"]
 radius = 8.0
@@ -48,5 +49,9 @@ rotation = 1.5708
 unique_name_in_owner = true
 position = Vector2(0, 10)
 rotation = 3.14159
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w48l7")
+bus = &"SFX"
 
 [editable path="Hurtbox"]

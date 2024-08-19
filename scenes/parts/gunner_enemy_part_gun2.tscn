@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c80onf8fc5s7e"]
+[gd_scene load_steps=10 format=3 uid="uid://c80onf8fc5s7e"]
 
 [ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_458ei"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_0l2uo"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_8souk"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_e2f2d"]
 [ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="7_v5e6o"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="8_37dvf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2k8oe"]
 radius = 8.0
@@ -47,5 +48,9 @@ rotation = 1.5708
 
 [node name="BasicThruster" parent="." instance=ExtResource("7_v5e6o")]
 position = Vector2(0, 15)
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_37dvf")
+bus = &"SFX"
 
 [editable path="Hurtbox"]
