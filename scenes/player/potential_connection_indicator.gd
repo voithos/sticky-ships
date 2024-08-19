@@ -22,8 +22,9 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	var current_time := Time.get_ticks_msec()
-	var pulse_progress := fmod((current_time - start_time), PULSE_PERIOD_SEC)
-	var cyclical_progress = sin(pulse_progress / PULSE_PERIOD_SEC * PI)
+	var period_ms := PULSE_PERIOD_SEC * 1000
+	var pulse_progress := fmod((current_time - start_time), period_ms)
+	var cyclical_progress = sin(pulse_progress / period_ms * PI)
 	var radius: float = lerp(MIN_RADIUS, MAX_RADIUS, cyclical_progress)
 	draw_circle(Vector2.ZERO, radius, FILL_COLOR, true)
 	draw_circle(Vector2.ZERO, radius, OUTLINE_COLOR, false)

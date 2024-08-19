@@ -4,8 +4,13 @@ extends Area2D
 
 const ATTACH_POINT_DEFAULT_RADIUS := 6
 
-const EDITOR_HINT_FILL_COLOR := Color(Color.AQUAMARINE, 0.3)
-const EDITOR_HINT_OUTLINE_COLOR := Color(Color.AQUAMARINE, 0.7)
+const ATTACH_HINT_MAX_RADIUS_MULTIPLIER := 1.5
+const ATTACH_HINT_PULSE_PERIOD_SEC := 1.0
+
+const ATTACH_HINT_FILL_COLOR := Color("22c278", 0.1)
+const ATTACH_HINT_OUTLINE_COLOR := Color("22c278", 0.4)
+
+var start_time := -1
 
 var part: Part
 
@@ -22,9 +27,18 @@ func _enter_tree() -> void:
 func stop_animation() -> void:
 	$Anchor.play("idle")
 
+
 func _ready() -> void:
 	_update_radius()
 	Global.level.level_up.connect(_update_radius)
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("attach"):
+		start_time = Time.get_ticks_msec()
+
+	if Input.is_action_pressed("attach") or Input.is_action_just_released("attach"):
+		queue_redraw()
 
 
 func _update_radius() -> void:
@@ -32,11 +46,16 @@ func _update_radius() -> void:
 
 
 func _draw() -> void:
-	# Not currently used.
-	if Engine.is_editor_hint():
-		var radius := ($CollisionShape2D.shape as CircleShape2D).radius
-		draw_circle(Vector2.ZERO, radius, EDITOR_HINT_FILL_COLOR, true)
-		draw_circle(Vector2.ZERO, radius, EDITOR_HINT_OUTLINE_COLOR, false)
+	if Input.is_action_pressed("attach") and !is_instance_valid(connection):
+		var current_time := Time.get_ticks_msec()
+		var period_ms := ATTACH_HINT_PULSE_PERIOD_SEC * 1000
+		var min_radius: float = $CollisionShape2D.shape.radius
+		var max_radius := min_radius * ATTACH_HINT_MAX_RADIUS_MULTIPLIER
+		var pulse_progress := fmod((current_time - start_time), period_ms)
+		var cyclical_progress = sin(pulse_progress / period_ms * PI)
+		var radius: float = lerp(min_radius, max_radius, cyclical_progress)
+		draw_circle(Vector2.ZERO, radius, ATTACH_HINT_FILL_COLOR, true)
+		draw_circle(Vector2.ZERO, radius, ATTACH_HINT_OUTLINE_COLOR, false)
 
 
 func _on_area_entered(area: Area2D) -> void:
