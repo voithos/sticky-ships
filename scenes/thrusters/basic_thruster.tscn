@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgyv48l8d7s7f"]
+[gd_scene load_steps=10 format=3 uid="uid://bgyv48l8d7s7f"]
 
 [ext_resource type="Script" path="res://scenes/thrusters/basic_thruster.gd" id="1_hkuu4"]
 [ext_resource type="Texture2D" uid="uid://dqonmtjn11cq0" path="res://assets/sprites/thrusters/basic_thruster.png" id="2_aargh"]
+[ext_resource type="AudioStream" uid="uid://dy72r14wanj0o" path="res://assets/sfx/Thruster.wav" id="3_s0b1t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pmmv"]
 atlas = ExtResource("2_aargh")
@@ -60,3 +61,7 @@ sprite_frames = SubResource("SpriteFrames_n165y")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.50202
+
+[node name="Thruster_SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s0b1t")
+volume_db = -8.0
