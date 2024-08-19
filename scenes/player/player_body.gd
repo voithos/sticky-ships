@@ -159,6 +159,8 @@ func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> vo
 
 
 func on_part_removed(part: Part) -> void:
+	if !part.attached_to_player:
+		return
 	Global.player.remove_child(part.player_collision_shape_instance)
 	part.player_collision_shape_instance = null
 

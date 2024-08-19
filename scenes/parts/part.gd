@@ -196,6 +196,9 @@ func _on_health_changed(new_health: float, prev_health: float) -> void:
 
 
 func destroy_part() -> void:
+	destroy_part_deferred.call_deferred()
+
+func destroy_part_deferred() -> void:
 	print('part destroyed!')
 	if type == Global.PartType.Core:
 		# Destruction of core means death
