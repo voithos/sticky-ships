@@ -12,6 +12,8 @@ var parts: Array[Part] = []
 var potential_connection_overlaps := {}
 
 var total_mass := 0.0
+var growth_progress := 0.0
+var growth_progress_ratio := 0.0
 
 
 func _ready() -> void:
@@ -79,20 +81,26 @@ func _update_growth_display() -> void:
 			Global.hud.disable_growth()
 		return
 
-	var current_growth := 0.0
-	for part in parts:
-		current_growth += Global.get_growth_for_part(part.type, part.growth_level)
-	var growth_ratio := current_growth / Global.get_next_level_growth(Session.current_growth_level)
 	if Global.hud:
-		Global.hud.set_growth_ratio(growth_ratio)
+		Global.hud.set_growth_ratio(growth_progress_ratio)
 
 
 func _update_total_mass() -> void:
-	total_mass = parts.reduce(func (accum, part): return accum + part.mass, 0)
+	total_mass = parts.reduce(
+		func (accum, part): return accum + part.mass
+	, 0)
+
+
+func _update_growth_progress() -> void:
+	growth_progress = parts.reduce(func (accum, part):
+		return accum + Global.get_growth_for_part(part.type, part.growth_level)
+	, 0)
+	growth_progress_ratio = growth_progress / Global.get_next_level_growth(Session.current_growth_level)
 
 
 func _update_part_stats() -> void:
 	_update_total_mass()
+	_update_growth_progress()
 	_update_growth_display()
 
 
@@ -181,10 +189,15 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 
 	attaching = false
 
+	assert(Global.level.drops.has(old_parent_node))
+	Global.level.drops.erase(old_parent_node)
 	old_parent_node.queue_free()
 
 	overlap.attached_point.stop_animation()
 	overlap.detached_point.stop_animation()
+
+	if growth_progress_ratio >= 1:
+		Global.level.level_up()
 
 	Sfx.play(Sfx.PARTS_CONNECTED)
 

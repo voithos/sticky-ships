@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	super()
 	for part in parts:
 		part.on_removed()
 

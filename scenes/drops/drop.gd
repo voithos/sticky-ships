@@ -7,3 +7,8 @@ extends RigidBody2D
 
 func _init() -> void:
 	add_to_group(Global.DROPS_GROUP)
+
+
+func _exit_tree() -> void:
+	if Global.level.drops.has(self):
+		Global.level.drops.erase(self)

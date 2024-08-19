@@ -55,11 +55,15 @@ func level_up() -> void:
 	# - Create high and low res copies of all parts, projectiles, and enemies.
 	# - Add some logic for spawning large-version drops in the current level.
 	#   - And chunks of them.
-	# - Reduce enemy drops to compensate.
+	#   - These will be stationary, non-interactive obstacles for the player to move around.
+	#   - Then add logic to activate these as interactible when leveling-up.
+	#   - We could do the same thing for enemies.
+	#   - For this to work, we might need the scale factor to be bigger. x16?
+	#     - We probably would still want to only create art at x8 though, and then scale the art differently.
+	# - Slightly reduce enemy drops to compensate.
 	# - Balance config multipliers for each growth level.
 	#
-	# - Show some sort of particle effect.
-	# - Damage everything within a radius.
+	# - Damage/destroy all enemies within a radius when leveling-up.
 	#
 	# - Show sprite overlays for whichever aspects have been upgraded.
 
