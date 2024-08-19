@@ -135,6 +135,17 @@ func _init_health_component(h: HealthComponent) -> void:
 	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(destroy_part)
 
+func on_attached() -> void:
+	# Assign the hurtbox to the right layer
+	var hurtbox: Area2D = get_node("Hurtbox")
+	if hurtbox:
+		hurtbox.collision_layer = Global.PLAYER_COLLISION_LAYER
+
+	for g in light_guns:
+		g.projectile_collision_mask = Global.ENEMY_COLLISION_LAYER | Global.LEVEL_COLLISION_LAYER
+	for g in heavy_guns:
+		g.projectile_collision_mask = Global.ENEMY_COLLISION_LAYER | Global.LEVEL_COLLISION_LAYER
+
 
 func _on_health_changed(new_health: float, prev_health: float) -> void:
 	if type == Global.PartType.Core:

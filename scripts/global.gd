@@ -35,6 +35,11 @@ const DEFAULT_NEXT_LEVEL_XP := 100
 
 const DEFAULT_PART_DROP_RATE_MULTIPLIER := 1.0
 
+# Collision layers
+const PLAYER_COLLISION_LAYER = 1 << 0
+const ENEMY_COLLISION_LAYER = 1 << 2
+const LEVEL_COLLISION_LAYER = 1 << 5
+
 enum SizeType {
 	UNKNOWN,
 	Small,
