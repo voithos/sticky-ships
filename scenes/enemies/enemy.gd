@@ -31,6 +31,7 @@ var _player_seek_location := GSAIAgentLocation.new()
 
 @export var droppables: Array[Droppable] = []
 
+
 func _ready() -> void:
 	_init_components(self)
 
@@ -58,12 +59,9 @@ func _init_health_component(h: HealthComponent) -> void:
 	health.health_changed.connect(_health_changed)
 	health.health_depleted.connect(die)
 
+
 func player_distance_squared() -> float:
 	return Global.player.global_position.distance_squared_to(global_position)
-
-
-func _process(delta: float) -> void:
-	pass
 
 
 ## Subclasses should override to prepare steering params / agents for a frame.
@@ -123,11 +121,13 @@ func _health_changed(new_health: float, old_health: float) -> void:
 	if new_health < old_health:
 		_flash_damage()
 
+
 func _flash_damage() -> void:
 	var sprite: AnimatedSprite2D = $AnimatedSprite2D
 	sprite.material.set_shader_parameter("brightening", 2.0)
 	await get_tree().create_timer(0.05).timeout
 	sprite.material.set_shader_parameter("brightening", 1.0)
+
 
 func die() -> void:
 	die_deferred.call_deferred()
@@ -138,5 +138,6 @@ func die_deferred() -> void:
 		var explosion := explosion_scene.instantiate()
 		explosion.global_position = global_position
 		add_sibling(explosion)
+	Session.enemies_destroyed += 1
 	maybe_drop_part()
 	queue_free()

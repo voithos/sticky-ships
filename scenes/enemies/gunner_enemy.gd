@@ -3,9 +3,11 @@ extends Enemy
 
 @export var firing_distance := 100.0
 
+
 func _ready() -> void:
 	super()
 	_setup_steering()
+
 
 func _physics_process(delta: float) -> void:
 	super(delta)

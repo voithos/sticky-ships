@@ -46,11 +46,3 @@ position = Vector2(17, -99)
 [node name="GunnerEnemy" parent="." instance=ExtResource("7_3w60v")]
 position = Vector2(-78, -82)
 rotation = 2.38154
-firing_distance = null
-linear_drag_coefficient = null
-angular_drag = null
-linear_accel_max = null
-linear_speed_max = null
-angular_accel_max = null
-angular_speed_max = null
-player_seek_offset = null
