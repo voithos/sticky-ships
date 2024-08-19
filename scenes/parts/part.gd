@@ -328,6 +328,6 @@ func reassign_parent_connection(new_parent_connection: PartConnection) -> void:
 
 
 func translate_part(translation: Vector2) -> void:
-	position += translation
+	global_position += translation
 	for connection in child_connections:
 		connection.child.part.translate_part(translation)
