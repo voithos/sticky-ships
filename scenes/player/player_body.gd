@@ -53,8 +53,7 @@ func set_core(growth_level: int) -> void:
 	core_part.looks_for_nearby_connections_when_entering_tree = false
 	add_child(core_part)
 
-	core_part.health.max_health = Global.get_max_health(growth_level)
-	core_part.health.health = core_part.health.max_health
+	core_part.health.reset_health(Global.get_max_health(growth_level))
 
 	core_part.health.health_changed.connect(_on_core_health_changed)
 	_update_part_stats()

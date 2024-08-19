@@ -132,6 +132,7 @@ func _init_components(node: Node) -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
+	health.reset_health(Global.get_health_for_part(type, size_type, growth_level))
 	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(destroy_part)
 

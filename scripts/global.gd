@@ -92,15 +92,15 @@ const LEVEL_CONFIG := [
 
 const PART_TYPE_CONFIG := {
 	PartType.Core: {
-		base_health = 20,
+		base_health = 12,
 		base_growth = 0,
 	},
 	PartType.BasicGun: {
-		base_health = 50,
+		base_health = 7,
 		base_growth = 10,
 	},
 	PartType.BasicThruster: {
-		base_health = 50,
+		base_health = 7,
 		base_growth = 10,
 	},
 }
@@ -109,9 +109,9 @@ const PART_TYPE_CONFIG := {
 const skip_main_menu := true
 
 # TODO: Adjust this.
-var default_level_scene := MAIN_LEVEL_SCENE
+#var default_level_scene := MAIN_LEVEL_SCENE
 #var default_level_scene := LEVI_TEST_LEVEL_SCENE
-#var default_level_scene := ZAVEN_TEST_LEVEL_SCENE
+var default_level_scene := ZAVEN_TEST_LEVEL_SCENE
 
 
 var level_container

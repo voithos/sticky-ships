@@ -4,7 +4,7 @@ extends PanelContainer
 
 func open() -> void:
 	%GrowthProgressLabel.text = "Destroyed %d enemies." % Session.enemies_destroyed
-	%EnemiesKilledLabel.text = "Grew to level %d." % Session.current_growth_level
+	%EnemiesKilledLabel.text = "Reached level %d." % Session.current_growth_level
 	visible = true
 
 

@@ -1,11 +1,18 @@
 class_name HealthComponent
 extends Node
 
+
 @export var max_health := 100.0
 @onready var health := max_health
 
 signal health_depleted
 signal health_changed(new_health: float, prev_health: float)
+
+
+func reset_health(h: float) -> void:
+	max_health = h
+	health = h
+
 
 func adjust_health(delta: float) -> void:
 	var prev_health = health

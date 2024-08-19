@@ -29,6 +29,8 @@ func _ready() -> void:
 	body = PlayerBody.new()
 	add_child(body)
 
+	$Camera2D.make_current()
+
 
 func _process(delta: float) -> void:
 	pass
