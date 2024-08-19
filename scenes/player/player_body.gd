@@ -76,7 +76,8 @@ func _update_hp_display() -> void:
 		core_part.health.health / core_part.health.max_health if
 		is_instance_valid(core_part) else
 		0.0)
-	Global.hud.set_hp_ratio(health_ratio)
+	if Global.hud:
+		Global.hud.set_hp_ratio(health_ratio)
 
 
 func _update_xp_display() -> void:
@@ -84,7 +85,8 @@ func _update_xp_display() -> void:
 	for part in parts:
 		current_xp += Global.get_xp_for_part(part.type, part.size_type, Global.level.current_growth_level)
 	var xp_ratio := current_xp / Global.get_next_level_xp(Global.level.current_growth_level)
-	Global.hud.set_xp_ratio(xp_ratio)
+	if Global.hud:
+		Global.hud.set_xp_ratio(xp_ratio)
 
 
 func get_bounding_box() -> Rect2:

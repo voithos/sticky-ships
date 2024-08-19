@@ -1,33 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://dewn0gwi1ijai"]
+[gd_scene load_steps=10 format=3 uid="uid://dvkwqmafsi7u5"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy_projectile.gd" id="1_3xvt7"]
+[ext_resource type="Script" path="res://scenes/battle/basic_projectile.gd" id="1_su2tt"]
+[ext_resource type="PackedScene" uid="uid://del7hg6ux6mxm" path="res://scenes/fx/particle_pop1.tscn" id="2_3ddmk"]
 [ext_resource type="Texture2D" uid="uid://sabje8rtaqdg" path="res://assets/sprites/enemies/basic_enemy_projectile.png" id="2_s5i5h"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_581ul"]
-radius = 2.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
+radius = 4.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_62mqx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_05f7w"]
 atlas = ExtResource("2_s5i5h")
-region = Rect2(0, 0, 4, 4)
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dao2y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_15kn3"]
+atlas = ExtResource("2_s5i5h")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue25t"]
+atlas = ExtResource("2_s5i5h")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n48yh"]
+atlas = ExtResource("2_s5i5h")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5v50"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_62mqx")
+"texture": SubResource("AtlasTexture_05f7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15kn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue25t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n48yh")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 12.0
 }]
 
-[node name="BasicEnemyProjectile" type="Area2D"]
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("1_3xvt7")
+[node name="BasicEnemyProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
+script = ExtResource("1_su2tt")
+speed = 75.0
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
+explosion_effect_scene = ExtResource("2_3ddmk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_581ul")
+shape = SubResource("CircleShape2D_2qn3j")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(0.3, 0.35)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_dao2y")
+sprite_frames = SubResource("SpriteFrames_a5v50")
+autoplay = "default"
+frame_progress = 0.763702
