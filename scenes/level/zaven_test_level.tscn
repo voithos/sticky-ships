@@ -18,7 +18,7 @@ script = ExtResource("1_7r1pg")
 [node name="Background" parent="." instance=ExtResource("2_sygiw")]
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(159, 34)
+position = Vector2(158, 38)
 texture = ExtResource("3_xn8hx")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
@@ -29,20 +29,19 @@ position = Vector2(-1.5, -2.5)
 shape = SubResource("RectangleShape2D_hkr8e")
 
 [node name="EmptyPartsDrop2" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(-46, -23)
+position = Vector2(-59, -26)
 
 [node name="BasicThrusterPart" parent="EmptyPartsDrop2" instance=ExtResource("5_yfcfs")]
 
 [node name="EmptyPartsDrop3" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(-19, -93)
+position = Vector2(-58, -117)
 
 [node name="BasicGunPart" parent="EmptyPartsDrop3" instance=ExtResource("7_4cwjr")]
 
 [node name="EmptyPartsDrop4" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(-19, -93)
+position = Vector2(17, -99)
 
 [node name="BasicGunPart" parent="EmptyPartsDrop4" instance=ExtResource("8_ml6jh")]
-position = Vector2(67, -22)
 
 [node name="GunnerEnemy" parent="." instance=ExtResource("7_3w60v")]
 position = Vector2(-78, -82)

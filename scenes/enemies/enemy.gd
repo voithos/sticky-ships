@@ -113,6 +113,7 @@ func maybe_drop_part() -> void:
 			var empty_drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
 			empty_drop.add_child(dropped_scene)
 			empty_drop.global_position = global_position
+			empty_drop.global_rotation = global_rotation
 			add_sibling(empty_drop)
 			# Only drop at most one thing
 			break
