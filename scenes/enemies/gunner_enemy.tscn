@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://71virob0imkf"]
+[gd_scene load_steps=14 format=3 uid="uid://71virob0imkf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/gunner_enemy.gd" id="1_hl36b"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_awgqx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="3_hhxo5"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="4_3ui24"]
 [ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_doe2v"]
+[ext_resource type="PackedScene" uid="uid://dvkwqmafsi7u5" path="res://scenes/enemies/basic_enemy_projectile.tscn" id="7_pex06"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at3n4"]
 atlas = ExtResource("2_v46qx")
@@ -76,6 +77,7 @@ shape = SubResource("CircleShape2D_m33n7")
 
 [node name="BasicGun" parent="." instance=ExtResource("5_doe2v")]
 position = Vector2(0, -10)
+projectile = ExtResource("7_pex06")
 cooldown = 0.5
 spread = 20.0
 projectile_collision_mask = 1
