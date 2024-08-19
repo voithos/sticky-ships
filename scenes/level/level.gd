@@ -2,7 +2,7 @@ class_name Level
 extends Node2D
 
 
-signal level_up
+signal leveled_up
 
 const GROWTH_LEVEL_TRANSITION_DURATION := 0.7
 
@@ -31,18 +31,20 @@ func _enter_tree() -> void:
 	add_child(drop_chunk)
 
 	# TODO: Remove.
-	#await get_tree().create_timer(1.0).timeout
-	#increment_growth_level()
+	await get_tree().create_timer(1.0).timeout
+	level_up()
 
 
-func increment_growth_level() -> void:
+func level_up() -> void:
+	assert(!Global.is_at_max_growth_level())
+
 	var next_level := Session.current_growth_level + 1
 
 	levelling_up = true
 
 	var camera := get_viewport().get_camera_2d()
 
-	var next_zoom := Vector2.ONE * Global.INITIAL_CAMERA_ZOOM / pow(Global.GROWTH_LEVEL_CAMERA_ZOOM_FACTOR, next_level - 1)
+	var next_zoom := Vector2.ONE * Global.INITIAL_CAMERA_ZOOM / Global.get_growth_level_scale(next_level)
 
 	# FIXME: Implement growth system
 	#
@@ -70,7 +72,7 @@ func increment_growth_level() -> void:
 	await get_tree().create_timer(LevelUpEffect.ANIMATION_FULL_SHIELD_DELAY).timeout
 
 	Session.current_growth_level = next_level
-	level_up.emit()
+	leveled_up.emit()
 
 	growth_level_tween = get_tree() \
 		.create_tween() \

@@ -19,6 +19,7 @@ func start() -> void:
 	Session.current_growth_level = 1
 	Session.enemies_destroyed = 0
 	Session.is_game_over = false
+	Session.did_player_win = false
 
 	if is_instance_valid(Global.level):
 		Global.player.queue_free()

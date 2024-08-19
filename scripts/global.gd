@@ -25,8 +25,11 @@ const PART_FIRE_LOW_EFFECT_SCENE := preload("res://scenes/player/part_fire_low_e
 const PART_FIRE_MEDIUM_EFFECT_SCENE := preload("res://scenes/player/part_fire_medium_effect.tscn")
 const PART_FIRE_HIGH_EFFECT_SCENE := preload("res://scenes/player/part_fire_high_effect.tscn")
 
+const GROWTH_LEVEL_SCALE_FACTOR := 8.0
+
+const MAX_GROWTH_LEVEL := 3
+
 const INITIAL_CAMERA_ZOOM := 1.0
-const GROWTH_LEVEL_CAMERA_ZOOM_FACTOR := 4.0
 
 const SMALL_ITEM_HEALTH_MULTIPLIER := 0.25
 const SMALL_ITEM_DAMAGE_MULTIPLIER := 0.25
@@ -115,46 +118,56 @@ var level
 var player: Player
 
 
-func get_growth_for_part(part_type: PartType, growth_level: int) -> float:
+func get_growth_level_scale(growth_level: int) -> float:
+	return pow(Global.GROWTH_LEVEL_SCALE_FACTOR, growth_level - 1)
+
+
+func get_growth_for_part(part_type: PartType, growth_level: int, current_growth_level := -1) -> float:
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
-	var size_multiplier := get_item_size_growth_multiplier(growth_level)
+	var size_multiplier := get_item_size_growth_multiplier(growth_level, current_growth_level)
 	return PART_TYPE_CONFIG[part_type].base_growth * level_config.next_level_growth_multiplier * size_multiplier
 
 
-func get_health_for_part(part_type: PartType, growth_level: int) -> float:
+func get_health_for_part(part_type: PartType, growth_level: int, current_growth_level := -1) -> float:
 	assert(PART_TYPE_CONFIG.has(part_type))
 	var level_config := get_current_level_config(growth_level)
-	var size_multiplier := get_item_size_health_multiplier(growth_level)
+	var size_multiplier := get_item_size_health_multiplier(growth_level, current_growth_level)
 	return PART_TYPE_CONFIG[part_type].base_health * level_config.part_health_multiplier * size_multiplier
 
 
-func get_item_size_health_multiplier(growth_level: int) -> float:
-	if growth_level == Session.current_growth_level:
+func get_item_size_health_multiplier(growth_level: int, current_growth_level := -1) -> float:
+	if current_growth_level < 0:
+		current_growth_level = Session.current_growth_level
+	if growth_level == current_growth_level:
 		return 1
-	elif growth_level == Session.current_growth_level - 1:
+	elif growth_level == current_growth_level - 1:
 		return SMALL_ITEM_HEALTH_MULTIPLIER
 	return 0
 
 
-func get_item_size_damage_multiplier(growth_level: int) -> float:
-	if growth_level == Session.current_growth_level:
+func get_item_size_damage_multiplier(growth_level: int, current_growth_level := -1) -> float:
+	if current_growth_level < 0:
+		current_growth_level = Session.current_growth_level
+	if growth_level == current_growth_level:
 		return 1
-	elif growth_level == Session.current_growth_level - 1:
+	elif growth_level == current_growth_level - 1:
 		return SMALL_ITEM_DAMAGE_MULTIPLIER
 	return 0
 
 
-func get_item_size_growth_multiplier(growth_level: int) -> float:
-	if growth_level == Session.current_growth_level:
+func get_item_size_growth_multiplier(growth_level: int, current_growth_level := -1) -> float:
+	if current_growth_level < 0:
+		current_growth_level = Session.current_growth_level
+	if growth_level == current_growth_level:
 		return 1
-	elif growth_level == Session.current_growth_level - 1:
+	elif growth_level == current_growth_level - 1:
 		return SMALL_ITEM_GROWTH_MULTIPLIER
 	return 0
 
 
 func get_max_health(growth_level: int) -> float:
-	return get_health_for_part(PartType.Core, growth_level)
+	return get_health_for_part(PartType.Core, growth_level, growth_level)
 
 
 func get_next_level_growth(growth_level: int) -> float:
@@ -205,3 +218,7 @@ static func get_next_level_config(growth_level: int) -> Dictionary:
 	var next_growth_level := growth_level + 1
 	next_growth_level = min(next_growth_level, LEVEL_CONFIG.size())
 	return LEVEL_CONFIG[next_growth_level - 1]
+
+
+func is_at_max_growth_level() -> bool:
+	return Session.current_growth_level == Global.MAX_GROWTH_LEVEL

@@ -116,10 +116,13 @@ func _init_components(node: Node) -> void:
 	if node is HealthComponent:
 		_init_health_component(node)
 	elif node is LightGun:
+		node.growth_level = growth_level
 		light_guns.push_back(node)
 	elif node is HeavyGun:
+		node.growth_level = growth_level
 		heavy_guns.push_back(node)
 	elif node is Thruster:
+		node.growth_level = growth_level
 		thrusters.push_back(node)
 	elif node is AttachPoint:
 		attach_points.push_back(node)

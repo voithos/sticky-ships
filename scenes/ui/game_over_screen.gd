@@ -5,6 +5,10 @@ extends PanelContainer
 func open() -> void:
 	%GrowthProgressLabel.text = "Destroyed %d enemies." % Session.enemies_destroyed
 	%EnemiesKilledLabel.text = "Reached level %d." % Session.current_growth_level
+	if Session.did_player_win:
+		%Title.text = "You win!"
+	else:
+		%Title.text = "Game Over"
 	visible = true
 
 

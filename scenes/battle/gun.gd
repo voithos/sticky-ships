@@ -1,6 +1,8 @@
 class_name Gun
-extends Node
+extends Node2D
 
+
+@export var growth_level := 1
 
 @export var projectile: PackedScene
 # A node used as the spawn position when spawning bullets

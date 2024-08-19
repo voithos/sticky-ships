@@ -41,24 +41,25 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HealthRow" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthRow"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 4
 text = "Health"
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthRow"]
 custom_minimum_size = Vector2(48, 4)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lodn")
 
-[node name="HPProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="HealthProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthRow/PanelContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 4)
 layout_mode = 2
@@ -71,24 +72,25 @@ step = 0.001
 value = 0.5
 show_percentage = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="GrowthRow" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GrowthRow"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 4
 text = "Growth"
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/GrowthRow"]
 custom_minimum_size = Vector2(48, 4)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lodn")
 
-[node name="XPProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/PanelContainer2"]
+[node name="GrowthProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/GrowthRow/PanelContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 4)
 layout_mode = 2

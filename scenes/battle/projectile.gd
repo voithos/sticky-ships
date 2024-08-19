@@ -1,6 +1,8 @@
 class_name Projectile
 extends Area2D
 
+
+@export var growth_level := 1
 # The speed of motion.
 @export var speed := 200.0
 # The damage inflicted.

@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 @export var explosion_scene: PackedScene
 
+@export var growth_level := 1
+
 var health: HealthComponent = null
 
 var light_guns: Array[LightGun] = []

@@ -152,6 +152,16 @@ func die() -> void:
 	add_sibling(explosion)
 	visible = false
 	Session.is_game_over = true
+	Session.did_player_win = false
+	# TODO: SFX.
+	Global.game_over_screen.open()
+
+
+# TODO: Call this.
+func win() -> void:
+	print('we won!')
+	Session.is_game_over = true
+	Session.did_player_win = true
 	# TODO: SFX.
 	Global.game_over_screen.open()
 
