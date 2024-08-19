@@ -33,6 +33,8 @@ func _enter_tree() -> void:
 	# TODO: Remove.
 	await get_tree().create_timer(1.0).timeout
 	level_up()
+	#await get_tree().create_timer(4.0).timeout
+	#level_up()
 
 
 func level_up() -> void:
@@ -88,3 +90,5 @@ func level_up() -> void:
 func _on_growth_transition_finished() -> void:
 	growth_level_tween = null
 	levelling_up = false
+	if Global.is_at_max_growth_level() and Global.force_win_when_reaching_max_growth_level:
+		player.win()

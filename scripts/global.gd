@@ -101,8 +101,11 @@ const PART_TYPE_CONFIG := {
 	},
 }
 
-# TODO: Set this to true.
+# TODO: Adjust this.
 const skip_main_menu := true
+
+# TODO: Adjust this.
+const force_win_when_reaching_max_growth_level := true
 
 # TODO: Adjust this.
 #var default_level_scene := MAIN_LEVEL_SCENE
