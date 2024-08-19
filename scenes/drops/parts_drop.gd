@@ -16,15 +16,14 @@ func remove_part(part: Part) -> void:
 
 
 func on_part_added(part: Part) -> void:
-	var healthbox_collision_shape := part.get_healthbox_collision_shape()
 	var collision_shape := CollisionShape2D.new()
-	collision_shape.shape = healthbox_collision_shape.shape
-	call_deferred("deferred_on_part_added", part, collision_shape, healthbox_collision_shape.global_transform)
+	collision_shape.shape = part.get_healthbox_collision_shape().shape
+	call_deferred("deferred_on_part_added", part, collision_shape)
 
 
-func deferred_on_part_added(part: Part, collision_shape: CollisionShape2D, global_transform: Transform2D) -> void:
+func deferred_on_part_added(part: Part, collision_shape: CollisionShape2D) -> void:
 	add_child(collision_shape)
-	collision_shape.global_transform = global_transform
+	collision_shape.global_transform = part.get_healthbox_collision_shape().global_transform
 	part.player_collision_shape_instance = collision_shape
 
 

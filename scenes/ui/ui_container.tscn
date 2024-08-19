@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyutd33mkou7y"]
+[gd_scene load_steps=5 format=3 uid="uid://dyutd33mkou7y"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui_container.gd" id="1_mg7j0"]
 [ext_resource type="PackedScene" uid="uid://gi7ysmql1hcl" path="res://scenes/ui/hud.tscn" id="1_rh8kw"]
 [ext_resource type="PackedScene" uid="uid://b8pposh8tw6y5" path="res://scenes/ui/main_menu.tscn" id="2_65l1j"]
+[ext_resource type="PackedScene" uid="uid://bokx7wb2tjgmx" path="res://scenes/ui/game_over_screen.tscn" id="4_g3b1t"]
 
 [node name="UiContainer" type="Node2D"]
 script = ExtResource("1_mg7j0")
@@ -10,5 +11,12 @@ script = ExtResource("1_mg7j0")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("1_rh8kw")]
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("4_g3b1t")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 320.0
+offset_bottom = 180.0
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_65l1j")]

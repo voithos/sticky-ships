@@ -15,7 +15,7 @@ var total_mass := 0.0
 
 
 func _ready() -> void:
-	set_core(Global.level.current_growth_level)
+	set_core(Session.current_growth_level)
 
 
 func _process(delta: float) -> void:
@@ -54,20 +54,15 @@ func set_core(growth_level: int) -> void:
 	add_child(core_part)
 
 	core_part.health.max_health = Global.get_max_health(growth_level)
+	core_part.health.health = core_part.health.max_health
 
 	core_part.health.health_changed.connect(_on_core_health_changed)
-	core_part.health.health_depleted.connect(_on_core_health_depleted)
-	_update_growth_display()
+	_update_part_stats()
 	_update_health_display()
 
 
 func _on_core_health_changed(new_health: float, prev_health: float) -> void:
 	_update_health_display()
-
-
-func _on_core_health_depleted() -> void:
-	# TODO: GAME OVER!
-	pass
 
 
 func _update_health_display() -> void:
@@ -80,12 +75,21 @@ func _update_health_display() -> void:
 
 
 func _update_growth_display() -> void:
-	var current_growth := 0
+	var current_growth := 0.0
 	for part in parts:
-		current_growth += Global.get_growth_for_part(part.type, part.size_type, Global.level.current_growth_level)
-	var xp_ratio := current_growth / Global.get_next_level_growth(Global.level.current_growth_level)
+		current_growth += Global.get_growth_for_part(part.type, part.size_type, Session.current_growth_level)
+	var xp_ratio := current_growth / Global.get_next_level_growth(Session.current_growth_level)
 	if Global.hud:
 		Global.hud.set_growth_ratio(xp_ratio)
+
+
+func _update_total_mass() -> void:
+	total_mass = parts.reduce(func (accum, part): return accum + part.mass, 0)
+
+
+func _update_part_stats() -> void:
+	_update_total_mass()
+	_update_growth_display()
 
 
 func get_bounding_box() -> Rect2:
@@ -146,11 +150,10 @@ func destroy_part(part: Part) -> void:
 	_on_part_removed(part)
 	part.queue_free()
 
+	_update_part_stats()
+
 
 func on_part_added(part: Part) -> void:
-	total_mass += part.mass
-	assert(total_mass > 0)
-
 	part.on_attached()
 
 	var collision_shape := CollisionShape2D.new()
@@ -169,9 +172,6 @@ func on_part_added_deferred(part: Part, collision_shape: CollisionShape2D) -> vo
 func _on_part_removed(part: Part) -> void:
 	part.player_collision_shape_instance.queue_free()
 	part.player_collision_shape_instance = null
-
-	total_mass -= part.mass
-	assert(total_mass >= 0)
 
 
 func attach_part(overlap: PotentialConnectionOverlap) -> void:
@@ -201,7 +201,7 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 
 	overlap.attached_point.part.add_child_connection(overlap.attached_point, overlap.detached_point)
 
-	_update_growth_display()
+	_update_part_stats()
 
 	attaching = false
 

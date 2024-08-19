@@ -25,6 +25,7 @@ ProgressionStore="*res://scripts/progression_store.gd"
 Saving="*res://scripts/saving.gd"
 Screen="*res://scripts/screen.gd"
 Sfx="*res://scripts/sfx.gd"
+Session="*res://scripts/session.gd"
 
 [debug]
 

@@ -35,6 +35,9 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if Session.is_game_over:
+		return
+
 	handle_movement(delta)
 
 	# Try to fire every frame when it's held down
@@ -142,6 +145,13 @@ func _on_health_component_health_depleted() -> void:
 
 func die() -> void:
 	print('we died!')
+	var explosion := Global.EXPLOSION_SCENE.instantiate()
+	explosion.global_position = global_position
+	add_sibling(explosion)
+	visible = false
+	Session.is_game_over = true
+	# TODO: SFX.
+	Global.game_over_screen.open()
 
 
 func _update_agent() -> void:

@@ -19,6 +19,7 @@ const TRIPLE_GUN_DROP_CHUNK_SCENE := preload("res://scenes/drop_chunks/triple_gu
 
 const GUNNER_ENEMY_SCENE := preload("res://scenes/enemies/gunner_enemy.tscn")
 
+const EXPLOSION_SCENE := preload("res://scenes/fx/boom1.tscn")
 const LEVEL_UP_EFFECT_SCENE := preload("res://scenes/player/level_up_effect.tscn")
 const PART_FIRE_LOW_EFFECT_SCENE := preload("res://scenes/player/part_fire_low_effect.tscn")
 const PART_FIRE_MEDIUM_EFFECT_SCENE := preload("res://scenes/player/part_fire_medium_effect.tscn")
@@ -31,7 +32,7 @@ const SMALL_ITEM_HEALTH_MULTIPLIER := 0.25
 const SMALL_ITEM_DAMAGE_MULTIPLIER := 0.25
 const SMALL_ITEM_growth_MULTIPLIER := 0.25
 
-const DEFAULT_NEXT_LEVEL_growth := 100
+const DEFAULT_NEXT_LEVEL_GROWTH := 100
 
 const DEFAULT_PART_DROP_RATE_MULTIPLIER := 1.0
 
@@ -91,7 +92,7 @@ const LEVEL_CONFIG := [
 
 const PART_TYPE_CONFIG := {
 	PartType.Core: {
-		base_health = 100,
+		base_health = 20,
 		base_growth = 0,
 	},
 	PartType.BasicGun: {
@@ -108,15 +109,16 @@ const PART_TYPE_CONFIG := {
 const skip_main_menu := true
 
 # TODO: Adjust this.
-#var default_level_scene := Global.MAIN_LEVEL_SCENE
-#var default_level_scene := Global.LEVI_TEST_LEVEL_SCENE
-var default_level_scene := Global.ZAVEN_TEST_LEVEL_SCENE
+#var default_level_scene := MAIN_LEVEL_SCENE
+#var default_level_scene := LEVI_TEST_LEVEL_SCENE
+var default_level_scene := ZAVEN_TEST_LEVEL_SCENE
 
 
-var level_container: LevelContainer
+var level_container
 var hud: Hud
 var main_menu: MainMenu
-var level: Level
+var game_over_screen: GameOverScreen
+var level
 var player: Player
 
 
@@ -173,7 +175,7 @@ static func get_max_health(growth_level: int) -> float:
 
 static func get_next_level_growth(growth_level: int) -> float:
 	var level_config := get_current_level_config(growth_level)
-	return DEFAULT_NEXT_LEVEL_growth * level_config.next_level_growth_multiplier
+	return DEFAULT_NEXT_LEVEL_GROWTH * level_config.next_level_growth_multiplier
 
 
 static func get_enemies(growth_level: int) -> Array[EnemyType]:

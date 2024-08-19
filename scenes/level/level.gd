@@ -6,7 +6,6 @@ signal level_up
 
 const GROWTH_LEVEL_TRANSITION_DURATION := 0.7
 
-var current_growth_level := 1
 var levelling_up := false
 
 var player: Player
@@ -37,7 +36,7 @@ func _enter_tree() -> void:
 
 
 func increment_growth_level() -> void:
-	var next_level := current_growth_level + 1
+	var next_level := Session.current_growth_level + 1
 
 	levelling_up = true
 
@@ -60,7 +59,7 @@ func increment_growth_level() -> void:
 
 	await get_tree().create_timer(LevelUpEffect.ANIMATION_FULL_SHIELD_DELAY).timeout
 
-	current_growth_level = next_level
+	Session.current_growth_level = next_level
 	level_up.emit()
 
 	growth_level_tween = get_tree() \
