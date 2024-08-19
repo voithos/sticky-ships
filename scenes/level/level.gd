@@ -50,7 +50,11 @@ func level_up() -> void:
 
 	# FIXME: Implement growth system
 	#
+	# - Reduce projectile damage when its small.
+	#   - Use/adapt Global.get_item_size_damage_multiplier.
 	# - Update systems to spawn new items at the correct scale and resolution.
+	#   - Enemy-wave system.
+	#   - Guns shooting projectiles.
 	#   - No tiny guys on the first level.
 	# - Create high and low res copies of all parts, projectiles, and enemies.
 	# - Add some logic for spawning large-version drops in the current level.
