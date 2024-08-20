@@ -147,7 +147,7 @@ func _on_health_component_health_depleted() -> void:
 
 func die() -> void:
 	print('we died!')
-	var explosion := Global.EXPLOSION_SCENE.instantiate()
+	var explosion := Config.EXPLOSION_SCENE.instantiate()
 	explosion.global_position = global_position
 	add_sibling(explosion)
 	visible = false
@@ -176,7 +176,7 @@ func _update_agent() -> void:
 
 
 func level_up(next_level: int) -> void:
-	var level_up_effect: LevelUpEffect = Global.LEVEL_UP_EFFECT_SCENE.instantiate()
+	var level_up_effect: LevelUpEffect = Config.LEVEL_UP_EFFECT_SCENE.instantiate()
 	add_child(level_up_effect)
 	var level_up_effect_sprite_size := level_up_effect.get_sprite_size()
 

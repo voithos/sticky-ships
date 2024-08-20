@@ -6,7 +6,7 @@ extends RigidBody2D
 
 
 func _init() -> void:
-	add_to_group(Global.DROPS_GROUP)
+	add_to_group(Config.DROPS_GROUP)
 
 
 func _exit_tree() -> void:

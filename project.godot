@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Config="*res://scripts/config.gd"
 Global="*res://scripts/global.gd"
 CheckpointStore="*res://scripts/checkpoint_store.gd"
 GameTimer="*res://scripts/game_timer.gd"

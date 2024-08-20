@@ -29,7 +29,7 @@ func _setup_steering() -> void:
 
 	agent.bounding_radius = $CollisionShape2D.shape.radius
 
-	var player_agent := Global.player.agent
+	var player_agent: GSAISteeringAgent = Global.player.agent
 
 	# Setup the core behavior.
 	var arrive := GSAIArrive.new(agent, _player_seek_location)

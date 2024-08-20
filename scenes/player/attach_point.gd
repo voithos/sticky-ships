@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 
 
 func _update_radius() -> void:
-	$CollisionShape2D.shape.radius = ATTACH_POINT_DEFAULT_RADIUS * Global.get_growth_level_scale(Session.current_growth_level)
+	$CollisionShape2D.shape.radius = ATTACH_POINT_DEFAULT_RADIUS * Config.get_growth_level_scale(Session.current_growth_level)
 
 
 func _draw() -> void:

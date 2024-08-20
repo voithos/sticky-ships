@@ -11,7 +11,7 @@ func _ready() -> void:
 	Global.main_menu = ui_container.main_menu
 	Global.game_over_screen = ui_container.game_over_screen
 
-	if Global.skip_main_menu:
+	if Config.skip_main_menu:
 		start()
 
 
@@ -25,7 +25,7 @@ func start() -> void:
 		Global.player.queue_free()
 		Global.level.queue_free()
 
-	var level: Level = Global.default_level_scene.instantiate()
+	var level: Level = Config.default_level_scene.instantiate()
 	add_child(level)
 
 	Global.game_over_screen.visible = false
