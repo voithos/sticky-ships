@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://csy77bvwh14dl"]
+[gd_scene load_steps=25 format=3 uid="uid://csy77bvwh14dl"]
 
 [ext_resource type="Script" path="res://scenes/enemies/destroyer_enemy.gd" id="1_tl7vv"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_nk8jf"]
@@ -11,6 +11,11 @@
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="9_1xnk0"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="10_8bbd8"]
 [ext_resource type="PackedScene" uid="uid://d3c0pudm0ljxw" path="res://scenes/battle/sprayer.tscn" id="11_vme8w"]
+[ext_resource type="AudioStream" uid="uid://dgi72tkgfbvv3" path="res://assets/sfx/Explosion/Explosion.01_02-02.wav" id="12_ivfas"]
+[ext_resource type="AudioStream" uid="uid://culmj2h5dnaug" path="res://assets/sfx/Explosion/Explosion.01_02-04.wav" id="13_dtilb"]
+[ext_resource type="AudioStream" uid="uid://pgrdqdagi1uc" path="res://assets/sfx/Explosion/Explosion.01_02-06.wav" id="14_yrdxf"]
+[ext_resource type="AudioStream" uid="uid://cricnmh6sg6rm" path="res://assets/sfx/Explosion/Explosion.01_02-08.wav" id="15_7fp1j"]
+[ext_resource type="AudioStream" uid="uid://bpqwcok0flwyb" path="res://assets/sfx/Explosion/Explosion.01_02-09.wav" id="16_nv534"]
 
 [sub_resource type="Resource" id="Resource_uuke1"]
 script = ExtResource("3_5davx")
@@ -56,6 +61,14 @@ size = Vector2(56, 40)
 [sub_resource type="CircleShape2D" id="CircleShape2D_7d82r"]
 radius = 20.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0mald"]
+streams_count = 5
+stream_0/stream = ExtResource("12_ivfas")
+stream_1/stream = ExtResource("13_dtilb")
+stream_2/stream = ExtResource("14_yrdxf")
+stream_3/stream = ExtResource("15_7fp1j")
+stream_4/stream = ExtResource("16_nv534")
+
 [node name="DestroyerEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
@@ -97,5 +110,9 @@ reverse_rotate = true
 
 [node name="Sprayer2" parent="." instance=ExtResource("11_vme8w")]
 position = Vector2(18, -1)
+
+[node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_0mald")
+bus = &"SFX"
 
 [editable path="Hurtbox"]

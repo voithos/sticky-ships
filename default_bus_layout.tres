@@ -11,7 +11,7 @@ ceiling_db = -1.0
 threshold_db = -1.0
 
 [resource]
-bus/0/volume_db = -0.228265
+bus/0/volume_db = -0.230488
 bus/1/name = &"Main Theme"
 bus/1/solo = false
 bus/1/mute = false
@@ -50,3 +50,9 @@ bus/5/effect/0/effect = SubResource("AudioEffectCompressor_l062s")
 bus/5/effect/0/enabled = true
 bus/5/effect/1/effect = SubResource("AudioEffectLimiter_6we3a")
 bus/5/effect/1/enabled = true
+bus/6/name = &"ProjectileHit"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = -5.04538
+bus/6/send = &"SFX"

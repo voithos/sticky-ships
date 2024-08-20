@@ -20,6 +20,8 @@ var _steering: GSAISteeringBehavior
 @onready var agent := await GSAICharacterBody2DAgent.new(self)
 @onready var accel := GSAITargetAcceleration.new()
 
+@onready var death_knell_sfx = $DeathKnellSFX
+
 ## Helper location that computes arrive distance from the player
 ## Not active by default, you have to use it in `_setup_steering`
 var _player_seek_location := GSAIAgentLocation.new()
@@ -151,6 +153,10 @@ func die() -> void:
 
 
 func die_deferred() -> void:
+	assert(is_instance_valid(death_knell_sfx))
+	death_knell_sfx.reparent(Global.level)
+	death_knell_sfx.play()
+
 	if explosion_scene:
 		var explosion := explosion_scene.instantiate()
 		explosion.global_position = global_position
@@ -158,3 +164,5 @@ func die_deferred() -> void:
 	Session.on_enemy_destroyed()
 	maybe_drop_part()
 	queue_free()
+	await death_knell_sfx.finished
+	death_knell_sfx.queue_free()

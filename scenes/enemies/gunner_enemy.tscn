@@ -1,4 +1,5 @@
-[gd_scene load_steps=21 format=3 uid="uid://71virob0imkf"]
+[gd_scene load_steps=28 format=3 uid="uid://71virob0imkf"]
+
 
 [ext_resource type="Script" path="res://scenes/enemies/gunner_enemy.gd" id="1_hl36b"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_awgqx"]
@@ -12,6 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://c80onf8fc5s7e" path="res://scenes/parts/gunner_enemy_part_gun2.tscn" id="6_tjl1k"]
 [ext_resource type="Material" uid="uid://bad7xnst617kn" path="res://scenes/enemies/damage_flash_shader.tres" id="7_cojer"]
 [ext_resource type="PackedScene" uid="uid://dvkwqmafsi7u5" path="res://scenes/enemies/basic_enemy_projectile.tscn" id="7_pex06"]
+[ext_resource type="AudioStream" uid="uid://dgi72tkgfbvv3" path="res://assets/sfx/Explosion/Explosion.01_02-02.wav" id="13_s0pmp"]
+[ext_resource type="AudioStream" uid="uid://culmj2h5dnaug" path="res://assets/sfx/Explosion/Explosion.01_02-04.wav" id="14_vifum"]
+[ext_resource type="AudioStream" uid="uid://pgrdqdagi1uc" path="res://assets/sfx/Explosion/Explosion.01_02-06.wav" id="15_k5if5"]
+[ext_resource type="AudioStream" uid="uid://cricnmh6sg6rm" path="res://assets/sfx/Explosion/Explosion.01_02-08.wav" id="16_mvbrl"]
+[ext_resource type="AudioStream" uid="uid://bpqwcok0flwyb" path="res://assets/sfx/Explosion/Explosion.01_02-09.wav" id="17_wn0ou"]
 
 [sub_resource type="Resource" id="Resource_uuke1"]
 script = ExtResource("3_gvbd3")
@@ -65,6 +71,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_m33n7"]
 radius = 8.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_06o2y"]
+streams_count = 5
+stream_0/stream = ExtResource("13_s0pmp")
+stream_1/stream = ExtResource("14_vifum")
+stream_2/stream = ExtResource("15_k5if5")
+stream_3/stream = ExtResource("16_mvbrl")
+stream_4/stream = ExtResource("17_wn0ou")
+
 [node name="GunnerEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
@@ -97,5 +111,9 @@ projectile = ExtResource("7_pex06")
 cooldown = 0.5
 spread = 20.0
 projectile_collision_mask = 1
+
+[node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_06o2y")
+bus = &"SFX"
 
 [editable path="Hurtbox"]

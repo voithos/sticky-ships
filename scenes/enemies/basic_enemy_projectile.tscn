@@ -66,6 +66,6 @@ frame_progress = 0.763702
 
 [node name="ProjectileHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_x4sck")
-volume_db = -9.179
+volume_db = -9.798
 pitch_scale = 0.79
-bus = &"SFX"
+bus = &"ProjectileHit"

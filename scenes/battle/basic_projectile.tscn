@@ -70,4 +70,4 @@ frame_progress = 0.862869
 stream = ExtResource("4_iibkb")
 volume_db = -9.179
 pitch_scale = 0.79
-bus = &"SFX"
+bus = &"ProjectileHit"

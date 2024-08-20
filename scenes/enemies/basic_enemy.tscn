@@ -1,7 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj27d2ad4h57k"]
+[gd_scene load_steps=19 format=3 uid="uid://bj27d2ad4h57k"]
 
 [ext_resource type="Script" path="res://scenes/enemies/basic_enemy.gd" id="1_lphny"]
 [ext_resource type="Texture2D" uid="uid://dfsnggri2xi5f" path="res://assets/sprites/enemies/basic_enemy.png" id="2_olgq7"]
+[ext_resource type="AudioStream" uid="uid://dgi72tkgfbvv3" path="res://assets/sfx/Explosion/Explosion.01_02-02.wav" id="3_iea4v"]
+[ext_resource type="AudioStream" uid="uid://culmj2h5dnaug" path="res://assets/sfx/Explosion/Explosion.01_02-04.wav" id="4_mu6e0"]
+[ext_resource type="AudioStream" uid="uid://pgrdqdagi1uc" path="res://assets/sfx/Explosion/Explosion.01_02-06.wav" id="5_vl06j"]
+[ext_resource type="AudioStream" uid="uid://cricnmh6sg6rm" path="res://assets/sfx/Explosion/Explosion.01_02-08.wav" id="6_7k2jx"]
+[ext_resource type="AudioStream" uid="uid://bpqwcok0flwyb" path="res://assets/sfx/Explosion/Explosion.01_02-09.wav" id="7_la0d8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_muxgy"]
 atlas = ExtResource("2_olgq7")
@@ -70,6 +75,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h60r0"]
 radius = 8.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_41272"]
+streams_count = 5
+stream_0/stream = ExtResource("3_iea4v")
+stream_1/stream = ExtResource("4_mu6e0")
+stream_2/stream = ExtResource("5_vl06j")
+stream_3/stream = ExtResource("6_7k2jx")
+stream_4/stream = ExtResource("7_la0d8")
+
 [node name="BasicEnemy" type="Area2D"]
 collision_layer = 4
 collision_mask = 0
@@ -82,3 +95,7 @@ frame_progress = 0.414494
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h60r0")
+
+[node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_41272")
+bus = &"SFX"
