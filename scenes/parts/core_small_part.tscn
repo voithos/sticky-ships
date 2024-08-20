@@ -61,7 +61,7 @@ animations = [{
 
 [node name="CoreSmallPart" type="Node2D"]
 script = ExtResource("1_biq3a")
-mass = 1.0
+mass = 10.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_yvjf3")
@@ -99,6 +99,7 @@ rotation = -3.14159
 
 [node name="BasicThruster" parent="." instance=ExtResource("7_517eh")]
 position = Vector2(0, 17)
+propulsion = 5.0
 
 [node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_vgcyy")

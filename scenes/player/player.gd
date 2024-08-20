@@ -22,6 +22,8 @@ var agent := GSAISteeringAgent.new()
 
 var body: PlayerBody
 
+## Default propulsion applied to everything
+@export var inherent_propulsion := 10.0
 
 func _ready() -> void:
 	Global.player = self
@@ -58,7 +60,7 @@ func rot_90_ccw(v: Vector2) -> Vector2:
 func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, direction_y: Vector2) -> Vector2:
 	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
 	# We start with the core's default movement capabilities.
-	var max_propulsion := Vector2(1.0, (reverse_multiplier if is_reversing else 1.0))
+	var max_propulsion := Vector2(inherent_propulsion, (inherent_propulsion * reverse_multiplier if is_reversing else inherent_propulsion))
 
 	for part in body.parts:
 		for thruster in part.thrusters:
