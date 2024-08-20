@@ -39,6 +39,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Don't fire the laser when it is dropped.
+	var parent := get_parent()
+	if is_instance_valid(parent) and parent is Part and !parent.attached_to_player:
+		return
+
 	damage_cooldown_left = maxf(damage_cooldown_left - delta, 0.0)
 	fire_start_cooldown_left = maxf(fire_start_cooldown_left - delta, 0.0)
 	fire_end_cooldown_left = maxf(fire_end_cooldown_left - delta, 0.0)

@@ -320,6 +320,17 @@ func add_child_connection(parent_point: AttachPoint, child_point: AttachPoint) -
 
 	child_point.part.attached_to_player = parent_point.part.attached_to_player
 
+	# TODO: Consider adding this back in.
+	# Snap the rotation of the new part to better align with the attachment points
+	# and to more likely prevent collision-shape overlap.
+	var current_parent_rotation_direction := \
+		child_point.global_position - child_point.part.global_position
+	var desired_parent_rotation_direction := \
+		parent_point.part.global_position - parent_point.global_position
+	var rotation_difference_angle := \
+		desired_parent_rotation_direction.angle_to(current_parent_rotation_direction)
+	child_point.part.rotation -= rotation_difference_angle * 0.5
+
 	# Snap the new part to align attachment points.
 	var translation := parent_point.global_position - child_point.global_position
 	child_point.part.translate_part(translation)

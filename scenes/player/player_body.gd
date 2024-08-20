@@ -33,8 +33,16 @@ func attach_overlapping_parts() -> void:
 	var overlaps: Array[PotentialConnectionOverlap] = []
 	for attached_point in potential_connection_overlaps:
 		overlaps.push_back(potential_connection_overlaps[attached_point])
+
+	# Sort the overlaps by those whose AttachPoints are closest together.
+	overlaps.sort_custom(
+		func (a: PotentialConnectionOverlap, b: PotentialConnectionOverlap):
+			return a.attached_point.global_position.distance_squared_to(a.detached_point.global_position) < \
+				b.attached_point.global_position.distance_squared_to(b.detached_point.global_position))
+
 	for overlap in overlaps:
 		attach_part(overlap)
+
 	Global.hud.set_attach_hint_visibility(false)
 
 
