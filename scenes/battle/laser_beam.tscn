@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://dix10f8b4ubof"]
+
+[ext_resource type="Script" path="res://scenes/battle/laser_beam.gd" id="1_xvoiw"]
+[ext_resource type="Texture2D" uid="uid://pxusggrygk47" path="res://assets/sprites/battle/laser_beam.png" id="2_0es1w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyqg1"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f5l5"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfdj3"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkdvd"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jc8v"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii836"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlful"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6lls"]
+atlas = ExtResource("2_0es1w")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n72nm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyqg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f5l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfdj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkdvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jc8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii836")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlful")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6lls")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4usy"]
+size = Vector2(256, 8)
+
+[node name="LaserBeam" type="Node2D"]
+script = ExtResource("1_xvoiw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_n72nm")
+autoplay = "default"
+frame_progress = 0.236504
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -96)
+sprite_frames = SubResource("SpriteFrames_n72nm")
+autoplay = "default"
+frame_progress = 0.617546
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -160)
+sprite_frames = SubResource("SpriteFrames_n72nm")
+autoplay = "default"
+frame_progress = 0.87973
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -224)
+sprite_frames = SubResource("SpriteFrames_n72nm")
+autoplay = "default"
+frame_progress = 0.340428
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 29
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -128)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_v4usy")

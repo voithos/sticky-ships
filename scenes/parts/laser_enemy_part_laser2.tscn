@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddjuf73w3bchj"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_a0uwb"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_tv8a3"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_lkkdx"]
+[ext_resource type="Texture2D" uid="uid://cgtewxbkndhu2" path="res://assets/sprites/parts/blade_enemy_parts.png" id="4_mctf5"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="5_thxvi"]
+[ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="6_qaals"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_eajmu"]
+[ext_resource type="PackedScene" uid="uid://ccrb68o7wfwc" path="res://scenes/battle/laser.tscn" id="8_jvxk5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioa2x"]
+size = Vector2(22, 14)
+
+[node name="LaserEnemyPartLaser2" type="Node2D"]
+script = ExtResource("1_a0uwb")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_tv8a3")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_lkkdx")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ioa2x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_mctf5")
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("5_thxvi")]
+unique_name_in_owner = true
+position = Vector2(-12, 3)
+rotation = -1.5708
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("5_thxvi")]
+unique_name_in_owner = true
+position = Vector2(12, 3)
+rotation = 1.5708
+
+[node name="BasicThruster" parent="." instance=ExtResource("6_qaals")]
+position = Vector2(-3.80277e-05, 15)
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_eajmu")
+bus = &"SFX"
+
+[node name="Laser" parent="." instance=ExtResource("8_jvxk5")]
+position = Vector2(0, -7)
+growth_level = null
+duration = null
+cooldown = null
+damage_cooldown = null
+damage = null
+projectile_damage_multiplier = null
+damage_collision_mask = null
+
+[editable path="Hurtbox"]
