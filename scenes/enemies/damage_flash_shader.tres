@@ -13,5 +13,6 @@ void fragment() {
 "
 
 [resource]
+resource_local_to_scene = true
 shader = SubResource("Shader_jyjgq")
 shader_parameter/brightening = 1.0
