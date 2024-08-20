@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=11 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
 [ext_resource type="Script" path="res://scenes/enemies/wave_spawner.gd" id="2_apulf"]
@@ -6,12 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="4_pnmxi"]
 [ext_resource type="AudioStream" uid="uid://d3s3uice6y1d" path="res://assets/sfx/LevelUpAlt1.wav" id="5_1hw5x"]
 [ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="5_761nh"]
+[ext_resource type="PackedScene" uid="uid://csy77bvwh14dl" path="res://scenes/enemies/destroyer_enemy.tscn" id="5_hfaci"]
 
 [sub_resource type="Resource" id="Resource_50rs7"]
 script = ExtResource("3_efd08")
 scene = ExtResource("4_pnmxi")
 weight = 2.0
 cost = 1.0
+
+[sub_resource type="Resource" id="Resource_cmr0v"]
+script = ExtResource("3_efd08")
+scene = ExtResource("5_hfaci")
+weight = 1.0
+cost = 3.0
 
 [sub_resource type="Resource" id="Resource_2flxw"]
 script = ExtResource("3_efd08")
@@ -28,7 +35,7 @@ position_smoothing_enabled = true
 
 [node name="WaveSpawner" type="Node2D" parent="."]
 script = ExtResource("2_apulf")
-spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7"), SubResource("Resource_2flxw")])
+spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7"), SubResource("Resource_cmr0v"), SubResource("Resource_2flxw")])
 
 [node name="LevelUpSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_1hw5x")
