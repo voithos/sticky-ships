@@ -11,6 +11,7 @@ const CORE_LARGE_PART_SCENE := preload("res://scenes/parts/core_large_part.tscn"
 
 const PLAYER_SCENE := preload("res://scenes/player/player.tscn")
 const EMPTY_PARTS_DROP_SCENE := preload("res://scenes/drops/empty_parts_drop.tscn")
+const TRIPLE_GUN_DROP_CHUNK_SCENE := preload("res://scenes/drop_chunks/triple_gun_drop_chunk.tscn")
 const EXPLOSION_SCENE := preload("res://scenes/fx/boom1.tscn")
 const LEVEL_UP_EFFECT_SCENE := preload("res://scenes/player/level_up_effect.tscn")
 const PART_FIRE_LOW_EFFECT_SCENE := preload("res://scenes/player/part_fire_low_effect.tscn")

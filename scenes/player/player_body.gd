@@ -165,7 +165,9 @@ func attach_part_deferred(overlap: PotentialConnectionOverlap) -> void:
 
 	_remove_potential_overlap_mapping(overlap.attached_point)
 
-	if overlap.detached_point.part.attached_to_player:
+	if (overlap.detached_point.part.attached_to_player or
+		is_instance_valid(overlap.detached_point.connection) or
+		is_instance_valid(overlap.attached_point.connection)):
 		# Already attached from another AttachPoint this frame.
 		return
 
