@@ -35,6 +35,7 @@ func attach_overlapping_parts() -> void:
 		overlaps.push_back(potential_connection_overlaps[attached_point])
 	for overlap in overlaps:
 		attach_part(overlap)
+	Global.hud.set_attach_hint_visibility(false)
 
 
 func _add_attached_sub_part(sub_part: Part) -> void:
@@ -240,6 +241,8 @@ func on_potential_attach_point_overlap_started(point_a: AttachPoint, point_b: At
 
 		Sfx.play(Sfx.CONNECTION_AVAILABLE)
 
+		Global.hud.set_attach_hint_visibility(!potential_connection_overlaps.is_empty())
+
 
 func on_potential_attach_point_overlap_ended(point_a: AttachPoint, point_b: AttachPoint) -> void:
 	assert(point_a.part.attached_to_player != point_b.part.attached_to_player)
@@ -254,3 +257,5 @@ func _remove_potential_overlap_mapping(point: AttachPoint) -> void:
 		assert(is_instance_valid(overlap.indicator))
 		overlap.indicator.queue_free()
 		potential_connection_overlaps.erase(point)
+
+	Global.hud.set_attach_hint_visibility(!potential_connection_overlaps.is_empty())

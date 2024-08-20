@@ -1,11 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8pposh8tw6y5"]
+[gd_scene load_steps=12 format=3 uid="uid://b8pposh8tw6y5"]
 
 [ext_resource type="Theme" uid="uid://bpgxvlp7d0yu8" path="res://main_theme.tres" id="1_eci2u"]
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_xmvbh"]
+[ext_resource type="Texture2D" uid="uid://b1b6k03kxa1or" path="res://assets/sprites/player/core1.png" id="3_4j428"]
 [ext_resource type="PackedScene" uid="uid://kipbyxtg87h5" path="res://scenes/ui/my_button.tscn" id="3_rvh4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uimi"]
 bg_color = Color(0.054902, 0.0392157, 0.180392, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp5ha"]
+atlas = ExtResource("3_4j428")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7ch6"]
+atlas = ExtResource("3_4j428")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm5ld"]
+atlas = ExtResource("3_4j428")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iohib"]
+atlas = ExtResource("3_4j428")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6m67"]
+atlas = ExtResource("3_4j428")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bqegs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp5ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7ch6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm5ld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iohib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6m67")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
 
 [node name="MainMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -32,7 +76,25 @@ theme_override_font_sizes/font_size = 17
 text = "Sticky Ships"
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CenterContainer/VBoxContainer/Control"]
+position = Vector2(0, 14)
+sprite_frames = SubResource("SpriteFrames_bqegs")
+autoplay = "default"
+frame_progress = 0.105201
+offset = Vector2(16, 2)
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 4
 

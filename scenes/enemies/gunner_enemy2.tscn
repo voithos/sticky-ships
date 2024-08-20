@@ -101,6 +101,7 @@ collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_fchrb")
 firing_distance = 200.0
+growth_level = 2
 explosion_scene = ExtResource("2_clwjx")
 droppables = Array[ExtResource("3_mjffr")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas")])
 

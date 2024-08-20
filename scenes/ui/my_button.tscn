@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://kipbyxtg87h5"]
+[gd_scene load_steps=4 format=3 uid="uid://kipbyxtg87h5"]
 
 [ext_resource type="Script" path="res://scenes/ui/my_button.gd" id="1_aqymr"]
 [ext_resource type="Theme" uid="uid://bpgxvlp7d0yu8" path="res://main_theme.tres" id="1_f1hho"]
+[ext_resource type="AudioStream" uid="uid://cwocmimtnrlob" path="res://assets/sfx/ConnectionMade.wav" id="3_i2vca"]
 
 [node name="MyButton" type="Button"]
 offset_right = 8.0
@@ -10,3 +11,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_f1hho")
 script = ExtResource("1_aqymr")
+
+[node name="ConnectionMadeSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_i2vca")
+bus = &"SFX"

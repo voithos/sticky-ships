@@ -81,15 +81,15 @@ const LEVEL_CONFIG := [
 ]
 
 # TODO: Adjust this.
-const skip_main_menu := true
+const skip_main_menu := false
 
 # TODO: Adjust this.
 const force_win_when_reaching_max_growth_level := true
 
 # TODO: Adjust this.
-#const default_level_scene := MAIN_LEVEL_SCENE
+const default_level_scene := MAIN_LEVEL_SCENE
 #const default_level_scene := LEVI_TEST_LEVEL_SCENE
-var default_level_scene := ZAVEN_TEST_LEVEL_SCENE
+#const default_level_scene := ZAVEN_TEST_LEVEL_SCENE
 
 
 static func get_growth_level_scale(growth_level: int) -> float:

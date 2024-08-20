@@ -14,6 +14,7 @@ height = 48.0
 
 [node name="LaserEnemyPartLaser1" type="Node2D"]
 script = ExtResource("1_ekebh")
+growth_level = 2
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_7ru80")

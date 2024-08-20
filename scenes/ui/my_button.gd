@@ -8,5 +8,4 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-	# TODO: SFX.
-	pass
+	$ConnectionMadeSFX.play()

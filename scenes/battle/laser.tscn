@@ -22,8 +22,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27g33"]
 size = Vector2(256, 8)
 
-[node name="Laser" type="Node2D"]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("sfx")]
 script = ExtResource("1_nstu2")
+sfx = NodePath("BeamSFX")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(0, -5)

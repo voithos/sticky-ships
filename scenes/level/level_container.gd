@@ -31,3 +31,8 @@ func start() -> void:
 
 	Global.game_over_screen.visible = false
 	Global.main_menu.visible = false
+
+	Global.hud.set_attach_hint_visibility(false)
+	Global.hud.set_controls_hint_visibility(true)
+	await get_tree().create_timer(2.0).timeout
+	Global.hud.set_controls_hint_visibility(false)

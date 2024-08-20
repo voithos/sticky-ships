@@ -46,7 +46,8 @@ func _physics_process(delta: float) -> void:
 
 	if is_firing and fire_end_cooldown_left == 0:
 		is_firing = false
-		$LaserBeam.visible = false
+		if sfx:
+			sfx.stop()
 		if is_instance_valid(telegraph):
 			telegraph.queue_free()
 		if is_instance_valid(laser_beam):
@@ -63,6 +64,8 @@ func _physics_process(delta: float) -> void:
 		if is_instance_valid(telegraph):
 			telegraph.queue_free()
 		is_firing = true
+		if sfx:
+			sfx.play()
 		laser_beam = LASER_BEAM_SCENE.instantiate()
 		laser_beam.position = $SpawnPoint.position
 		add_child(laser_beam)
@@ -79,9 +82,6 @@ func try_damage() -> void:
 
 
 func _damage() -> void:
-	if !intersecting_objects.is_empty() and sfx:
-		sfx.play()
-
 	_damage_intersecting_objects()
 
 	damage_cooldown_left = damage_cooldown
@@ -117,8 +117,6 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 			if is_firing:
 				# Apply damage immediately.
 				_damage_intersecting_object(parent_node)
-				if sfx:
-					sfx.play()
 
 
 func _on_hit_box_area_exited(area: Area2D) -> void:

@@ -1,6 +1,7 @@
 class_name WaveSpawner
 extends Node2D
 
+
 ## Minimum time until next wave
 @export var wave_min_time := 10.0
 ## Max time until next wave
@@ -27,6 +28,7 @@ var minimum_cost: float = INF
 var total_weights: float = 0.0
 
 # TODO: Add a signal in case all enemies are destroyed early, we fire off the next wave
+
 
 func _ready() -> void:
 	Session.enemy_count_changed.connect(_on_enemy_count_changed)

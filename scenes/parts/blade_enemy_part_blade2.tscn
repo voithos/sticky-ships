@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="5_7sswg"]
 [ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="6_85yhb"]
 [ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="6_mtmf2"]
-[ext_resource type="PackedScene" uid="uid://brprybcbal3t0" path="res://scenes/battle/blade.tscn" id="7_c8q0a"]
+[ext_resource type="PackedScene" uid="uid://qv01xfc4asrd" path="res://scenes/battle/blade.tscn" id="7_c8q0a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ioa2x"]
 size = Vector2(22, 14)

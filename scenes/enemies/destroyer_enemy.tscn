@@ -68,6 +68,7 @@ stream_4/stream = ExtResource("16_nv534")
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_tl7vv")
+growth_level = 2
 explosion_scene = ExtResource("2_nk8jf")
 linear_accel_max = 900.0
 linear_speed_max = 75.0

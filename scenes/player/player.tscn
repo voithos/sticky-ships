@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=15 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
 [ext_resource type="Script" path="res://scenes/enemies/wave_spawner.gd" id="2_apulf"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://d3s3uice6y1d" path="res://assets/sfx/LevelUpAlt1.wav" id="5_1hw5x"]
 [ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="5_761nh"]
 [ext_resource type="PackedScene" uid="uid://csy77bvwh14dl" path="res://scenes/enemies/destroyer_enemy.tscn" id="5_hfaci"]
+[ext_resource type="PackedScene" uid="uid://dhjvhbhsmr0gl" path="res://scenes/enemies/blade_enemy.tscn" id="7_xkhsh"]
+[ext_resource type="PackedScene" uid="uid://day7ijqengkhx" path="res://scenes/enemies/laser_enemy.tscn" id="8_h8s3s"]
 
 [sub_resource type="Resource" id="Resource_50rs7"]
 script = ExtResource("3_efd08")
@@ -26,6 +28,18 @@ scene = ExtResource("5_761nh")
 weight = 1.0
 cost = 5.0
 
+[sub_resource type="Resource" id="Resource_arp86"]
+script = ExtResource("3_efd08")
+scene = ExtResource("7_xkhsh")
+weight = 1.0
+cost = 2.0
+
+[sub_resource type="Resource" id="Resource_43roj"]
+script = ExtResource("3_efd08")
+scene = ExtResource("8_h8s3s")
+weight = 1.0
+cost = 4.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 38
 script = ExtResource("1_monq1")
@@ -35,7 +49,7 @@ position_smoothing_enabled = true
 
 [node name="WaveSpawner" type="Node2D" parent="."]
 script = ExtResource("2_apulf")
-spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7"), SubResource("Resource_cmr0v"), SubResource("Resource_2flxw")])
+spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7"), SubResource("Resource_cmr0v"), SubResource("Resource_2flxw"), SubResource("Resource_arp86"), SubResource("Resource_43roj")])
 
 [node name="LevelUpSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_1hw5x")
