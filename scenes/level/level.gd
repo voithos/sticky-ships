@@ -17,16 +17,16 @@ var growth_level_tween: Tween
 func _enter_tree() -> void:
 	Global.level = self
 
-	player = Global.PLAYER_SCENE.instantiate()
+	player = Config.PLAYER_SCENE.instantiate()
 	Global.player = player
 	add_child(player)
 
 	# TODO: Remove.
-	#var drop = Global.ENERGY_DROP_SCENE.instantiate()
+	#var drop := Config.ENERGY_DROP_SCENE.instantiate()
 	#add_child(drop)
 
 	# TODO: Remove.
-	var drop_chunk := Global.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
+	var drop_chunk := Config.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
 	drop_chunk.position = Vector2(0.0, 48.0)
 	add_child(drop_chunk)
 
@@ -46,12 +46,11 @@ func level_up() -> void:
 
 	var camera := get_viewport().get_camera_2d()
 
-	var next_zoom := Vector2.ONE * Global.INITIAL_CAMERA_ZOOM / Global.get_growth_level_scale(next_level)
+	var next_zoom := Vector2.ONE * Config.INITIAL_CAMERA_ZOOM / Config.get_growth_level_scale(next_level)
 
 	# FIXME: Implement growth system
 	#
 	# - Reduce projectile damage when it's small.
-	#   - Use/adapt Global.get_item_size_damage_multiplier.
 	# - Update systems to spawn new items at the correct scale and resolution.
 	#   - Enemy-wave system.
 	#   - Guns shooting projectiles.
@@ -107,7 +106,7 @@ func _on_growth_transition_finished() -> void:
 		drop.queue_free()
 
 	# Remove too-small enemies.
-	var enemies := get_tree().get_nodes_in_group(Global.ENEMIES_GROUP)
+	var enemies := get_tree().get_nodes_in_group(Config.ENEMIES_GROUP)
 	var enemies_to_remove := enemies.filter(func (enemy: Node):
 		assert(enemy is Enemy)
 		return enemy.growth_level < Session.current_growth_level - 1
@@ -117,7 +116,7 @@ func _on_growth_transition_finished() -> void:
 		enemy.queue_free()
 
 	# Remove too-small projectiles.
-	var projectiles := get_tree().get_nodes_in_group(Global.PROJECTILES_GROUP)
+	var projectiles := get_tree().get_nodes_in_group(Config.PROJECTILES_GROUP)
 	var projectiles_to_remove := projectiles.filter(func (projectile: Node):
 		assert(projectile is Projectile)
 		return projectile.growth_level < Session.current_growth_level - 1
@@ -128,5 +127,5 @@ func _on_growth_transition_finished() -> void:
 
 	growth_level_tween = null
 	levelling_up = false
-	if Global.is_at_max_growth_level() and Global.force_win_when_reaching_max_growth_level:
+	if Global.is_at_max_growth_level() and Config.force_win_when_reaching_max_growth_level:
 		player.win()

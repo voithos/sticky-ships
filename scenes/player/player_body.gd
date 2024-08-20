@@ -49,13 +49,9 @@ func _add_attached_sub_part(sub_part: Part) -> void:
 func set_core(growth_level: int) -> void:
 	clear_parts()
 
-	core_part = Global.part_type_to_packed_scene(
-		Global.PartType.Core,
-		growth_level).instantiate()
-	core_part.looks_for_nearby_connections_when_entering_tree = false
+	var config: Dictionary = Config.get_current_level_config(growth_level)
+	core_part = Config.instantiate_part(config.core_type)
 	add_child(core_part)
-
-	core_part.health.reset_health(Global.get_max_health(growth_level))
 
 	core_part.health.health_changed.connect(_on_core_health_changed)
 	_update_part_stats()
@@ -93,9 +89,9 @@ func _update_total_mass() -> void:
 
 func _update_growth_progress() -> void:
 	growth_progress = parts.reduce(func (accum, part):
-		return accum + Global.get_growth_for_part(part.type, part.growth_level)
+		return accum + part.growth_progress_value
 	, 0)
-	growth_progress_ratio = growth_progress / Global.get_next_level_growth(Session.current_growth_level)
+	growth_progress_ratio = growth_progress / Config.get_growth_progress_to_next_level(Session.current_growth_level)
 
 
 func _update_part_stats() -> void:

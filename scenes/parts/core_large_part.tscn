@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctagqlnlgv0vx"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_h6acy"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_bkr4e"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_uhbqj"]
+[ext_resource type="Texture2D" uid="uid://dtuk0owfyw8cw" path="res://assets/sprites/parts/core_2.png" id="4_fv7mh"]
+[ext_resource type="PackedScene" uid="uid://bk0ob0f1kxgmm" path="res://scenes/battle/basic_gun.tscn" id="5_1xsp4"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_ptr81"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_4uv1c"]
+
+[node name="CoreLargePart" type="Node2D"]
+script = ExtResource("1_h6acy")
+type = 1
+mass = 2.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_bkr4e")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_uhbqj")]
+health_component = NodePath("../HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_fv7mh")
+
+[node name="BasicGun" parent="." instance=ExtResource("5_1xsp4")]
+position = Vector2(0, -18)
+projectile_collision_mask = 36
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("6_ptr81")]
+unique_name_in_owner = true
+position = Vector2(-10, 0)
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("6_ptr81")]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+
+[node name="ForwardAttachPoint" parent="." instance=ExtResource("6_ptr81")]
+unique_name_in_owner = true
+position = Vector2(0, -10)
+
+[node name="RearAttachPoint" parent="." instance=ExtResource("6_ptr81")]
+unique_name_in_owner = true
+position = Vector2(0, 10)
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_4uv1c")
+bus = &"SFX"
+
+[editable path="Hurtbox"]

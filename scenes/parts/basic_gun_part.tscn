@@ -10,7 +10,7 @@
 
 [node name="BasicGunPart" type="Node2D"]
 script = ExtResource("1_o0bfy")
-type = 2
+type = 4
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_vnmqv")

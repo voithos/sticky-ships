@@ -12,7 +12,6 @@ radius = 8.0
 
 [node name="GunnerEnemyPartChassis" type="Node2D"]
 script = ExtResource("1_4tjgs")
-type = 2
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_i3hql")

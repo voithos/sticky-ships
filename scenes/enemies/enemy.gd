@@ -2,9 +2,20 @@ class_name Enemy
 extends CharacterBody2D
 
 
-@export var explosion_scene: PackedScene
+@export var type := Config.EnemyType.UNKNOWN:
+	get:
+		return type
+	set(value):
+		type = value
+		var config: Dictionary = Config.ENEMY_TYPE_CONFIG[type]
+		growth_level = config.growth_level
+		scale = Vector2.ONE * config.scale * Config.ENEMY_SCALE_MULTIPLIER
+		health_value = config.health * Config.ENEMY_HEALTH_MULTIPLIER
 
-@export var growth_level := 1
+var growth_level := 1
+var health_value := 1
+
+@export var explosion_scene: PackedScene
 
 var health: HealthComponent = null
 
@@ -35,7 +46,7 @@ var _player_seek_location := GSAIAgentLocation.new()
 
 
 func _init() -> void:
-	add_to_group(Global.ENEMIES_GROUP)
+	add_to_group(Config.ENEMIES_GROUP)
 
 
 func _ready() -> void:
@@ -62,6 +73,7 @@ func try_fire_light() -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
+	health.reset_health(health_value)
 	health.health_changed.connect(_health_changed)
 	health.health_depleted.connect(die)
 
@@ -73,8 +85,8 @@ func player_distance_squared() -> float:
 ## Subclasses should override to prepare steering params / agents for a frame.
 func _steering_process(delta: float) -> void:
 	# Calculate offset by a fixed distance
-	var playerpos := Global.player.agent.position
-	var target := playerpos + (agent.position - playerpos).normalized() * player_seek_offset
+	var playerpos: Vector3 = Global.player.agent.position
+	var target: Vector3 = playerpos + (agent.position - playerpos).normalized() * player_seek_offset
 	_player_seek_location.position = target
 
 
@@ -111,10 +123,10 @@ func _physics_process(delta: float) -> void:
 
 func maybe_drop_part() -> void:
 	for droppable in droppables:
-		var chance := droppable.chance * Global.DEFAULT_PART_DROP_RATE_MULTIPLIER
+		var chance := droppable.chance * Config.DEFAULT_PART_DROP_RATE_MULTIPLIER
 		if randf() < chance:
 			var dropped_scene := droppable.drop.instantiate()
-			var empty_drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
+			var empty_drop := Config.EMPTY_PARTS_DROP_SCENE.instantiate()
 			empty_drop.add_child(dropped_scene)
 			empty_drop.global_position = global_position
 			empty_drop.global_rotation = global_rotation

@@ -14,8 +14,23 @@ const HIGH_HEALTH_RATIO_THRESHOLD := 0.8
 const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
 const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 
-@export var type := Global.PartType.UNKNOWN
-@export var growth_level := 1
+@export var type := Config.PartType.UNKNOWN:
+	get:
+		return type
+	set(value):
+		type = value
+		if type == Config.PartType.UNKNOWN:
+			return
+		var config: Dictionary = Config.PART_TYPE_CONFIG[type]
+		growth_level = config.growth_level
+		scale = Vector2.ONE * config.scale * Config.PLAYER_PART_SCALE_MULTIPLIER
+		health_value = config.health * Config.PLAYER_PART_HEALTH_MULTIPLIER
+		growth_progress_value = config.growth_progress_value * Config.PLAYER_PART_GROWTH_PROGRESS_VALUE_MULTIPLIER
+		mass = config.mass * Config.PLAYER_PART_MASS_MULTIPLIER
+
+var growth_level := 1
+var growth_progress_value := 0
+var health_value := 1
 
 # The mass of this part, as a whole.
 @export var mass: float = 0.5
@@ -48,7 +63,7 @@ var health: HealthComponent = null
 
 
 func _init() -> void:
-	add_to_group(Global.PARTS_GROUP)
+	add_to_group(Config.PARTS_GROUP)
 
 
 func _enter_tree() -> void:
@@ -141,7 +156,7 @@ func _init_components(node: Node) -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
-	health.reset_health(Global.get_health_for_part(type, growth_level))
+	health.reset_health(health_value)
 	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(_on_health_depleted)
 
@@ -150,12 +165,12 @@ func on_attached() -> void:
 	# Assign the hurtbox to the right layer
 	var hurtbox: Area2D = get_node("Hurtbox")
 	if hurtbox:
-		hurtbox.collision_layer = Global.PLAYER_COLLISION_LAYER
+		hurtbox.collision_layer = Config.PLAYER_COLLISION_LAYER
 
 	for g in light_guns:
-		g.projectile_collision_mask = Global.ENEMY_COLLISION_LAYER | Global.LEVEL_COLLISION_LAYER
+		g.projectile_collision_mask = Config.ENEMY_COLLISION_LAYER | Config.LEVEL_COLLISION_LAYER
 	for g in heavy_guns:
-		g.projectile_collision_mask = Global.ENEMY_COLLISION_LAYER | Global.LEVEL_COLLISION_LAYER
+		g.projectile_collision_mask = Config.ENEMY_COLLISION_LAYER | Config.LEVEL_COLLISION_LAYER
 
 
 func on_detached() -> void:
@@ -165,14 +180,15 @@ func on_detached() -> void:
 		hurtbox.collision_layer = 0
 
 	for g in light_guns:
-		g.projectile_collision_mask = Global.LEVEL_COLLISION_LAYER
+		g.projectile_collision_mask = Config.LEVEL_COLLISION_LAYER
 	for g in heavy_guns:
-		g.projectile_collision_mask = Global.LEVEL_COLLISION_LAYER
+		g.projectile_collision_mask = Config.LEVEL_COLLISION_LAYER
 
 
 func _on_health_changed(new_health: float, prev_health: float) -> void:
-	if type == Global.PartType.Core:
+	if Config.is_core_type(type):
 		print(new_health)
+
 	var weight: float = new_health / $HealthComponent.max_health
 
 	#get_sprite().modulate.a = lerp(MIN_HEALTH_MODULATION_ALPHA, MAX_HEALTH_MODULATION_ALPHA, weight)
@@ -196,11 +212,11 @@ func _on_health_changed(new_health: float, prev_health: float) -> void:
 		var fire_effect_scene: PackedScene
 		match next_fire_level:
 			1:
-				fire_effect_scene = Global.PART_FIRE_LOW_EFFECT_SCENE
+				fire_effect_scene = Config.PART_FIRE_LOW_EFFECT_SCENE
 			2:
-				fire_effect_scene = Global.PART_FIRE_MEDIUM_EFFECT_SCENE
+				fire_effect_scene = Config.PART_FIRE_MEDIUM_EFFECT_SCENE
 			3:
-				fire_effect_scene = Global.PART_FIRE_HIGH_EFFECT_SCENE
+				fire_effect_scene = Config.PART_FIRE_HIGH_EFFECT_SCENE
 			_:
 				assert(false)
 				return
@@ -229,7 +245,7 @@ func _on_health_depleted_deferred() -> void:
 	space_explosion.play()
 
 	print('part destroyed!')
-	if type == Global.PartType.Core:
+	if Config.is_core_type(type):
 		# Destruction of core means death
 		Global.player.die()
 	else:
@@ -387,7 +403,7 @@ func destroy() -> void:
 	if is_instance_valid(part.parent_connection):
 		part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
 
-	var drop := Global.EMPTY_PARTS_DROP_SCENE.instantiate()
+	var drop := Config.EMPTY_PARTS_DROP_SCENE.instantiate()
 	Global.level.add_child(drop)
 	Global.level.drops.push_back(drop)
 
