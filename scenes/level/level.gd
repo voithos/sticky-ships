@@ -48,26 +48,6 @@ func level_up() -> void:
 
 	var next_zoom := Vector2.ONE * Config.INITIAL_CAMERA_ZOOM / Config.get_growth_level_scale(next_level)
 
-	# FIXME: Implement growth system
-	#
-	# - Update systems to spawn new items at the correct scale and resolution.
-	#   - Enemy-wave system.
-	#   - No tiny guys on the first level.
-	# - Create a new set of enemies, projectiles, and parts for each growth level.
-	# - Add some logic for spawning large-version drops in the current level?
-	#   - And chunks of them.
-	#   - These will be stationary, non-interactive obstacles for the player to move around.
-	#   - Then add logic to activate these as interactible when leveling-up.
-	#   - We could do the same thing for enemies.
-	#   - For this to work, we might need the scale factor to be bigger. x16?
-	#     - We probably would still want to only create art at x8 though, and then scale the art differently.
-	#   - Slightly reduce enemy drops to compensate.
-	# - Balance config multipliers for each growth level.
-	#
-	# - Damage/destroy all enemies within a radius when leveling-up.
-	#
-	# - Show sprite overlays for whichever aspects have been upgraded.
-
 	if is_instance_valid(growth_level_tween):
 		growth_level_tween.kill()
 
