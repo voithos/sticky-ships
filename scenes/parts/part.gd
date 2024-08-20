@@ -227,14 +227,14 @@ func _on_health_depleted_deferred() -> void:
 	assert(is_instance_valid(space_explosion))
 	space_explosion.reparent(Global.level)
 	space_explosion.play()
-	
+
 	print('part destroyed!')
 	if type == Global.PartType.Core:
 		# Destruction of core means death
 		Global.player.die()
 	else:
 		Global.player.body.destroy_part(self)
-	
+
 	await space_explosion.finished
 	space_explosion.queue_free()
 

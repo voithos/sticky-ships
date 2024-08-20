@@ -50,19 +50,16 @@ func maybe_do_damage(to: Node2D) -> void:
 
 
 func die() -> void:
-	
+
 	assert(is_instance_valid(projectile_hit))
 	projectile_hit.reparent(Global.level)
 	projectile_hit.play()
-	
+
 	if explosion_effect_scene:
 		var fx := explosion_effect_scene.instantiate()
 		fx.global_position = global_position
 		add_sibling(fx)
 	queue_free()
-	
+
 	await projectile_hit.finished
 	projectile_hit.queue_free()
-	
-
-	
