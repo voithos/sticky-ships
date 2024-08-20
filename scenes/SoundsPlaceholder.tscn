@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://gfroa5bgjhlo"]
+[gd_scene load_steps=12 format=3 uid="uid://gfroa5bgjhlo"]
 
 [ext_resource type="AudioStream" uid="uid://dg13ojbocsi1q" path="res://assets/sfx/Impact/Impact-cm-02.wav" id="1_bcgmv"]
 [ext_resource type="AudioStream" uid="uid://bk0nhf36gqs2d" path="res://assets/sfx/Impact/Impact-cm_01-02.wav" id="2_67wuh"]
 [ext_resource type="AudioStream" uid="uid://cbn8am8587ctk" path="res://assets/sfx/Impact/Impact-cm_02-02.wav" id="3_kdj8l"]
 [ext_resource type="AudioStream" uid="uid://cd5iaevpvjb00" path="res://assets/sfx/Impact/Impact-cm_03-02.wav" id="4_j5kg0"]
+[ext_resource type="AudioStream" uid="uid://ch2esv5qkchh3" path="res://assets/sfx/BladeSFX.wav" id="5_mh84f"]
+[ext_resource type="AudioStream" uid="uid://cmgsni6t73eyh" path="res://assets/sfx/LowLaunch/Launch-05.wav" id="6_p1wi7"]
+[ext_resource type="AudioStream" uid="uid://ducha0jxq4a3n" path="res://assets/sfx/LowLaunch/Launch-07.wav" id="7_guget"]
+[ext_resource type="AudioStream" uid="uid://bf46leflmpghx" path="res://assets/sfx/LowLaunch/Launch-08.wav" id="8_kvwwn"]
+[ext_resource type="AudioStream" uid="uid://djnn0obrjd6kh" path="res://assets/sfx/LowLaunch/Launch-10.wav" id="9_movh5"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l3jj7"]
 streams_count = 4
@@ -12,9 +17,24 @@ stream_1/stream = ExtResource("2_67wuh")
 stream_2/stream = ExtResource("3_kdj8l")
 stream_3/stream = ExtResource("4_j5kg0")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_432hf"]
+streams_count = 4
+stream_0/stream = ExtResource("6_p1wi7")
+stream_1/stream = ExtResource("7_guget")
+stream_2/stream = ExtResource("8_kvwwn")
+stream_3/stream = ExtResource("9_movh5")
+
 [node name="SoundsPlaceholder" type="Node2D"]
 
 [node name="ImpactSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_l3jj7")
 volume_db = -10.165
+bus = &"SFX"
+
+[node name="BladeSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mh84f")
+bus = &"SFX"
+
+[node name="LowLaunchSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_432hf")
 bus = &"SFX"
