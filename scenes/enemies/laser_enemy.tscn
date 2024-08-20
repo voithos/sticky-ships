@@ -1,53 +1,64 @@
-[gd_scene load_steps=19 format=3 uid="uid://day7ijqengkhx"]
+[gd_scene load_steps=29 format=3 uid="uid://day7ijqengkhx"]
 
 [ext_resource type="Script" path="res://scenes/enemies/laser_enemy.gd" id="1_trf4b"]
+[ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_jo2f4"]
+[ext_resource type="Script" path="res://scenes/enemies/droppable.gd" id="2_t72ey"]
+[ext_resource type="Texture2D" uid="uid://c2x7meb2oqrak" path="res://assets/sprites/enemies/laser_enemy.png" id="3_1j8rh"]
+[ext_resource type="PackedScene" uid="uid://btuckq6kclbf5" path="res://scenes/parts/laser_enemy_part_laser1.tscn" id="3_idgu5"]
+[ext_resource type="PackedScene" uid="uid://ddjuf73w3bchj" path="res://scenes/parts/laser_enemy_part_laser2.tscn" id="4_eda8j"]
 [ext_resource type="Material" uid="uid://bad7xnst617kn" path="res://scenes/enemies/damage_flash_shader.tres" id="5_cuhdv"]
 [ext_resource type="PackedScene" uid="uid://ccrb68o7wfwc" path="res://scenes/battle/laser.tscn" id="6_54tnh"]
-[ext_resource type="Texture2D" uid="uid://chqsmjxow50dd" path="res://assets/sprites/enemies/blade_enemy.png" id="6_w76ep"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="7_c62wa"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="8_nfl6j"]
+[ext_resource type="AudioStream" uid="uid://dgi72tkgfbvv3" path="res://assets/sfx/Explosion/Explosion.01_02-02.wav" id="11_8a5he"]
+[ext_resource type="AudioStream" uid="uid://culmj2h5dnaug" path="res://assets/sfx/Explosion/Explosion.01_02-04.wav" id="12_bp0bf"]
+[ext_resource type="AudioStream" uid="uid://pgrdqdagi1uc" path="res://assets/sfx/Explosion/Explosion.01_02-06.wav" id="13_cq0lx"]
+[ext_resource type="AudioStream" uid="uid://cricnmh6sg6rm" path="res://assets/sfx/Explosion/Explosion.01_02-08.wav" id="14_tmhiv"]
+[ext_resource type="AudioStream" uid="uid://bpqwcok0flwyb" path="res://assets/sfx/Explosion/Explosion.01_02-09.wav" id="15_tirv1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vfuao"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="Resource" id="Resource_1g5b4"]
+script = ExtResource("2_t72ey")
+drop = ExtResource("3_idgu5")
+weight = 1.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqbnr"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="Resource" id="Resource_115ot"]
+script = ExtResource("2_t72ey")
+drop = ExtResource("4_eda8j")
+weight = 1.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n5bm1"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tott2"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4of88"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwnk3"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3joek"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(128, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntu03"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d3lw7"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(160, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcqbk"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ht2t"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(192, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_nglqa"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ewsq1"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(224, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_050r5"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3skwd"]
-atlas = ExtResource("6_w76ep")
-region = Rect2(256, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs500"]
+atlas = ExtResource("3_1j8rh")
+region = Rect2(384, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_aeqjd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_iyilk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vfuao")
+"texture": SubResource("AtlasTexture_tott2")
 }],
 "loop": true,
 "name": &"idle",
@@ -55,51 +66,59 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dqbnr")
+"texture": SubResource("AtlasTexture_iwnk3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n5bm1")
+"texture": SubResource("AtlasTexture_ntu03")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4of88")
+"texture": SubResource("AtlasTexture_qcqbk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3joek")
+"texture": SubResource("AtlasTexture_nglqa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d3lw7")
+"texture": SubResource("AtlasTexture_050r5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1ht2t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ewsq1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3skwd")
+"texture": SubResource("AtlasTexture_vs500")
 }],
 "loop": true,
 "name": &"thrust",
-"speed": 12.0
+"speed": 30.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qngo"]
-size = Vector2(24, 18)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wq5pv"]
+radius = 8.0
+height = 52.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ea5u2"]
-radius = 11.0
+radius = 16.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2r3pi"]
+streams_count = 5
+stream_0/stream = ExtResource("11_8a5he")
+stream_1/stream = ExtResource("12_bp0bf")
+stream_2/stream = ExtResource("13_cq0lx")
+stream_3/stream = ExtResource("14_tmhiv")
+stream_4/stream = ExtResource("15_tirv1")
 
 [node name="LaserEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_trf4b")
+explosion_scene = ExtResource("2_jo2f4")
+angular_drag = 0.01
+angular_accel_max = 10000
+angular_speed_max = 180
+droppables = Array[ExtResource("2_t72ey")]([SubResource("Resource_1g5b4"), SubResource("Resource_115ot")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("5_cuhdv")
-sprite_frames = SubResource("SpriteFrames_aeqjd")
+sprite_frames = SubResource("SpriteFrames_iyilk")
 animation = &"thrust"
 autoplay = "thrust"
-frame_progress = 0.773334
+frame_progress = 0.498521
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_c62wa")
@@ -111,20 +130,20 @@ collision_layer = 4
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_1qngo")
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_wq5pv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ea5u2")
 
 [node name="Laser" parent="." instance=ExtResource("6_54tnh")]
-position = Vector2(0, -10)
-growth_level = null
-duration = null
-cooldown = null
-damage_cooldown = null
-damage = null
-projectile_damage_multiplier = null
-damage_collision_mask = null
+position = Vector2(0, -20)
+fires_automatically = false
+damage = 10
+damage_collision_mask = 9
+
+[node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_2r3pi")
+bus = &"SFX"
 
 [editable path="Hurtbox"]

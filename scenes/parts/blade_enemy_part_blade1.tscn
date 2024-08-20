@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_8b48b"]
 [ext_resource type="Texture2D" uid="uid://cgtewxbkndhu2" path="res://assets/sprites/parts/blade_enemy_parts.png" id="4_7ydr2"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_mb4ya"]
-[ext_resource type="PackedScene" uid="uid://brprybcbal3t0" path="res://scenes/battle/blade.tscn" id="7_2iet8"]
+[ext_resource type="PackedScene" uid="uid://qv01xfc4asrd" path="res://scenes/battle/blade.tscn" id="7_2iet8"]
 [ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_q461h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ioa2x"]

@@ -80,6 +80,15 @@ func _on_growth_transition_finished() -> void:
 	# Remove too-small parts from the player.
 	player.body.remove_too_small_parts(Session.current_growth_level)
 
+	# TODO: This sanitization step should not be necessary.
+	#       Debug why `drops` can have invalid entries.
+	var drop_indices_to_remove: Array[int] = []
+	for i in drops.size():
+		if !is_instance_valid(drops[i]):
+			drop_indices_to_remove.push_front(i)
+	for index in drop_indices_to_remove:
+		drops.remove_at(index)
+
 	# Remove too-small parts from drops.
 	for drop in drops:
 		if drop is PartsDrop:
@@ -88,6 +97,7 @@ func _on_growth_transition_finished() -> void:
 	# Remove any drops that are now empty or too small.
 	var drops_to_remove := drops.filter(func (drop: Drop): return drop.growth_level < Session.current_growth_level - 1 or drop.parts.is_empty())
 	for drop in drops_to_remove:
+		drops.erase(drop)
 		drop.queue_free()
 
 	# Remove too-small enemies.

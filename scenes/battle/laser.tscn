@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccrb68o7wfwc"]
+[gd_scene load_steps=7 format=3 uid="uid://ccrb68o7wfwc"]
 
 [ext_resource type="Script" path="res://scenes/battle/laser.gd" id="1_nstu2"]
 [ext_resource type="Texture2D" uid="uid://ik26trcvhkmo" path="res://assets/sprites/battle/laser.png" id="2_273ry"]
-[ext_resource type="PackedScene" uid="uid://dix10f8b4ubof" path="res://scenes/battle/laser_beam.tscn" id="3_utkep"]
+[ext_resource type="AudioStream" uid="uid://dobqk3ko531h8" path="res://assets/sfx/BEAM.wav" id="4_32nuu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4nlwu"]
 atlas = ExtResource("2_273ry")
@@ -19,22 +19,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27g33"]
+size = Vector2(256, 8)
+
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_nstu2")
-growth_level = null
-duration = null
-cooldown = null
-damage_cooldown = null
-damage = null
-projectile_damage_multiplier = null
-damage_collision_mask = null
 
-[node name="LaserBeam" parent="." instance=ExtResource("3_utkep")]
-visible = false
+[node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(0, -5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hch24")
 autoplay = "default"
 
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 29
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -133)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_27g33")
+
+[node name="BeamSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_32nuu")
+bus = &"SFX"
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_basic_gun_animation_finished"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]

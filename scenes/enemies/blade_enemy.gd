@@ -1,3 +1,4 @@
+class_name BladeEnemy
 extends Enemy
 
 
@@ -8,8 +9,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-
-	$Blade.try_cut()
 
 	if accel.linear.length_squared() < 1000:
 		$AnimatedSprite2D.play("idle")
