@@ -25,7 +25,13 @@ func _enter_tree() -> void:
 	linear_damp = linear_damp_override
 	angular_damp = angular_damp_override
 
+	_show_outline()
+
 
 func _exit_tree() -> void:
 	if Global.level.drops.has(self):
 		Global.level.drops.erase(self)
+
+
+func _show_outline() -> void:
+	material = Config.DROP_OUTLINE_MATERIAL

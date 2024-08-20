@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://duh8w0vk3u3xm"]
+
+[ext_resource type="Shader" path="res://scenes/drops/outline_material.gdshader" id="1_gs6um"]
+
+[resource]
+shader = ExtResource("1_gs6um")
+shader_parameter/outline_color = Vector4(1, 0.922, 0.514, 1)
+shader_parameter/padding = 0
+shader_parameter/border_size = 1
