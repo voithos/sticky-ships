@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=9 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
 [ext_resource type="Script" path="res://scenes/enemies/wave_spawner.gd" id="2_apulf"]
 [ext_resource type="Script" path="res://scenes/enemies/spawnable.gd" id="3_efd08"]
 [ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="4_pnmxi"]
-[ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="5_761nh"]
 [ext_resource type="AudioStream" uid="uid://d3s3uice6y1d" path="res://assets/sfx/LevelUpAlt1.wav" id="5_1hw5x"]
+[ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="5_761nh"]
 
 [sub_resource type="Resource" id="Resource_50rs7"]
 script = ExtResource("3_efd08")
