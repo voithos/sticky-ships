@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GMTK Game Jam 2024"
+config/name="Sticky Ships"
 run/main_scene="res://scenes/level/level_container.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
