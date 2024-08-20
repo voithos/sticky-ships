@@ -1,8 +1,6 @@
 extends Node
 
 
-const DEFAULT_VIEWPORT_SIZE := Vector2(320, 180)
-
 var level_container
 var hud: Hud
 var main_menu: MainMenu

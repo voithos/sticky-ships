@@ -35,6 +35,8 @@ const ENEMIES_GROUP := "enemies"
 const PARTS_GROUP := "parts"
 const PROJECTILES_GROUP := "projectiles"
 
+const DEFAULT_VIEWPORT_SIZE := Vector2(320, 180)
+
 const GROWTH_LEVEL_SCALE_FACTOR := 8.0
 
 const MAX_GROWTH_LEVEL := 3

@@ -93,8 +93,8 @@ func _get_random_spawn_position(spawn_radius: float) -> Vector2:
 
 
 func _get_spawn_radius() -> float:
-	var viewport_radius := (Global.DEFAULT_VIEWPORT_SIZE / 2.0).length()
-	return (viewport_radius + SPAWN_DISTANCE_OUTSIDE_VIEWPORT_RADIUS) *  Global.get_growth_level_scale(Session.current_growth_level)
+	var viewport_radius := (Config.DEFAULT_VIEWPORT_SIZE / 2.0).length()
+	return (viewport_radius + SPAWN_DISTANCE_OUTSIDE_VIEWPORT_RADIUS) *  Config.get_growth_level_scale(Session.current_growth_level)
 
 
 func _schedule_next_spawn() -> void:
