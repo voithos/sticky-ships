@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://dp5udmqygl0i3"]
+
+[ext_resource type="Script" path="res://scenes/thrusters/basic_thruster.gd" id="1_ykm17"]
+[ext_resource type="Texture2D" uid="uid://djtkcxp5versk" path="res://assets/sprites/thrusters/thruster2.png" id="2_kgcbf"]
+[ext_resource type="AudioStream" uid="uid://dy72r14wanj0o" path="res://assets/sfx/Thruster.wav" id="3_y7adi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jh1qf"]
+atlas = ExtResource("2_kgcbf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_738va"]
+atlas = ExtResource("2_kgcbf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thoo2"]
+atlas = ExtResource("2_kgcbf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhvn8"]
+atlas = ExtResource("2_kgcbf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvxk4"]
+atlas = ExtResource("2_kgcbf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n165y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jh1qf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_738va")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thoo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhvn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvxk4")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 24.0
+}]
+
+[node name="Thruster2" type="Node2D" node_paths=PackedStringArray("animated_sprite")]
+script = ExtResource("1_ykm17")
+propulsion = 4.0
+animated_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n165y")
+animation = &"thrust"
+autoplay = "idle"
+frame_progress = 0.91228
+
+[node name="Thruster_SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_y7adi")
+volume_db = -4.0

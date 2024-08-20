@@ -60,7 +60,8 @@ func rot_90_ccw(v: Vector2) -> Vector2:
 func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, direction_y: Vector2) -> Vector2:
 	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
 	# We start with the core's default movement capabilities.
-	var max_propulsion := Vector2(inherent_propulsion, (inherent_propulsion * reverse_multiplier if is_reversing else inherent_propulsion))
+	var inherent := inherent_propulsion * Config.get_growth_level_scale(Session.current_growth_level)
+	var max_propulsion := Vector2(inherent, (inherent * reverse_multiplier if is_reversing else inherent))
 
 	for part in body.parts:
 		for thruster in part.thrusters:

@@ -27,7 +27,7 @@ const PROJECTILES_GROUP := "projectiles"
 
 const DEFAULT_VIEWPORT_SIZE := Vector2(320, 180)
 
-const GROWTH_LEVEL_SCALE_FACTOR := 4.0
+const GROWTH_LEVEL_SCALE_FACTOR := 2.0
 
 const MAX_GROWTH_LEVEL := 3
 

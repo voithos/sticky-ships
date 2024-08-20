@@ -14,6 +14,10 @@ var drops: Array[Drop] = []
 var growth_level_tween: Tween
 
 
+func _physics_process(delta: float) -> void:
+	if Screen.is_debug_pressed():
+		level_up()
+
 func _enter_tree() -> void:
 	Global.level = self
 
