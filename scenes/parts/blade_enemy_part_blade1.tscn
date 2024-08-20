@@ -49,7 +49,6 @@ bus = &"SFX"
 
 [node name="Blade" parent="." instance=ExtResource("7_2iet8")]
 position = Vector2(0, -7)
-damage = 6
 damage_collision_mask = 20
 
 [editable path="Hurtbox"]

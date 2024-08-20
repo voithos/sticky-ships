@@ -139,7 +139,7 @@ shape = SubResource("CircleShape2D_ea5u2")
 [node name="Laser" parent="." instance=ExtResource("6_54tnh")]
 position = Vector2(0, -20)
 fires_automatically = false
-damage = 10
+damage = 3
 damage_collision_mask = 9
 
 [node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]

@@ -66,6 +66,7 @@ mass = 10.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_yvjf3")
+max_health = 20.0
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_gc0vn")]
 health_component = NodePath("../HealthComponent")

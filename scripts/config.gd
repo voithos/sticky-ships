@@ -35,7 +35,6 @@ const INITIAL_CAMERA_ZOOM := 1.0
 
 const GROWTH_PROGRESS_TO_NEXT_LEVEL_MULTIPLIER := 1.0
 
-const PLAYER_PART_HEALTH_MULTIPLIER := 1.0
 const PLAYER_PART_DAMAGE_MULTIPLIER := 1.0
 const PLAYER_PART_SCALE_MULTIPLIER := 1.0
 const PLAYER_PART_GROWTH_PROGRESS_VALUE_MULTIPLIER := 1.0
@@ -57,24 +56,21 @@ const ENEMY_COLLISION_LAYER = 1 << 2
 const LEVEL_COLLISION_LAYER = 1 << 5
 
 # TODO: Adjust this.
-const DEFAULT_NEXT_LEVEL_GROWTH := 10
+const DEFAULT_NEXT_LEVEL_GROWTH := 6
 
 const LEVEL_CONFIG := [
 	{
 		# Level 1
-		part_health_multiplier = 1,
 		growth_progress_to_next_level = DEFAULT_NEXT_LEVEL_GROWTH,
 		core_scene = CORE_SMALL_PART_SCENE,
 	},
 	{
 		# Level 2
-		part_health_multiplier = 4,
 		growth_progress_to_next_level = DEFAULT_NEXT_LEVEL_GROWTH * 4,
 		core_scene = CORE_MEDIUM_PART_SCENE,
 	},
 	{
 		# Level 3
-		part_health_multiplier = 16,
 		growth_progress_to_next_level = DEFAULT_NEXT_LEVEL_GROWTH * 16,
 		core_scene = CORE_LARGE_PART_SCENE,
 	},

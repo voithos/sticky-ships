@@ -19,10 +19,11 @@ func _input(event):
 			else:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-		if OS.is_debug_build():
-			if event.keycode == KEY_P:
-				is_paused = not is_paused
-				get_tree().set_pause(is_paused)
+		# TODO: Add this back in.
+		#if OS.is_debug_build():
+			#if event.keycode == KEY_P:
+				#is_paused = not is_paused
+				#get_tree().set_pause(is_paused)
 
 
 func is_debug_pressed():

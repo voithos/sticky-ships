@@ -14,6 +14,8 @@ const HIGH_HEALTH_RATIO_THRESHOLD := 0.8
 const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
 const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 
+const HEALTH_MULTIPLIER := 2.0
+
 @export var growth_level := 1
 @export var growth_progress_value := 1
 
@@ -151,6 +153,8 @@ func _init_components(node: Node) -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
+	health.max_health *= HEALTH_MULTIPLIER
+	health.health = health.max_health
 	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(_on_health_depleted)
 
@@ -413,7 +417,9 @@ func destroy() -> void:
 
 	# Detach from parent.
 	if is_instance_valid(part.parent_connection):
-		part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
+		# TODO: This guard shouldn't be needed.
+		if is_instance_valid(part.parent_connection.parent):
+			part.parent_connection.parent.part.remove_child_connection(part.parent_connection)
 
 	var drop := Config.EMPTY_PARTS_DROP_SCENE.instantiate()
 	Global.level.add_child(drop)
@@ -433,4 +439,5 @@ func on_destroyed() -> void:
 	if is_instance_valid(player_collision_shape_instance):
 		player_collision_shape_instance.queue_free()
 	player_collision_shape_instance = null
+
 	queue_free()
