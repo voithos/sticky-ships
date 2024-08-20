@@ -1,12 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmc6nx7ggqism"]
+[gd_scene load_steps=12 format=3 uid="uid://bmc6nx7ggqism"]
 
 [ext_resource type="Script" path="res://scenes/battle/basic_projectile.gd" id="1_dyrb1"]
 [ext_resource type="Texture2D" uid="uid://baarl67m76hh0" path="res://assets/sprites/battle/basic_projectile.png" id="2_6uiut"]
 [ext_resource type="PackedScene" uid="uid://del7hg6ux6mxm" path="res://scenes/fx/particle_pop1.tscn" id="2_o8oui"]
-[ext_resource type="AudioStream" uid="uid://d5fjblkhfjlm" path="res://assets/sfx/Hits/Hit.cm-01.wav" id="4_e6lmu"]
-[ext_resource type="AudioStream" uid="uid://c14yt4mrr334j" path="res://assets/sfx/Hits/Hit.cm-03.wav" id="5_oud8u"]
-[ext_resource type="AudioStream" uid="uid://dl2aeoi6ayqp7" path="res://assets/sfx/Hits/Hit.cm-05.wav" id="6_sluam"]
-[ext_resource type="AudioStream" uid="uid://blhgxm7rgrq6n" path="res://assets/sfx/Hits/Hit.cm-06.wav" id="7_7cyit"]
+[ext_resource type="AudioStream" uid="uid://d3vttxm4whasd" path="res://assets/sfx/Take Damage.cm.wav" id="4_iibkb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
 radius = 3.0
@@ -54,13 +51,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mi0uf"]
-streams_count = 4
-stream_0/stream = ExtResource("4_e6lmu")
-stream_1/stream = ExtResource("5_oud8u")
-stream_2/stream = ExtResource("6_sluam")
-stream_3/stream = ExtResource("7_7cyit")
-
 [node name="BasicProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
 collision_mask = 0
 script = ExtResource("1_dyrb1")
@@ -80,5 +70,7 @@ autoplay = "default"
 frame_progress = 0.862869
 
 [node name="ProjectileHit" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_mi0uf")
+stream = ExtResource("4_iibkb")
+volume_db = -9.179
+pitch_scale = 0.79
 bus = &"SFX"
