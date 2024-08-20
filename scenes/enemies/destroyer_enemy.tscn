@@ -1,11 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://csy77bvwh14dl"]
+[gd_scene load_steps=24 format=3 uid="uid://csy77bvwh14dl"]
 
 [ext_resource type="Script" path="res://scenes/enemies/destroyer_enemy.gd" id="1_tl7vv"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_nk8jf"]
 [ext_resource type="Script" path="res://scenes/enemies/droppable.gd" id="3_5davx"]
-[ext_resource type="PackedScene" uid="uid://ddg7jalg6t4pd" path="res://scenes/parts/gunner_enemy_part_chassis.tscn" id="4_8emc7"]
-[ext_resource type="PackedScene" uid="uid://c3wp4nst03ky8" path="res://scenes/parts/gunner_enemy_part_gun1.tscn" id="5_h0nl6"]
-[ext_resource type="PackedScene" uid="uid://c80onf8fc5s7e" path="res://scenes/parts/gunner_enemy_part_gun2.tscn" id="6_2tkhb"]
+[ext_resource type="PackedScene" uid="uid://b6m8wyi3wfa4q" path="res://scenes/parts/destroyer_enemy_part_gun1.tscn" id="4_fnm2t"]
+[ext_resource type="PackedScene" uid="uid://bmu1k0ug4sexx" path="res://scenes/parts/destroyer_enemy_part_gun2.tscn" id="5_yovsw"]
 [ext_resource type="Material" uid="uid://bad7xnst617kn" path="res://scenes/enemies/damage_flash_shader.tres" id="7_6f2c6"]
 [ext_resource type="Texture2D" uid="uid://8j04ye3be0is" path="res://assets/sprites/enemies/destroyer.png" id="8_b3jr3"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="9_1xnk0"]
@@ -20,17 +19,12 @@
 
 [sub_resource type="Resource" id="Resource_uuke1"]
 script = ExtResource("3_5davx")
-drop = ExtResource("4_8emc7")
+drop = ExtResource("4_fnm2t")
 weight = 1.0
 
 [sub_resource type="Resource" id="Resource_mlqas"]
 script = ExtResource("3_5davx")
-drop = ExtResource("5_h0nl6")
-weight = 1.0
-
-[sub_resource type="Resource" id="Resource_pqyjn"]
-script = ExtResource("3_5davx")
-drop = ExtResource("6_2tkhb")
+drop = ExtResource("5_yovsw")
 weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0x1i"]
@@ -81,7 +75,7 @@ angular_accel_max = 2500
 angular_speed_max = 90
 player_seek_offset = 70.0
 drop_rate = 0.8
-droppables = Array[ExtResource("3_5davx")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas"), SubResource("Resource_pqyjn")])
+droppables = Array[ExtResource("3_5davx")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("7_6f2c6")

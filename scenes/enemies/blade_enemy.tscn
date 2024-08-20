@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b7h5ccfpxidvp"]
+[gd_scene load_steps=30 format=3 uid="uid://dhjvhbhsmr0gl"]
 
 [ext_resource type="Script" path="res://scenes/enemies/blade_enemy.gd" id="1_6ojgs"]
 [ext_resource type="Script" path="res://scenes/enemies/droppable.gd" id="2_13otm"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="10_1wsib"]
 [ext_resource type="AudioStream" uid="uid://dgi72tkgfbvv3" path="res://assets/sfx/Explosion/Explosion.01_02-02.wav" id="10_3u28x"]
 [ext_resource type="AudioStream" uid="uid://culmj2h5dnaug" path="res://assets/sfx/Explosion/Explosion.01_02-04.wav" id="11_33coa"]
-[ext_resource type="PackedScene" uid="uid://qv01xfc4asrd" path="res://scenes/battle/blade.tscn" id="11_qdc1q"]
+[ext_resource type="PackedScene" path="res://scenes/battle/blade.tscn" id="11_qdc1q"]
 [ext_resource type="AudioStream" uid="uid://pgrdqdagi1uc" path="res://assets/sfx/Explosion/Explosion.01_02-06.wav" id="12_dncm1"]
 [ext_resource type="AudioStream" uid="uid://cricnmh6sg6rm" path="res://assets/sfx/Explosion/Explosion.01_02-08.wav" id="13_ct36d"]
 [ext_resource type="AudioStream" uid="uid://bpqwcok0flwyb" path="res://assets/sfx/Explosion/Explosion.01_02-09.wav" id="14_3rmdy"]

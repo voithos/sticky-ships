@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmu1k0ug4sexx"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_5wwk1"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_kfpjx"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_q31sn"]
+[ext_resource type="Texture2D" uid="uid://b8aivq581mhnc" path="res://assets/sprites/parts/destroyer_enemy_parts.png" id="4_4xesg"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="5_th42t"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="6_4ntxn"]
+[ext_resource type="PackedScene" uid="uid://dp5udmqygl0i3" path="res://scenes/thrusters/thruster2.tscn" id="8_atytt"]
+[ext_resource type="PackedScene" uid="uid://d3c0pudm0ljxw" path="res://scenes/battle/sprayer.tscn" id="8_qd4hi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2k8oe"]
+radius = 16.0
+
+[node name="DestroyerEnemyPartGun2" type="Node2D"]
+script = ExtResource("1_5wwk1")
+mass = 1.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_kfpjx")
+max_health = 20.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_q31sn")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_2k8oe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_4xesg")
+hframes = 2
+frame = 1
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("5_th42t")]
+unique_name_in_owner = true
+position = Vector2(-30, 2)
+rotation = -1.5708
+
+[node name="LeftAttachPoint2" parent="." instance=ExtResource("5_th42t")]
+unique_name_in_owner = true
+position = Vector2(0, -6)
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("5_th42t")]
+unique_name_in_owner = true
+position = Vector2(16, 5)
+rotation = 1.5708
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4ntxn")
+bus = &"SFX"
+
+[node name="Sprayer" parent="." instance=ExtResource("8_qd4hi")]
+position = Vector2(-19, -3)
+
+[node name="Thruster2" parent="." instance=ExtResource("8_atytt")]
+position = Vector2(0, 29)
+
+[editable path="Hurtbox"]
