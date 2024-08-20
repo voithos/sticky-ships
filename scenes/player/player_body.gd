@@ -254,9 +254,3 @@ func _remove_potential_overlap_mapping(point: AttachPoint) -> void:
 		assert(is_instance_valid(overlap.indicator))
 		overlap.indicator.queue_free()
 		potential_connection_overlaps.erase(point)
-
-
-class PotentialConnectionOverlap extends RefCounted:
-	var attached_point: AttachPoint
-	var detached_point: AttachPoint
-	var indicator: PotentialConnectionIndicator

@@ -375,6 +375,18 @@ func destroy() -> void:
     var descendant_parts: Array[Part] = []
     part.get_all_descendants(descendant_parts)
 
+    # Remove any tracked AttachPoint overlaps.
+    var overlaps_to_remove: Array[PotentialConnectionOverlap] = []
+    for attach_point in Global.player.body.potential_connection_overlaps:
+        var overlap: PotentialConnectionOverlap = \
+            Global.player.body.potential_connection_overlaps[attach_point]
+        if (attach_points.has(overlap.attached_point) or
+                attach_points.has(overlap.detached_point)):
+            overlaps_to_remove.push_back(overlap)
+    for overlap in overlaps_to_remove:
+        Global.player.body._remove_potential_overlap_mapping(overlap.attached_point)
+        Global.player.body._remove_potential_overlap_mapping(overlap.detached_point)
+
     parts.erase(part)
     if part == Global.player.body.core_part:
         Global.player.body.core_part = null

@@ -5,4 +5,7 @@
 [node name="EmptyPartsDrop" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 0
+linear_damp_mode = 1
+linear_damp = 0.1
+angular_damp_mode = 1
 script = ExtResource("1_gdyq4")
