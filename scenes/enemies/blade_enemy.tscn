@@ -1,0 +1,140 @@
+[gd_scene load_steps=24 format=3 uid="uid://4yh83hbmu3nt"]
+
+[ext_resource type="Script" path="res://scenes/enemies/blade_enemy.gd" id="1_6ojgs"]
+[ext_resource type="Script" path="res://scenes/enemies/droppable.gd" id="2_13otm"]
+[ext_resource type="PackedScene" uid="uid://dikbmjbno0xvm" path="res://scenes/parts/blade_enemy_part_blade1.tscn" id="3_tj6np"]
+[ext_resource type="PackedScene" uid="uid://la5u68smtrw4" path="res://scenes/parts/blade_enemy_part_blade2.tscn" id="4_ko1of"]
+[ext_resource type="Material" uid="uid://bad7xnst617kn" path="res://scenes/enemies/damage_flash_shader.tres" id="7_f42uv"]
+[ext_resource type="Texture2D" uid="uid://chqsmjxow50dd" path="res://assets/sprites/enemies/blade_enemy.png" id="8_xxx45"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="9_4x18c"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="10_1wsib"]
+[ext_resource type="PackedScene" uid="uid://brprybcbal3t0" path="res://scenes/battle/blade.tscn" id="11_qdc1q"]
+
+[sub_resource type="Resource" id="Resource_ncsrk"]
+script = ExtResource("2_13otm")
+drop = ExtResource("3_tj6np")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_c8lle"]
+script = ExtResource("2_13otm")
+drop = ExtResource("4_ko1of")
+weight = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfuao"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqbnr"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5bm1"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4of88"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3joek"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3lw7"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ht2t"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewsq1"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3skwd"]
+atlas = ExtResource("8_xxx45")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aeqjd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfuao")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqbnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5bm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4of88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3joek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3lw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ht2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewsq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3skwd")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qngo"]
+size = Vector2(24, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ea5u2"]
+radius = 11.0
+
+[node name="BladeEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_6ojgs")
+linear_speed_max = 225.0
+player_seek_offset = 8.0
+droppables = Array[ExtResource("2_13otm")]([SubResource("Resource_ncsrk"), SubResource("Resource_c8lle")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("7_f42uv")
+sprite_frames = SubResource("SpriteFrames_aeqjd")
+animation = &"thrust"
+autoplay = "thrust"
+frame_progress = 0.773334
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("9_4x18c")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_1wsib")]
+position = Vector2(0, 1)
+collision_layer = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_1qngo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ea5u2")
+
+[node name="Blade" parent="." instance=ExtResource("11_qdc1q")]
+position = Vector2(0, -10)
+damage_collision_mask = 9
+
+[editable path="Hurtbox"]

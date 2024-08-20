@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dikbmjbno0xvm"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_cdmuo"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_utk3q"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_8b48b"]
+[ext_resource type="Texture2D" uid="uid://cgtewxbkndhu2" path="res://assets/sprites/parts/blade_enemy_parts.png" id="4_7ydr2"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_mb4ya"]
+[ext_resource type="PackedScene" uid="uid://brprybcbal3t0" path="res://scenes/battle/blade.tscn" id="7_2iet8"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_q461h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioa2x"]
+size = Vector2(22, 14)
+
+[node name="BladeEnemyPartBlade1" type="Node2D"]
+script = ExtResource("1_cdmuo")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_utk3q")
+max_health = 10.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_8b48b")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ioa2x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_7ydr2")
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("6_mb4ya")]
+unique_name_in_owner = true
+position = Vector2(-12, 3)
+rotation = -1.5708
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("6_mb4ya")]
+unique_name_in_owner = true
+position = Vector2(12, 3)
+rotation = 1.5708
+
+[node name="BackAttachPoint" parent="." instance=ExtResource("6_mb4ya")]
+unique_name_in_owner = true
+position = Vector2(0, 10)
+rotation = 3.14159
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_q461h")
+bus = &"SFX"
+
+[node name="Blade" parent="." instance=ExtResource("7_2iet8")]
+position = Vector2(0, -7)
+damage = 6
+damage_collision_mask = 20
+
+[editable path="Hurtbox"]

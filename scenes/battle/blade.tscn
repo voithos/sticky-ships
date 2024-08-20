@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://brprybcbal3t0"]
+
+[ext_resource type="Script" path="res://scenes/battle/blade.gd" id="1_civym"]
+[ext_resource type="Texture2D" uid="uid://iatb3un5psax" path="res://assets/sprites/battle/basic_blade.png" id="2_rjoru"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfpf2"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e22ht"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo81u"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkt2s"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5ir4"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3awwt"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuy7k"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqh11"]
+atlas = ExtResource("2_rjoru")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bir7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfpf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e22ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uo81u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkt2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5ir4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3awwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuy7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqh11")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0fl3l"]
+radius = 4.0
+height = 28.0
+
+[node name="Blade" type="Node2D"]
+script = ExtResource("1_civym")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1bir7")
+autoplay = "default"
+frame_progress = 0.917212
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 29
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0fl3l")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_basic_gun_animation_finished"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]
