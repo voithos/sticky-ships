@@ -419,14 +419,13 @@ func destroy() -> void:
 		assert(parts.has(descendant_part))
 		parts.erase(descendant_part)
 		descendant_part.looks_for_nearby_connections_when_entering_tree = false
-		descendant_part.on_removed()
 		descendant_part.reparent(drop)
 
-	part.on_removed()
-	part.queue_free()
+	part.on_destroyed()
 
 
-func on_removed() -> void:
+func on_destroyed() -> void:
 	if is_instance_valid(player_collision_shape_instance):
 		player_collision_shape_instance.queue_free()
 	player_collision_shape_instance = null
+	queue_free()

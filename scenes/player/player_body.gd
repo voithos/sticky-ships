@@ -118,8 +118,7 @@ func get_core_sprite_size() -> Vector2:
 
 func clear_parts() -> void:
 	for part in parts:
-		part.on_removed()
-		part.queue_free()
+		part.on_destroyed()
 	parts.clear()
 	core_part = null
 
@@ -141,7 +140,8 @@ func on_part_added(part: Part) -> void:
 	var collision_shape := CollisionShape2D.new()
 	Global.player.add_child(collision_shape)
 
-	if is_instance_valid(part.player_collision_shape_instance):
+	if (is_instance_valid(part.player_collision_shape_instance) and
+			part.player_collision_shape_instance.get_parent() is PartsDrop):
 		part.player_collision_shape_instance.queue_free()
 
 	call_deferred("on_part_added_deferred", part, collision_shape)
