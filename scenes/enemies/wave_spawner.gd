@@ -7,9 +7,9 @@ extends Node2D
 @export var wave_max_time := 20.0
 
 ## The amount of "spawn currency" bonus from # of enemies defated (in total)
-@export var enemies_defeated_bonus := 1.0
+@export var enemies_defeated_bonus := 0.25
 ## The amount of "spawn currency" bonus based on growth level
-@export var growth_level_bonus := 1.0
+@export var growth_level_bonus := 10.0
 
 ## The max number of enemies spawned at one time. If 0, no max
 @export var max_spawned := 0
@@ -29,6 +29,7 @@ var total_weights: float = 0.0
 # TODO: Add a signal in case all enemies are destroyed early, we fire off the next wave
 
 func _ready() -> void:
+	Session.enemy_count_changed.connect(_on_enemy_count_changed)
 	for s in spawnables:
 		minimum_cost = minf(minimum_cost, s.cost)
 		total_weights += s.weight
@@ -74,7 +75,7 @@ func _weighted_pick() -> int:
 
 func _calculate_currency() -> float:
 	return (
-		Session.current_growth_level * growth_level_bonus +
+		(Session.current_growth_level - 1) * growth_level_bonus +
 		Session.enemies_destroyed * enemies_defeated_bonus +
 		minimum_cost
 	)
@@ -99,3 +100,9 @@ func _get_spawn_radius() -> float:
 
 func _schedule_next_spawn() -> void:
 	time_remaining = randf_range(wave_min_time, wave_max_time)
+
+
+func _on_enemy_count_changed(current: int, previous: int) -> void:
+	if current == 0:
+		# Force respawn
+		_spawn()

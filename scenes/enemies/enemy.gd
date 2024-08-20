@@ -47,6 +47,7 @@ var _player_seek_location := GSAIAgentLocation.new()
 
 func _init() -> void:
 	add_to_group(Config.ENEMIES_GROUP)
+	Session.on_enemy_created()
 
 
 func _ready() -> void:
@@ -156,6 +157,6 @@ func die_deferred() -> void:
 		var explosion := explosion_scene.instantiate()
 		explosion.global_position = global_position
 		add_sibling(explosion)
-	Session.enemies_destroyed += 1
+	Session.on_enemy_destroyed()
 	maybe_drop_part()
 	queue_free()

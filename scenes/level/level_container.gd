@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func start() -> void:
 	Session.current_growth_level = 1
+	Session.enemy_count = 0
 	Session.enemies_destroyed = 0
 	Session.is_game_over = false
 	Session.did_player_win = false
