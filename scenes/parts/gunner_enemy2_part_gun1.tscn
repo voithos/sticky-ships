@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://tn5may4s1am3"]
+
+[ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_5q0qh"]
+[ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_i8k3k"]
+[ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_6hdui"]
+[ext_resource type="Texture2D" uid="uid://bwdnavn3n42x3" path="res://assets/sprites/parts/gunner_enemy2_parts.png" id="4_cgc3j"]
+[ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="6_vfghu"]
+[ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="7_2jpmp"]
+[ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_hkacn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2k8oe"]
+radius = 16.0
+
+[node name="GunnerEnemy2PartGun1" type="Node2D"]
+script = ExtResource("1_5q0qh")
+mass = 1.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_i8k3k")
+max_health = 20.0
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_6hdui")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_2k8oe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_cgc3j")
+hframes = 2
+
+[node name="LeftAttachPoint" parent="." instance=ExtResource("6_vfghu")]
+unique_name_in_owner = true
+position = Vector2(-19, 1)
+rotation = -1.5708
+
+[node name="LeftAttachPoint2" parent="." instance=ExtResource("6_vfghu")]
+unique_name_in_owner = true
+position = Vector2(0, -10)
+
+[node name="RightAttachPoint" parent="." instance=ExtResource("6_vfghu")]
+unique_name_in_owner = true
+position = Vector2(7, 2)
+rotation = 1.5708
+
+[node name="BackAttachPoint" parent="." instance=ExtResource("6_vfghu")]
+unique_name_in_owner = true
+position = Vector2(0, 20)
+rotation = 3.14159
+
+[node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_hkacn")
+bus = &"SFX"
+
+[node name="BasicThruster" parent="." instance=ExtResource("7_2jpmp")]
+position = Vector2(-12, 17)
+
+[editable path="Hurtbox"]

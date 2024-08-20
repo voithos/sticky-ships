@@ -1,15 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=8 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
 [ext_resource type="Script" path="res://scenes/enemies/wave_spawner.gd" id="2_apulf"]
 [ext_resource type="Script" path="res://scenes/enemies/spawnable.gd" id="3_efd08"]
 [ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="4_pnmxi"]
+[ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="5_761nh"]
 
 [sub_resource type="Resource" id="Resource_50rs7"]
 script = ExtResource("3_efd08")
 scene = ExtResource("4_pnmxi")
-weight = 1.0
+weight = 2.0
 cost = 1.0
+
+[sub_resource type="Resource" id="Resource_2flxw"]
+script = ExtResource("3_efd08")
+scene = ExtResource("5_761nh")
+weight = 1.0
+cost = 5.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 38
@@ -20,4 +27,4 @@ position_smoothing_enabled = true
 
 [node name="WaveSpawner" type="Node2D" parent="."]
 script = ExtResource("2_apulf")
-spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7")])
+spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7"), SubResource("Resource_2flxw")])

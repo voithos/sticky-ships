@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bcboie0ogjc8o"]
+[gd_scene load_steps=23 format=3 uid="uid://bcboie0ogjc8o"]
 
 [ext_resource type="Script" path="res://scenes/enemies/gunner_enemy2.gd" id="1_fchrb"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_clwjx"]
 [ext_resource type="Script" path="res://scenes/enemies/droppable.gd" id="3_mjffr"]
-[ext_resource type="PackedScene" uid="uid://ddg7jalg6t4pd" path="res://scenes/parts/gunner_enemy_part_chassis.tscn" id="4_iu28d"]
-[ext_resource type="PackedScene" uid="uid://c3wp4nst03ky8" path="res://scenes/parts/gunner_enemy_part_gun1.tscn" id="5_myg2g"]
-[ext_resource type="PackedScene" uid="uid://c80onf8fc5s7e" path="res://scenes/parts/gunner_enemy_part_gun2.tscn" id="6_ue6qa"]
+[ext_resource type="PackedScene" uid="uid://tn5may4s1am3" path="res://scenes/parts/gunner_enemy2_part_gun1.tscn" id="4_76t6k"]
+[ext_resource type="PackedScene" uid="uid://f4304qhy7c8e" path="res://scenes/parts/gunner_enemy2_part_gun2.tscn" id="5_8gtw0"]
 [ext_resource type="Material" uid="uid://bad7xnst617kn" path="res://scenes/enemies/damage_flash_shader.tres" id="7_8jvro"]
 [ext_resource type="Texture2D" uid="uid://dvpo0n26rvyt0" path="res://assets/sprites/enemies/gunner_enemy2.png" id="8_jknne"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="9_vmnqk"]
@@ -15,17 +14,12 @@
 
 [sub_resource type="Resource" id="Resource_uuke1"]
 script = ExtResource("3_mjffr")
-drop = ExtResource("4_iu28d")
+drop = ExtResource("4_76t6k")
 weight = 1.0
 
 [sub_resource type="Resource" id="Resource_mlqas"]
 script = ExtResource("3_mjffr")
-drop = ExtResource("5_myg2g")
-weight = 1.0
-
-[sub_resource type="Resource" id="Resource_pqyjn"]
-script = ExtResource("3_mjffr")
-drop = ExtResource("6_ue6qa")
+drop = ExtResource("5_8gtw0")
 weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kuapa"]
@@ -95,7 +89,7 @@ collision_mask = 4
 script = ExtResource("1_fchrb")
 firing_distance = 200.0
 explosion_scene = ExtResource("2_clwjx")
-droppables = Array[ExtResource("3_mjffr")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas"), SubResource("Resource_pqyjn")])
+droppables = Array[ExtResource("3_mjffr")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("7_8jvro")
