@@ -31,6 +31,8 @@ var _player_seek_location := GSAIAgentLocation.new()
 
 @export var player_seek_offset := 50.0
 
+## The % chance of dropping something. What actually gets dropped is determined by droppable weights
+@export var drop_rate := 0.5
 @export var droppables: Array[Droppable] = []
 
 
@@ -111,9 +113,17 @@ func _physics_process(delta: float) -> void:
 
 
 func maybe_drop_part() -> void:
+	if randf() > (drop_rate * Config.DEFAULT_PART_DROP_RATE_MULTIPLIER):
+		return
+
+	var total_weight := 0.0
 	for droppable in droppables:
-		var chance := droppable.chance * Config.DEFAULT_PART_DROP_RATE_MULTIPLIER
-		if randf() < chance:
+		total_weight += droppable.weight
+
+	var target_weight := randf() * total_weight
+	for droppable in droppables:
+		target_weight -= droppable.weight
+		if target_weight <= 0:
 			var dropped_scene := droppable.drop.instantiate()
 			var empty_drop := Config.EMPTY_PARTS_DROP_SCENE.instantiate()
 			empty_drop.add_child(dropped_scene)

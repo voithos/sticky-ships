@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_7r1pg"]
 [ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_sygiw"]
 [ext_resource type="Texture2D" uid="uid://owf0haa8rp2w" path="res://icon.svg" id="3_xn8hx"]
+[ext_resource type="PackedScene" uid="uid://c80onf8fc5s7e" path="res://scenes/parts/gunner_enemy_part_gun2.tscn" id="5_3f7s7"]
 [ext_resource type="PackedScene" uid="uid://bbny0j6b3dwts" path="res://scenes/drops/empty_parts_drop.tscn" id="5_ts01t"]
-[ext_resource type="PackedScene" uid="uid://chy8i0ynxsylr" path="res://scenes/parts/basic_thruster_part.tscn" id="5_yfcfs"]
 [ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="7_3w60v"]
 [ext_resource type="PackedScene" uid="uid://c3wp4nst03ky8" path="res://scenes/parts/gunner_enemy_part_gun1.tscn" id="7_4cwjr"]
 [ext_resource type="PackedScene" uid="uid://ddg7jalg6t4pd" path="res://scenes/parts/gunner_enemy_part_chassis.tscn" id="8_ml6jh"]
@@ -29,9 +29,9 @@ position = Vector2(-1.5, -2.5)
 shape = SubResource("RectangleShape2D_hkr8e")
 
 [node name="EmptyPartsDrop2" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(-59, -26)
+position = Vector2(29, -26)
 
-[node name="BasicThrusterPart" parent="EmptyPartsDrop2" instance=ExtResource("5_yfcfs")]
+[node name="GunnerEnemyPartGun2" parent="EmptyPartsDrop2" instance=ExtResource("5_3f7s7")]
 
 [node name="EmptyPartsDrop3" parent="." instance=ExtResource("5_ts01t")]
 position = Vector2(-58, -117)
