@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="3_lkkdx"]
 [ext_resource type="Texture2D" uid="uid://cmama5c5gf223" path="res://assets/sprites/parts/laser_enemy_parts.png" id="4_1ki82"]
 [ext_resource type="PackedScene" uid="uid://ddtt2pxrfir0a" path="res://scenes/player/attach_point.tscn" id="5_thxvi"]
-[ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="6_qaals"]
+[ext_resource type="PackedScene" uid="uid://dp5udmqygl0i3" path="res://scenes/thrusters/thruster2.tscn" id="6_0ap8m"]
 [ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_eajmu"]
 [ext_resource type="PackedScene" uid="uid://ccrb68o7wfwc" path="res://scenes/battle/laser.tscn" id="8_jvxk5"]
 
@@ -42,8 +42,8 @@ unique_name_in_owner = true
 position = Vector2(10, 11)
 rotation = 1.5708
 
-[node name="BasicThruster" parent="." instance=ExtResource("6_qaals")]
-position = Vector2(0, 28)
+[node name="Thruster2" parent="." instance=ExtResource("6_0ap8m")]
+position = Vector2(0, 33)
 
 [node name="SpaceExplosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_eajmu")

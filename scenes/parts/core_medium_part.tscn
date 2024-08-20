@@ -23,11 +23,15 @@ script = ExtResource("2_fgtkp")
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_g55la")]
 health_component = NodePath("../HealthComponent")
 
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 3)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_iof1l")
 
 [node name="BasicGun" parent="." instance=ExtResource("5_trkqv")]
 position = Vector2(0, -18)
+bullet_damage_multiplier = 3.0
 projectile_collision_mask = 36
 
 [node name="LeftAttachPoint" parent="." instance=ExtResource("6_58wm5")]
@@ -77,5 +81,6 @@ rotation = 4.71238
 
 [node name="Gun2" parent="." instance=ExtResource("10_tryqb")]
 position = Vector2(0, -5)
+bullet_damage_multiplier = 3.0
 
 [editable path="Hurtbox"]

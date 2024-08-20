@@ -89,11 +89,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wq5pv"]
-radius = 8.0
+radius = 9.0
 height = 52.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ea5u2"]
-radius = 16.0
+radius = 9.05539
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2r3pi"]
 streams_count = 5
@@ -109,6 +109,8 @@ collision_mask = 4
 script = ExtResource("1_trf4b")
 explosion_scene = ExtResource("2_jo2f4")
 angular_drag = 0.01
+linear_accel_max = 2800.0
+linear_speed_max = 300.0
 angular_accel_max = 10000
 angular_speed_max = 180
 droppables = Array[ExtResource("2_t72ey")]([SubResource("Resource_1g5b4"), SubResource("Resource_115ot")])
@@ -139,7 +141,7 @@ shape = SubResource("CircleShape2D_ea5u2")
 [node name="Laser" parent="." instance=ExtResource("6_54tnh")]
 position = Vector2(0, -20)
 fires_automatically = false
-damage = 3
+damage = 2
 damage_collision_mask = 9
 
 [node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]
