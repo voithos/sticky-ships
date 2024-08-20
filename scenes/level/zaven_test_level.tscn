@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="7_3w60v"]
 [ext_resource type="PackedScene" uid="uid://c3wp4nst03ky8" path="res://scenes/parts/gunner_enemy_part_gun1.tscn" id="7_4cwjr"]
 [ext_resource type="PackedScene" uid="uid://ddg7jalg6t4pd" path="res://scenes/parts/gunner_enemy_part_chassis.tscn" id="8_ml6jh"]
-[ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="9_0nomg"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/gunner_enemy2.tscn" id="9_0nomg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkr8e"]
 size = Vector2(117, 113)

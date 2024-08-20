@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var level_up_sfx = $LevelUpSFX
 
 @export var drag_linear_coeff := 0.05
 @export var drag_angular_coeff := 0.1
@@ -193,6 +194,8 @@ func level_up(next_level: int) -> void:
 
 	#level_up_effect.global_position = bounding_box.get_center() - desired_level_up_effect_size / 2
 	level_up_effect.scale = level_up_effect_scale
+
+	level_up_sfx.play()
 
 	await level_up_effect.half_finished
 
