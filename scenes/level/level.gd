@@ -29,9 +29,9 @@ func _enter_tree() -> void:
 	var drop_chunk := Config.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
 	drop_chunk.position = Vector2(0.0, 48.0)
 	add_child(drop_chunk)
-	#var drop_chunk2 := Config.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
-	#drop_chunk2.position = Vector2(0.0, 48.0)
-	#add_child(drop_chunk2)
+	var drop_chunk2 := Config.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
+	drop_chunk2.position = Vector2(0.0, 96.0)
+	add_child(drop_chunk2)
 
 	# TODO: Remove.
 	#await get_tree().create_timer(1.0).timeout
