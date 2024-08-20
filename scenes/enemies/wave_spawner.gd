@@ -17,6 +17,9 @@ extends Node2D
 ## TODO: Add multiple levels of spawnables
 @export var spawnables: Array[Spawnable] = []
 
+## This gets scaled by the level scale factor
+const SPAWN_DISTANCE_OUTSIDE_VIEWPORT_RADIUS := 5
+
 var is_paused := false
 var time_remaining := 0.0
 
@@ -39,7 +42,8 @@ func _physics_process(delta: float) -> void:
 
 func _spawn() -> void:
 	var currency := _calculate_currency()
-	print('CURRENCY ', currency)
+
+	var spawn_radius := _get_spawn_radius()
 
 	var spawn_count := 0
 	while currency >= minimum_cost:
@@ -47,7 +51,7 @@ func _spawn() -> void:
 		var s := spawnables[idx]
 		if s.cost <= currency:
 			currency -= s.cost
-			_spawn_one(s)
+			_spawn_one(s, _get_random_spawn_position(spawn_radius))
 		spawn_count += 1
 		if max_spawned > 0 and spawn_count >= max_spawned:
 			# Stop spawning
@@ -76,10 +80,21 @@ func _calculate_currency() -> float:
 	)
 
 
-func _spawn_one(s: Spawnable) -> void:
+func _spawn_one(s: Spawnable, offset: Vector2) -> void:
 	var spawned := s.scene.instantiate()
-	spawned.global_position = global_position - Vector2(100, 50)
+
+	spawned.global_position = global_position + offset
+	spawned.global_rotation = Vector2.UP.angle_to(-offset)
 	Global.level.add_child(spawned)
+
+
+func _get_random_spawn_position(spawn_radius: float) -> Vector2:
+	return Vector2.from_angle(randf() * PI * 2) * spawn_radius
+
+
+func _get_spawn_radius() -> float:
+	var viewport_radius := (Global.DEFAULT_VIEWPORT_SIZE / 2.0).length()
+	return (viewport_radius + SPAWN_DISTANCE_OUTSIDE_VIEWPORT_RADIUS) *  Global.get_growth_level_scale(Session.current_growth_level)
 
 
 func _schedule_next_spawn() -> void:

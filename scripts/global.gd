@@ -50,6 +50,8 @@ const PLAYER_COLLISION_LAYER = 1 << 0
 const ENEMY_COLLISION_LAYER = 1 << 2
 const LEVEL_COLLISION_LAYER = 1 << 5
 
+const DEFAULT_VIEWPORT_SIZE := Vector2(320, 180)
+
 enum PartType {
 	UNKNOWN,
 	Core,
