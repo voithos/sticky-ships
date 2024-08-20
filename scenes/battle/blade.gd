@@ -33,10 +33,10 @@ func try_cut() -> void:
 
 
 func _cut() -> void:
-	_damage_intersecting_objects()
-
-	if sfx:
+	if !intersecting_objects.is_empty() and sfx:
 		sfx.play()
+
+	_damage_intersecting_objects()
 
 	cooldown_left = cooldown
 
@@ -73,6 +73,8 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 			intersecting_objects.push_back(parent_node)
 			# Apply damage immediately.
 			_damage_intersecting_object(parent_node)
+			if sfx:
+				sfx.play()
 
 
 func _on_hit_box_area_exited(area: Area2D) -> void:

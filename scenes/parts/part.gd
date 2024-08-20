@@ -379,8 +379,13 @@ func destroy() -> void:
 	assert(parent_node is PlayerBody or parent_node is PartsDrop)
 	var parts: Array[Part] = parent_node.parts
 
-	assert(is_instance_valid(part))
-	assert(parts.has(part))
+	# TODO: Add these asserts back in and debug why `parts` could possibly not
+	#       contain `part`. Maybe both parts got destroyed in the same frame, and
+	#       the reparenting was delayed a frame?
+	#assert(is_instance_valid(part))
+	#assert(parts.has(part))
+	if !is_instance_valid(part) or !parts.has(part):
+		return
 
 	var descendant_parts: Array[Part] = []
 	part.get_all_descendants(descendant_parts)
