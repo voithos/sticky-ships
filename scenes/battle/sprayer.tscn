@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://d3c0pudm0ljxw"]
 
 [ext_resource type="Script" path="res://scenes/battle/sprayer.gd" id="1_4qcnv"]
-[ext_resource type="PackedScene" uid="uid://bmc6nx7ggqism" path="res://scenes/battle/basic_projectile.tscn" id="2_b8bw7"]
+[ext_resource type="PackedScene" uid="uid://cxlmdpy340goy" path="res://scenes/battle/spray_projectile.tscn" id="2_k7ttj"]
 [ext_resource type="Texture2D" uid="uid://r88c6n6bxt3f" path="res://assets/sprites/battle/sprayer.png" id="3_q1tk1"]
 [ext_resource type="AudioStream" uid="uid://huflma4e5xrr" path="res://assets/sfx/Laser/Lazer Gun-cm_01-02.wav" id="4_wuwu4"]
 [ext_resource type="AudioStream" uid="uid://f4q3jj3g6lg8" path="res://assets/sfx/Laser/Lazer Gun-cm_02-01.wav" id="5_hpqkc"]
@@ -74,7 +74,7 @@ stream_4/stream = ExtResource("18_y114w")
 
 [node name="Sprayer" type="Node2D" node_paths=PackedStringArray("spawn_point", "sfx")]
 script = ExtResource("1_4qcnv")
-projectile = ExtResource("2_b8bw7")
+projectile = ExtResource("2_k7ttj")
 spawn_point = NodePath("SpawnPoint")
 sfx = NodePath("LaserSFX")
 cooldown = 0.1

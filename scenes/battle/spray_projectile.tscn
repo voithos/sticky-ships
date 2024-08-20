@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxlmdpy340goy"]
+
+[ext_resource type="Script" path="res://scenes/battle/basic_projectile.gd" id="1_yxm21"]
+[ext_resource type="Texture2D" uid="uid://ble7xpcngal53" path="res://assets/sprites/battle/spray_projectile.png" id="2_oq7ei"]
+[ext_resource type="AudioStream" uid="uid://d3vttxm4whasd" path="res://assets/sfx/Take Damage.cm.wav" id="3_lu1cg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p1pq"]
+atlas = ExtResource("2_oq7ei")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ri3b"]
+atlas = ExtResource("2_oq7ei")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyu3x"]
+atlas = ExtResource("2_oq7ei")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btc4v"]
+atlas = ExtResource("2_oq7ei")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5v50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p1pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ri3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyu3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btc4v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="SprayProjectile" type="Area2D"]
+collision_mask = 0
+script = ExtResource("1_yxm21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2qn3j")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(0.3, 0.35)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a5v50")
+autoplay = "default"
+frame_progress = 0.316267
+
+[node name="ProjectileHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lu1cg")
+volume_db = -9.179
+pitch_scale = 0.79
+bus = &"SFX"
