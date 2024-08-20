@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfvwre7nady7n"]
+
+[ext_resource type="Script" path="res://scenes/battle/basic_projectile.gd" id="1_xqgs7"]
+[ext_resource type="PackedScene" uid="uid://del7hg6ux6mxm" path="res://scenes/fx/particle_pop1.tscn" id="2_k7cd1"]
+[ext_resource type="Texture2D" uid="uid://digolg6gct4c6" path="res://assets/sprites/enemies/spray_enemy_projectile.png" id="2_qpe81"]
+[ext_resource type="AudioStream" uid="uid://d3vttxm4whasd" path="res://assets/sfx/Take Damage.cm.wav" id="3_ff4hu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qn3j"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07osp"]
+atlas = ExtResource("2_qpe81")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o1pk"]
+atlas = ExtResource("2_qpe81")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt6gm"]
+atlas = ExtResource("2_qpe81")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceuhb"]
+atlas = ExtResource("2_qpe81")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5v50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07osp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5o1pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt6gm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceuhb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
+
+[node name="SprayProjectile" type="Area2D" node_paths=PackedStringArray("visibility_notifier")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_xqgs7")
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
+explosion_effect_scene = ExtResource("2_k7cd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2qn3j")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(0.3, 0.35)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a5v50")
+autoplay = "default"
+frame_progress = 0.109913
+
+[node name="ProjectileHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ff4hu")
+volume_db = -9.179
+pitch_scale = 0.79
+bus = &"SFX"

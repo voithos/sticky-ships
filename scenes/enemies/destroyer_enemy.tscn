@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://csy77bvwh14dl"]
+[gd_scene load_steps=26 format=3 uid="uid://csy77bvwh14dl"]
 
 [ext_resource type="Script" path="res://scenes/enemies/destroyer_enemy.gd" id="1_tl7vv"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_nk8jf"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="9_1xnk0"]
 [ext_resource type="PackedScene" uid="uid://ce52iat65rs1m" path="res://scenes/battle/hurtbox.tscn" id="10_8bbd8"]
 [ext_resource type="PackedScene" uid="uid://d3c0pudm0ljxw" path="res://scenes/battle/sprayer.tscn" id="11_vme8w"]
+[ext_resource type="PackedScene" uid="uid://cfvwre7nady7n" path="res://scenes/enemies/spray_enemy_projectile.tscn" id="12_gorc2"]
 [ext_resource type="AudioStream" uid="uid://dgi72tkgfbvv3" path="res://assets/sfx/Explosion/Explosion.01_02-02.wav" id="12_ivfas"]
 [ext_resource type="AudioStream" uid="uid://culmj2h5dnaug" path="res://assets/sfx/Explosion/Explosion.01_02-04.wav" id="13_dtilb"]
 [ext_resource type="AudioStream" uid="uid://pgrdqdagi1uc" path="res://assets/sfx/Explosion/Explosion.01_02-06.wav" id="14_yrdxf"]
@@ -107,9 +108,13 @@ shape = SubResource("CircleShape2D_7d82r")
 [node name="Sprayer" parent="." instance=ExtResource("11_vme8w")]
 position = Vector2(-18, -1)
 reverse_rotate = true
+projectile = ExtResource("12_gorc2")
+projectile_collision_mask = 1
 
 [node name="Sprayer2" parent="." instance=ExtResource("11_vme8w")]
 position = Vector2(18, -1)
+projectile = ExtResource("12_gorc2")
+projectile_collision_mask = 1
 
 [node name="DeathKnellSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_0mald")

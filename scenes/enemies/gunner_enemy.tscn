@@ -1,5 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://71virob0imkf"]
-
+[gd_scene load_steps=27 format=3 uid="uid://71virob0imkf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/gunner_enemy.gd" id="1_hl36b"]
 [ext_resource type="PackedScene" uid="uid://cb1aqyfqofkmc" path="res://scenes/fx/boom1.tscn" id="2_awgqx"]
