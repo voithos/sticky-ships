@@ -58,7 +58,6 @@ stream_3/stream = ExtResource("7_plyus")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_su2tt")
-type = 2
 speed = 50.0
 visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
 explosion_effect_scene = ExtResource("2_3ddmk")

@@ -2,18 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 
-@export var type := Config.EnemyType.UNKNOWN:
-	get:
-		return type
-	set(value):
-		type = value
-		var config: Dictionary = Config.ENEMY_TYPE_CONFIG[type]
-		growth_level = config.growth_level
-		scale = Vector2.ONE * config.scale * Config.ENEMY_SCALE_MULTIPLIER
-		health_value = config.health * Config.ENEMY_HEALTH_MULTIPLIER
-
-var growth_level := 1
-var health_value := 1
+@export var growth_level := 1
 
 @export var explosion_scene: PackedScene
 
@@ -74,7 +63,6 @@ func try_fire_light() -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
-	health.reset_health(health_value)
 	health.health_changed.connect(_health_changed)
 	health.health_depleted.connect(die)
 

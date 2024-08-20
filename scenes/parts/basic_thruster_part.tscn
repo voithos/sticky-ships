@@ -14,7 +14,6 @@ radius = 8.0
 [node name="BasicThrusterPart" type="Area2D"]
 collision_mask = 22
 script = ExtResource("1_yvmc1")
-type = 5
 mass = 0.1
 
 [node name="HealthComponent" type="Node" parent="."]

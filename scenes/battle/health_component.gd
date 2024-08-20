@@ -9,11 +9,6 @@ signal health_depleted
 signal health_changed(new_health: float, prev_health: float)
 
 
-func reset_health(h: float) -> void:
-	max_health = h
-	health = h
-
-
 func adjust_health(delta: float) -> void:
 	var prev_health = health
 	health = clamp(health + delta, 0.0, max_health)

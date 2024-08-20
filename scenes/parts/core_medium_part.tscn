@@ -10,7 +10,6 @@
 
 [node name="CoreMediumPart" type="Node2D"]
 script = ExtResource("1_htxda")
-type = 1
 mass = 2.0
 
 [node name="HealthComponent" type="Node" parent="."]

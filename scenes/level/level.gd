@@ -26,9 +26,9 @@ func _enter_tree() -> void:
 	#add_child(drop)
 
 	# TODO: Remove.
-	var drop_chunk := Config.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
-	drop_chunk.position = Vector2(0.0, 48.0)
-	add_child(drop_chunk)
+	#var drop_chunk := Config.TRIPLE_GUN_DROP_CHUNK_SCENE.instantiate()
+	#drop_chunk.position = Vector2(0.0, 48.0)
+	#add_child(drop_chunk)
 
 	# TODO: Remove.
 	#await get_tree().create_timer(1.0).timeout
@@ -50,10 +50,8 @@ func level_up() -> void:
 
 	# FIXME: Implement growth system
 	#
-	# - Reduce projectile damage when it's small.
 	# - Update systems to spawn new items at the correct scale and resolution.
 	#   - Enemy-wave system.
-	#   - Guns shooting projectiles.
 	#   - No tiny guys on the first level.
 	# - Create a new set of enemies, projectiles, and parts for each growth level.
 	# - Add some logic for spawning large-version drops in the current level?

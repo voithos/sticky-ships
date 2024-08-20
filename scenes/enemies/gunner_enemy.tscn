@@ -72,7 +72,6 @@ radius = 8.0
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_hl36b")
-type = 1
 explosion_scene = ExtResource("2_awgqx")
 droppables = Array[ExtResource("3_gvbd3")]([SubResource("Resource_uuke1"), SubResource("Resource_mlqas"), SubResource("Resource_pqyjn")])
 

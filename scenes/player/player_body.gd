@@ -50,7 +50,7 @@ func set_core(growth_level: int) -> void:
 	clear_parts()
 
 	var config: Dictionary = Config.get_current_level_config(growth_level)
-	core_part = Config.instantiate_part(config.core_type)
+	core_part = config.core_scene.instantiate()
 	add_child(core_part)
 
 	core_part.health.health_changed.connect(_on_core_health_changed)

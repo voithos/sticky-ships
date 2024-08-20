@@ -14,23 +14,8 @@ const HIGH_HEALTH_RATIO_THRESHOLD := 0.8
 const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
 const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 
-@export var type := Config.PartType.UNKNOWN:
-	get:
-		return type
-	set(value):
-		type = value
-		if type == Config.PartType.UNKNOWN:
-			return
-		var config: Dictionary = Config.PART_TYPE_CONFIG[type]
-		growth_level = config.growth_level
-		scale = Vector2.ONE * config.scale * Config.PLAYER_PART_SCALE_MULTIPLIER
-		health_value = config.health * Config.PLAYER_PART_HEALTH_MULTIPLIER
-		growth_progress_value = config.growth_progress_value * Config.PLAYER_PART_GROWTH_PROGRESS_VALUE_MULTIPLIER
-		mass = config.mass * Config.PLAYER_PART_MASS_MULTIPLIER
-
-var growth_level := 1
-var growth_progress_value := 0
-var health_value := 1
+@export var growth_level := 1
+@export var growth_progress_value := 0
 
 # The mass of this part, as a whole.
 @export var mass: float = 0.5
@@ -156,7 +141,6 @@ func _init_components(node: Node) -> void:
 func _init_health_component(h: HealthComponent) -> void:
 	assert(health == null)
 	health = h
-	health.reset_health(health_value)
 	health.health_changed.connect(_on_health_changed)
 	health.health_depleted.connect(_on_health_depleted)
 
@@ -186,7 +170,7 @@ func on_detached() -> void:
 
 
 func _on_health_changed(new_health: float, prev_health: float) -> void:
-	if Config.is_core_type(type):
+	if self == Global.player.body.core_part:
 		print(new_health)
 
 	var weight: float = new_health / $HealthComponent.max_health
@@ -245,7 +229,7 @@ func _on_health_depleted_deferred() -> void:
 	space_explosion.play()
 
 	print('part destroyed!')
-	if Config.is_core_type(type):
+	if self == Global.player.body.core_part:
 		# Destruction of core means death
 		Global.player.die()
 	else:
@@ -396,7 +380,8 @@ func destroy() -> void:
 		Global.player.body.core_part = null
 
 	# Detach from children.
-	for connection in part.child_connections:
+	var child_connections_copy := part.child_connections.duplicate()
+	for connection in child_connections_copy:
 		part.remove_child_connection(connection)
 
 	# Detach from parent.

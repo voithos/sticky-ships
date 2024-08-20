@@ -2,18 +2,7 @@ class_name Projectile
 extends Area2D
 
 
-@export var type := Config.ProjectileType.BasicProjectile:
-	get:
-		return type
-	set(value):
-		type = value
-		var config: Dictionary = Config.PROJECTILE_TYPE_CONFIG[type]
-		growth_level = config.growth_level
-		scale = Vector2.ONE * config.scale * Config.PROJECTILE_SCALE_MULTIPLIER
-		damage = config.damage * Config.PROJECTILE_DAMAGE_MULTIPLIER
-		speed = config.speed * Config.PROJECTILE_SPEED_MULTIPLIER
-
-var growth_level := 1
+@export var growth_level := 1
 
 # The speed of motion.
 @export var speed := 200.0
