@@ -15,7 +15,7 @@ const MEDIUM_HEALTH_RATIO_THRESHOLD := 0.5
 const LOW_HEALTH_RATIO_THRESHOLD := 0.2
 
 @export var growth_level := 1
-@export var growth_progress_value := 0
+@export var growth_progress_value := 1
 
 # The mass of this part, as a whole.
 @export var mass: float = 0.5

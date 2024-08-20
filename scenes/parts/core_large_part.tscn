@@ -12,6 +12,7 @@
 script = ExtResource("1_h6acy")
 growth_level = 3
 mass = 40.0
+growth_progress_value = 0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_bkr4e")
