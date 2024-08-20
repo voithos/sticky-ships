@@ -123,7 +123,7 @@ var level_container
 var hud: Hud
 var main_menu: MainMenu
 var game_over_screen: GameOverScreen
-var level
+var level: Level
 var player: Player
 
 

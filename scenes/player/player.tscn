@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://i6ryy2kr5lyk"]
+[gd_scene load_steps=6 format=3 uid="uid://i6ryy2kr5lyk"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_monq1"]
+[ext_resource type="Script" path="res://scenes/enemies/wave_spawner.gd" id="2_apulf"]
+[ext_resource type="Script" path="res://scenes/enemies/spawnable.gd" id="3_efd08"]
+[ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="4_pnmxi"]
+
+[sub_resource type="Resource" id="Resource_50rs7"]
+script = ExtResource("3_efd08")
+scene = ExtResource("4_pnmxi")
+weight = 1.0
+cost = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 38
@@ -8,3 +17,7 @@ script = ExtResource("1_monq1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="WaveSpawner" type="Node2D" parent="."]
+script = ExtResource("2_apulf")
+spawnables = Array[ExtResource("3_efd08")]([SubResource("Resource_50rs7")])
