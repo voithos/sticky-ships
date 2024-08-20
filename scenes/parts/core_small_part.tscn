@@ -61,8 +61,8 @@ animations = [{
 
 [node name="CoreSmallPart" type="Node2D"]
 script = ExtResource("1_biq3a")
-mass = 10.0
 growth_progress_value = 0
+mass = 10.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_yvjf3")

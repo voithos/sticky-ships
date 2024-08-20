@@ -11,8 +11,8 @@
 [node name="CoreMediumPart" type="Node2D"]
 script = ExtResource("1_htxda")
 growth_level = 2
-mass = 20.0
 growth_progress_value = 0
+mass = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_fgtkp")

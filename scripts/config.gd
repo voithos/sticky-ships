@@ -54,7 +54,7 @@ const ENEMY_COLLISION_LAYER = 1 << 2
 const LEVEL_COLLISION_LAYER = 1 << 5
 
 # TODO: Adjust this.
-const DEFAULT_NEXT_LEVEL_GROWTH := 40
+const DEFAULT_NEXT_LEVEL_GROWTH := 10
 
 const LEVEL_CONFIG := [
 	{
