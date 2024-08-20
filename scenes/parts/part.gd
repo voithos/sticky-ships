@@ -58,7 +58,7 @@ func _enter_tree() -> void:
 
 
 func _set_descendants_to_use_parent_material(node: Node) -> void:
-	if node is AttachPoint:
+	if node is AttachPoint or node is Blade:
 		return
 	if node is Node2D:
 		node.use_parent_material = true
