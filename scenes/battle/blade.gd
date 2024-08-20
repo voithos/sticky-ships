@@ -24,6 +24,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	cooldown_left = maxf(cooldown_left - delta, 0.0)
+	if sfx.playing and intersecting_objects.is_empty():
+		sfx.stop()
 
 
 func try_cut() -> void:
