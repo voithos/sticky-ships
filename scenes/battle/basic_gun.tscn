@@ -1,18 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bk0ob0f1kxgmm"]
+[gd_scene load_steps=16 format=3 uid="uid://bk0ob0f1kxgmm"]
 
 [ext_resource type="Script" path="res://scenes/battle/basic_gun.gd" id="1_bdwbd"]
 [ext_resource type="Texture2D" uid="uid://bbedc73bo7str" path="res://assets/sprites/battle/basic_gun.png" id="2_lv2k4"]
 [ext_resource type="PackedScene" uid="uid://bmc6nx7ggqism" path="res://scenes/battle/basic_projectile.tscn" id="2_qp3n7"]
-[ext_resource type="AudioStream" uid="uid://huflma4e5xrr" path="res://assets/sfx/Laser/Lazer Gun-cm_01-02.wav" id="4_gkapo"]
-[ext_resource type="AudioStream" uid="uid://f4q3jj3g6lg8" path="res://assets/sfx/Laser/Lazer Gun-cm_02-01.wav" id="5_ai801"]
-[ext_resource type="AudioStream" uid="uid://ngvw5wpvk0jt" path="res://assets/sfx/Laser/Lazer Gun-cm_03-01.wav" id="6_qm3cf"]
-[ext_resource type="AudioStream" uid="uid://wtf4rdcfo3p0" path="res://assets/sfx/Laser/Lazer Gun-cm_04-01.wav" id="7_xqnfv"]
-[ext_resource type="AudioStream" uid="uid://dcx6dru75snij" path="res://assets/sfx/Laser/Lazer Gun-cm_05-01.wav" id="8_aaqad"]
-[ext_resource type="AudioStream" uid="uid://eedobldq1q63" path="res://assets/sfx/BulletDry/BULLET DRY_01-03.wav" id="9_0ijp2"]
-[ext_resource type="AudioStream" uid="uid://ckwm5rdviq47h" path="res://assets/sfx/BulletDry/BULLET DRY_01-05.wav" id="10_3tibi"]
-[ext_resource type="AudioStream" uid="uid://bbg0x4p8881wx" path="res://assets/sfx/BulletDry/BULLET DRY_01-07.wav" id="11_378es"]
-[ext_resource type="AudioStream" uid="uid://dkkcmy6o17xln" path="res://assets/sfx/BulletDry/BULLET DRY_01-09.wav" id="12_uwu8t"]
-[ext_resource type="AudioStream" uid="uid://dr34ntxc1a6ri" path="res://assets/sfx/BulletDry/BULLET DRY_01-10.wav" id="13_r4mot"]
 [ext_resource type="AudioStream" uid="uid://ks81lc53gyvk" path="res://assets/sfx/BulletWet/BULLET WET_02-05.wav" id="14_73bd0"]
 [ext_resource type="AudioStream" uid="uid://dcad51p0f61qx" path="res://assets/sfx/BulletWet/BULLET WET_02-10.wav" id="15_7n1gr"]
 [ext_resource type="AudioStream" uid="uid://u6bfgutu5yxp" path="res://assets/sfx/BulletWet/BULLET WET_02-11.wav" id="16_x01i6"]
@@ -67,23 +57,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ib0um"]
-random_pitch = 1.35
-streams_count = 6
-stream_1/stream = ExtResource("4_gkapo")
-stream_2/stream = ExtResource("5_ai801")
-stream_3/stream = ExtResource("6_qm3cf")
-stream_4/stream = ExtResource("7_xqnfv")
-stream_5/stream = ExtResource("8_aaqad")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t4jd3"]
-streams_count = 5
-stream_0/stream = ExtResource("9_0ijp2")
-stream_1/stream = ExtResource("10_3tibi")
-stream_2/stream = ExtResource("11_378es")
-stream_3/stream = ExtResource("12_uwu8t")
-stream_4/stream = ExtResource("13_r4mot")
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dq12q"]
 streams_count = 5
 stream_0/stream = ExtResource("14_73bd0")
@@ -109,13 +82,6 @@ frame_progress = 1.0
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(0, -3)
-
-[node name="LaserSFX" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_ib0um")
-
-[node name="BulletDrySFX" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_t4jd3")
-bus = &"SFX"
 
 [node name="BulletWetSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_dq12q")
