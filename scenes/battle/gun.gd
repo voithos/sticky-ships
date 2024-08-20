@@ -15,6 +15,8 @@ extends Node2D
 # The speed variation when firing (relative to projectile speed)
 @export var speed_spread: float = 0.0
 
+@export var bullet_damage_multiplier := 1.0
+
 @export_flags_2d_physics var projectile_collision_mask: int
 
 var cooldown_left := 0.0
@@ -31,18 +33,27 @@ func try_fire() -> void:
 
 
 func _fire() -> void:
-	var p: Projectile = projectile.instantiate()
-	p.global_position = spawn_point.global_position
-	p.rotation = spawn_point.global_rotation + deg_to_rad(random_spread(spread))
-	p.speed *= (1.0 + random_spread(speed_spread))
-	p.collision_mask = projectile_collision_mask
-	p.shooter = owner
-	Global.level.add_child(p)
+	_spawn_projectiles()
 
 	if sfx:
 		sfx.play()
 
 	cooldown_left = cooldown
+
+
+func _spawn_projectiles() -> void:
+	var p: Projectile = projectile.instantiate()
+	_apply_projectile_props(p)
+	Global.level.add_child(p)
+
+
+func _apply_projectile_props(p: Projectile) -> void:
+	p.global_position = spawn_point.global_position
+	p.rotation = spawn_point.global_rotation + deg_to_rad(random_spread(spread))
+	p.speed *= (1.0 + random_spread(speed_spread))
+	p.collision_mask = projectile_collision_mask
+	p.shooter = owner
+	p.damage *= bullet_damage_multiplier
 
 
 static func random_spread(value: float) -> float:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4hlq3o1jf3ce"]
+[gd_scene load_steps=11 format=3 uid="uid://4hlq3o1jf3ce"]
 
 [ext_resource type="Script" path="res://scenes/parts/part.gd" id="1_htxda"]
 [ext_resource type="Script" path="res://scenes/battle/health_component.gd" id="2_fgtkp"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cux668rpyg0xm" path="res://assets/sfx/Space Explosion.wav" id="7_0sb04"]
 [ext_resource type="PackedScene" uid="uid://dp5udmqygl0i3" path="res://scenes/thrusters/thruster2.tscn" id="8_j4u6e"]
 [ext_resource type="PackedScene" uid="uid://bgyv48l8d7s7f" path="res://scenes/thrusters/basic_thruster.tscn" id="9_a7lc3"]
+[ext_resource type="PackedScene" uid="uid://cnm2f4u47p3po" path="res://scenes/battle/gun2.tscn" id="10_tryqb"]
 
 [node name="CoreMediumPart" type="Node2D"]
 script = ExtResource("1_htxda")
@@ -73,5 +74,8 @@ rotation = 1.57079
 [node name="BasicThruster2" parent="." instance=ExtResource("9_a7lc3")]
 position = Vector2(19, -11)
 rotation = 4.71238
+
+[node name="Gun2" parent="." instance=ExtResource("10_tryqb")]
+position = Vector2(0, -5)
 
 [editable path="Hurtbox"]
