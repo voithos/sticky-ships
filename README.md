@@ -1,4 +1,4 @@
-# GMTK Game Jam 2024
+# Sticky Ships
 
 **Play the game**: https://voithos.itch.io/sticky-ships
 
