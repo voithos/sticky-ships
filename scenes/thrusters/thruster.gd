@@ -13,8 +13,8 @@ extends Node2D
 
 
 func get_thrust_vector() -> Vector2:
-	# Pointing up (_away_ from the direction of engine exhaust)
-	return Vector2.from_angle(global_rotation - PI/2)
+	# Pointing up (_away_ from the direction of engine exhaust).
+	return Vector2.UP.rotated(global_rotation)
 
 
 func set_is_thrusting(is_thrusting: bool):

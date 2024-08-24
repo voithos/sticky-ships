@@ -3,8 +3,8 @@ extends Node
 var current_growth_level := 1
 var enemy_count := 0
 var enemies_destroyed := 0
-var is_game_over := true
-var did_player_win := true
+var is_game_over := false
+var did_player_win := false
 
 signal enemy_count_changed(current: int, previous: int)
 

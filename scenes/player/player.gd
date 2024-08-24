@@ -19,6 +19,9 @@ var can_fire := true
 
 const MIN_THRUSTER_CONTRIBUTION_COS := cos(deg_to_rad(45.0))
 
+@export var inherent_thrust_multiplier := 1.0
+@export var additional_thrust_multiplier := 1.0
+
 var agent := GSAISteeringAgent.new()
 
 var body: PlayerBody
@@ -61,17 +64,19 @@ func rot_90_ccw(v: Vector2) -> Vector2:
 func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, direction_y: Vector2) -> Vector2:
 	# TODO: If this is too slow, we can pull it out and only calculate it when attaching/detaching.
 	# We start with the core's default movement capabilities.
-	var inherent := inherent_propulsion * Config.get_growth_level_scale(Session.current_growth_level)
+	var inherent := inherent_propulsion * Config.get_growth_level_scale(Session.current_growth_level) * inherent_thrust_multiplier
 	var max_propulsion := Vector2(inherent, (inherent * reverse_multiplier if is_reversing else inherent))
 
 	for part in body.parts:
+		if part == Global.player.body.core_part:
+			continue
 		for thruster in part.thrusters:
 			var thrust_vector := thruster.get_thrust_vector()
 			# First compute forward/back component
 			# Only add contribution when it is at least a certain degrees aligned.
 			var satisfies_y := direction_y.dot(thrust_vector) > MIN_THRUSTER_CONTRIBUTION_COS
 			if satisfies_y:
-				max_propulsion.y += thruster.propulsion
+				max_propulsion.y += thruster.propulsion * additional_thrust_multiplier
 
 			var dir_x_cos := direction_x.dot(thrust_vector)
 			var satisfies_x := absf(dir_x_cos) > MIN_THRUSTER_CONTRIBUTION_COS
@@ -80,7 +85,7 @@ func gather_thrust(movement: Vector2, forward: Vector2, direction_x: Vector2, di
 				var is_front_of_center := rel_pos.project(forward).dot(forward) > 0
 				# Figure out if it's in the same dir as the desired turn, or in the opposite dir
 				if (dir_x_cos > 0 and is_front_of_center) or dir_x_cos <= 0 and !is_front_of_center:
-					max_propulsion.x += thruster.propulsion
+					max_propulsion.x += thruster.propulsion * additional_thrust_multiplier
 				else:
 					satisfies_x = false
 

@@ -1,17 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2k44vm6uk81p"]
+[gd_scene load_steps=10 format=3 uid="uid://c2k44vm6uk81p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_7r1pg"]
-[ext_resource type="PackedScene" uid="uid://cgevtqh5qhrf2" path="res://scenes/level/background.tscn" id="2_sygiw"]
+[ext_resource type="Material" uid="uid://bm4mh2m5amvsr" path="res://scenes/level/world_aligned_texture.tres" id="2_rn14m"]
+[ext_resource type="Texture2D" uid="uid://bhc3n5nrfxbqk" path="res://scenes/level/colored_tile.png" id="3_fbyfe"]
 [ext_resource type="Texture2D" uid="uid://owf0haa8rp2w" path="res://icon.svg" id="3_xn8hx"]
 [ext_resource type="PackedScene" uid="uid://c80onf8fc5s7e" path="res://scenes/parts/gunner_enemy_part_gun2.tscn" id="5_3f7s7"]
 [ext_resource type="PackedScene" uid="uid://bbny0j6b3dwts" path="res://scenes/drops/empty_parts_drop.tscn" id="5_ts01t"]
-[ext_resource type="PackedScene" uid="uid://71virob0imkf" path="res://scenes/enemies/gunner_enemy.tscn" id="7_3w60v"]
-[ext_resource type="PackedScene" uid="uid://c3wp4nst03ky8" path="res://scenes/parts/gunner_enemy_part_gun1.tscn" id="7_4cwjr"]
-[ext_resource type="PackedScene" uid="uid://ddg7jalg6t4pd" path="res://scenes/parts/gunner_enemy_part_chassis.tscn" id="8_ml6jh"]
-[ext_resource type="PackedScene" uid="uid://bcboie0ogjc8o" path="res://scenes/enemies/gunner_enemy2.tscn" id="9_0nomg"]
-[ext_resource type="PackedScene" uid="uid://csy77bvwh14dl" path="res://scenes/enemies/destroyer_enemy.tscn" id="10_poohk"]
-[ext_resource type="PackedScene" uid="uid://dhjvhbhsmr0gl" path="res://scenes/enemies/blade_enemy.tscn" id="11_tpeiy"]
-[ext_resource type="PackedScene" uid="uid://day7ijqengkhx" path="res://scenes/enemies/laser_enemy.tscn" id="12_pw0iu"]
+[ext_resource type="PackedScene" uid="uid://b6m8wyi3wfa4q" path="res://scenes/parts/destroyer_enemy_part_gun1.tscn" id="7_7ubhv"]
+[ext_resource type="PackedScene" uid="uid://bmu1k0ug4sexx" path="res://scenes/parts/destroyer_enemy_part_gun2.tscn" id="8_bap6m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkr8e"]
 size = Vector2(117, 113)
@@ -19,7 +15,11 @@ size = Vector2(117, 113)
 [node name="ZavenTestLevel" type="Node2D"]
 script = ExtResource("1_7r1pg")
 
-[node name="Background" parent="." instance=ExtResource("2_sygiw")]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = ExtResource("2_rn14m")
+scale = Vector2(10, 10)
+texture = ExtResource("3_fbyfe")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(158, 38)
@@ -33,32 +33,16 @@ position = Vector2(-1.5, -2.5)
 shape = SubResource("RectangleShape2D_hkr8e")
 
 [node name="EmptyPartsDrop2" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(29, -26)
+position = Vector2(58, -30)
 
 [node name="GunnerEnemyPartGun2" parent="EmptyPartsDrop2" instance=ExtResource("5_3f7s7")]
 
 [node name="EmptyPartsDrop3" parent="." instance=ExtResource("5_ts01t")]
 position = Vector2(-58, -117)
 
-[node name="BasicGunPart" parent="EmptyPartsDrop3" instance=ExtResource("7_4cwjr")]
+[node name="DestroyerEnemyPartGun1" parent="EmptyPartsDrop3" instance=ExtResource("7_7ubhv")]
 
 [node name="EmptyPartsDrop4" parent="." instance=ExtResource("5_ts01t")]
-position = Vector2(17, -99)
+position = Vector2(73, -103)
 
-[node name="BasicGunPart" parent="EmptyPartsDrop4" instance=ExtResource("8_ml6jh")]
-
-[node name="GunnerEnemy" parent="." instance=ExtResource("7_3w60v")]
-position = Vector2(-78, -82)
-rotation = 2.38154
-
-[node name="GunnerEnemy2" parent="." instance=ExtResource("9_0nomg")]
-position = Vector2(-105, -17)
-
-[node name="DestroyerEnemy" parent="." instance=ExtResource("10_poohk")]
-position = Vector2(126, -93)
-
-[node name="BladeEnemy" parent="." instance=ExtResource("11_tpeiy")]
-position = Vector2(76, 21)
-
-[node name="LaserEnemy" parent="." instance=ExtResource("12_pw0iu")]
-position = Vector2(-75, 67)
+[node name="DestroyerEnemyPartGun2" parent="EmptyPartsDrop4" instance=ExtResource("8_bap6m")]

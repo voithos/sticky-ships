@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bm4mh2m5amvsr"]
+
+[ext_resource type="Shader" path="res://scenes/level/world_aligned_texture.gdshader" id="1_o23r7"]
+
+[resource]
+shader = ExtResource("1_o23r7")

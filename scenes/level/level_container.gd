@@ -11,6 +11,9 @@ func _ready() -> void:
 	Global.main_menu = ui_container.main_menu
 	Global.game_over_screen = ui_container.game_over_screen
 
+	Session.is_game_over = true
+	Session.did_player_win = true
+
 	if Config.skip_main_menu:
 		start()
 
